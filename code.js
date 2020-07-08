@@ -1,25 +1,25 @@
-var Comment = /** @class */ (function () {
-    function Comment(row, value) {
+var Note = /** @class */ (function () {
+    function Note(row, value) {
         this.row = row;
         this.value = value;
     }
     ;
-    Comment.prototype.print = function () {
+    Note.prototype.print = function () {
         return "#" + this.row + " " + this.value;
     };
-    return Comment;
+    return Note;
 }());
 var Counter = /** @class */ (function () {
-    function Counter(name, index, comments) {
+    function Counter(name, index, notes) {
         if (index === void 0) { index = 1; }
-        if (comments === void 0) { comments = []; }
+        if (notes === void 0) { notes = []; }
         this.name = name;
         this.index = index;
-        this.comments = comments;
+        this.notes = notes;
     }
     ;
-    Counter.prototype.addComment = function (comment) {
-        this.comments.push(comment);
+    Counter.prototype.addNote = function (note) {
+        this.notes.push(note);
     };
     Counter.prototype.increase = function () {
         this.index += 1;
@@ -30,13 +30,13 @@ var Counter = /** @class */ (function () {
     Counter.prototype.print = function () {
         return this.name + " is at " + this.index;
     };
-    Counter.prototype.getCommentsAtCurrentRow = function () {
+    Counter.prototype.getNotesAtCurrentRow = function () {
         var i = this.index;
-        return this.comments.
-            filter(function (c) {
-            return c.row == i;
+        return this.notes.
+            filter(function (note) {
+            return note.row == i;
         }).
-            flatMap(function (c) { return c.print(); }).
+            flatMap(function (note) { return note.print(); }).
             join("\n");
     };
     return Counter;

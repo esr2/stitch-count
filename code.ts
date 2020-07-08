@@ -1,4 +1,4 @@
-class Comment {
+class Note {
   row: number;
   value: string;
 
@@ -15,19 +15,19 @@ class Comment {
 class Counter {
     name: string;
     index: number;
-    comments: Comment[];
+    notes: Note[];
 
   constructor (
        name: string,
        index: number = 1,
-       comments: Comment[] = []) {
+       notes: Note[] = []) {
     this.name = name;
     this.index = index;
-    this.comments = comments;
+    this.notes = notes;
   };
-  
-  addComment(comment: Comment) {
-    this.comments.push(comment);
+
+  addNote(note: Note) {
+    this.notes.push(note);
   }
 
   increase() {
@@ -42,13 +42,13 @@ class Counter {
     return this.name + " is at " + this.index;
   }
 
-  getCommentsAtCurrentRow() {
+  getNotesAtCurrentRow() {
     let i = this.index;
-    return this.comments.
-					filter((c: Comment) => {
-                    return c.row == i;
+    return this.notes.
+					filter((note: Note) => {
+                    return note.row == i;
                 }).
-    			flatMap((c) => { return c.print(); }).
+    			flatMap((note: Note) => { return note.print(); }).
 					join("\n");
   }
 }

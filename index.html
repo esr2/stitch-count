@@ -32,7 +32,7 @@
       text-align: center;
     }
 
-    .commentWrapper {
+    .noteWrapper {
       background: #fff;
       border-radius: 4px;
       padding: 20px;
@@ -57,9 +57,9 @@
     Decrease
     </button>
 
-    <div class="commentWrapper">
-    Comments:
-    <div class="commentContent">
+    <div class="noteWrapper">
+    Notes:
+    <div class="noteContent">
 
 
   </body>
@@ -70,15 +70,15 @@
     		"Global",
         1,
         [
-          new Comment(2, "comment for row 2"),
-          new Comment(4, "comment for row 4"),
+          new Note(2, "note for row 2"),
+          new Note(4, "note for row 4"),
         ]);
 
     let updateDisplay = () => {
       document.querySelector(".counter").innerHTML =
           globalCounter.print();
-      document.querySelector(".commentContent").innerHTML =
-          globalCounter.getCommentsAtCurrentRow();
+      document.querySelector(".noteContent").innerHTML =
+          globalCounter.getNotesAtCurrentRow();
     };
     updateDisplay();
 
