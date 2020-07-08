@@ -1,43 +1,39 @@
-var Note = /** @class */ (function () {
-    function Note(row, value) {
+class Note {
+    constructor(row, value) {
         this.row = row;
         this.value = value;
     }
     ;
-    Note.prototype.print = function () {
+    print() {
         return "#" + this.row + " " + this.value;
-    };
-    return Note;
-}());
-var Counter = /** @class */ (function () {
-    function Counter(name, index, notes) {
-        if (index === void 0) { index = 1; }
-        if (notes === void 0) { notes = []; }
+    }
+}
+class Counter {
+    constructor(name, index = 1, notes = []) {
         this.name = name;
         this.index = index;
         this.notes = notes;
     }
     ;
-    Counter.prototype.addNote = function (note) {
+    addNote(note) {
         this.notes.push(note);
-    };
-    Counter.prototype.increase = function () {
+    }
+    increase() {
         this.index += 1;
-    };
-    Counter.prototype.decrease = function () {
+    }
+    decrease() {
         this.index -= 1;
-    };
-    Counter.prototype.print = function () {
+    }
+    print() {
         return this.name + " is at " + this.index;
-    };
-    Counter.prototype.getNotesAtCurrentRow = function () {
-        var i = this.index;
+    }
+    getNotesAtCurrentRow() {
+        let i = this.index;
         return this.notes.
-            filter(function (note) {
+            filter((note) => {
             return note.row == i;
         }).
-            flatMap(function (note) { return note.print(); }).
+            flatMap((note) => { return note.print(); }).
             join("\n");
-    };
-    return Counter;
-}());
+    }
+}
