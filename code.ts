@@ -22,6 +22,7 @@ class Counter {
     private notes: Note[];
     private startIndex: number;
     private endIndex?: number;
+    private numResets?: number;
 
   constructor (
       name: string,
@@ -43,6 +44,7 @@ class Counter {
     this.index = index;
     this.startIndex = startIndex;
     this.endIndex = endIndex;
+    this.numResets = 0;
   };
 
   addNote(note: Note) {
@@ -53,6 +55,7 @@ class Counter {
     this.index += 1;
     if (this.index > this.endIndex) {
       this.index = this.startIndex;
+      this.numResets += 1;
     }
   }
 
@@ -60,11 +63,13 @@ class Counter {
     this.index -= 1;
     if (this.index < this.startIndex) {
       this.index = this.endIndex;
+      this.numResets -= 1;
     }
   }
 
   print() {
-    return this.name + ": " + this.index;
+    return this.name + ": " + this.index +
+        (!!this.endIndex ? `  num Resets: ${this.numResets}` : '') ;
   }
 
   getNotesAtCurrentIndex() {
