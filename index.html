@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Stitch Count</title>
+  </head>
+  <script type="text/javascript">
+    let globalCounter = new Counter(
+    		"Global",
+        1,
+        [
+          new Comment(2, "comment for row 2"),
+          new Comment(4, "comment for row 4"),
+        ]);
+
+    let updateDisplay = () => {
+      document.querySelector(".counter").innerHTML =
+          globalCounter.print();
+      document.querySelector(".commentContent").innerHTML =
+          globalCounter.getCommentsAtCurrentRow();
+    };
+    updateDisplay();
+
+    document.querySelector("#increaseButton").addEventListener(
+    		"click",
+        () => {
+          globalCounter.increase();
+           updateDisplay();
+        });
+    document.querySelector("#decreaseButton").addEventListener(
+    		"click",
+        () => {
+          globalCounter.decrease();
+           updateDisplay();
+        });
+  </script>
+
+  <style>
+    body {
+      background: #20262E;
+      padding: 20px;
+      font-family: Helvetica;
+    }
+
+    .topnav{
+      background: #339933;
+      color: white;
+      height: 30px;
+    }
+
+    .topnavText {
+      left: 20px;
+      top: 5px;
+      position: relative;
+    }
+
+    .counter {
+      background: #fff;
+      border-radius: 4px;
+      padding: 20px;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .commentWrapper {
+      background: #fff;
+      border-radius: 4px;
+      padding: 20px;
+      transition: all 0.2s;
+      text-align: center;
+    }
+  </style>
+
+  <body>
+    <div class="topnav">
+      <div class="topnavText">
+      App Title
+      </div>
+    </div>
+
+    <div class="counter global">
+    </div>
+    <button id="increaseButton">
+    Increase
+    </button>
+    <button id="decreaseButton">
+    Decrease
+    </button>
+
+    <div class="commentWrapper">
+    Comments:
+    <div class="commentContent">
+
+
+  </body>
+</html>
