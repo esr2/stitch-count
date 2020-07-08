@@ -42,7 +42,7 @@ class Counter {
     return this.name + " is at " + this.index;
   }
 
-  getNotesAtCurrentRow() {
+  getNotesAtCurrentIndex() {
     let i = this.index;
     return this.notes.
 					filter((note: Note) => {
