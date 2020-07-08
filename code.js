@@ -1,11 +1,11 @@
 class Note {
-    constructor(row, value) {
-        this.row = row;
+    constructor(index, value) {
+        this.index = index;
         this.value = value;
     }
     ;
     print() {
-        return "#" + this.row + " " + this.value;
+        return "#" + this.index + ": " + this.value;
     }
 }
 class Counter {
@@ -25,16 +25,51 @@ class Counter {
         this.index -= 1;
     }
     print() {
-        return this.name + " is at " + this.index;
+        return this.name + ": " + this.index;
     }
     getNotesAtCurrentIndex() {
         let i = this.index;
         return this.notes.
             filter((note) => {
-            return note.row == i;
+            return note.index == i;
         }).
-            flatMap((note) => { return note.print(); }).
-            join("\n");
+            flatMap((note) => { return this.name + " " + note.print(); }).
+            join('<br />');
+    }
+}
+class Project {
+    constructor(name, counters) {
+        this.name = name;
+        this.counters = counters;
+    }
+    addCounter(counter) {
+        this.counters.push(counter);
+    }
+    // TODO figure out if we ever want unliked Counters and accommodate that here.
+    increase() {
+        this.counters.forEach((counter) => {
+            counter.increase();
+        });
+    }
+    decrease() {
+        this.counters.forEach((counter) => {
+            counter.decrease();
+        });
+    }
+    print() {
+        return this.name + '<br />' + this.counters.
+            flatMap((counter) => {
+            return counter.print();
+        }).
+            join('<br />');
+    }
+    getNotesAtCurrentIndex() {
+        return this.counters
+            .flatMap((counter) => {
+            return counter.getNotesAtCurrentIndex();
+        })
+            .filter((notes) => { return notes.length > 0; })
+            .join('<br />');
     }
 }
 //# sourceMappingURL=code.js.map

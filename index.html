@@ -24,7 +24,7 @@
       position: relative;
     }
 
-    .counter {
+    .projectState {
       background: #fff;
       border-radius: 4px;
       padding: 20px;
@@ -48,8 +48,10 @@
       </div>
     </div>
 
-    <div class="counter global">
+    <div class="projectState">
     </div>
+
+
     <button id="increaseButton">
     Increase
     </button>
@@ -73,26 +75,35 @@
           new Note(2, "note for row 2"),
           new Note(4, "note for row 4"),
         ]);
+    let secondaryCounter = new Counter(
+        		"border",
+            1,
+            [
+              new Note(3, "note for row 3"),
+              new Note(4, "note for row 4"),
+            ]);
+    let project = new Project('Project Title', [globalCounter]);
+    project.addCounter(secondaryCounter);
 
     let updateDisplay = () => {
-      document.querySelector(".counter").innerHTML =
-          globalCounter.print();
+      document.querySelector(".projectState").innerHTML =
+          project.print();
       document.querySelector(".noteContent").innerHTML =
-          globalCounter.getNotesAtCurrentIndex();
+          project.getNotesAtCurrentIndex();
     };
     updateDisplay();
 
     document.querySelector("#increaseButton").addEventListener(
     		"click",
         () => {
-          globalCounter.increase();
-           updateDisplay();
+          project.increase();
+          updateDisplay();
         });
     document.querySelector("#decreaseButton").addEventListener(
     		"click",
         () => {
-          globalCounter.decrease();
-           updateDisplay();
+          project.decrease();
+          updateDisplay();
         });
   </script>
 </html>
