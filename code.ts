@@ -1,21 +1,25 @@
 class Note {
-  index: number;
-  value: string;
+  private index: number;
+  private value: string;
 
   constructor (index: number, value: string) {
     this.index = index;
     this.value = value;
   };
 
- print() {
-   return "#" + this.index + ": " + this.value;
- }
+  getIndex() {
+    return this.index;
+  }
+
+  print() {
+    return "#" + this.index + ": " + this.value;
+  }
 }
 
 class Counter {
-    name: string;
-    index: number;
-    notes: Note[];
+    private name: string;
+    private index: number;
+    private notes: Note[];
 
   constructor (
        name: string,
@@ -43,10 +47,9 @@ class Counter {
   }
 
   getNotesAtCurrentIndex() {
-    let i = this.index;
     return this.notes.
 					filter((note: Note) => {
-                    return note.index == i;
+                    return note.getIndex() == this.index;
                 }).
     			flatMap((note: Note) => { return this.name + " " + note.print(); }).
 					join('<br />');
@@ -54,7 +57,7 @@ class Counter {
 }
 
 class Project {
-  name: string;
+  private name: string;
 	private counters: Counter[];
 
   constructor(name: string, counters: Counter[]) {

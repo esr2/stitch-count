@@ -4,6 +4,9 @@ class Note {
         this.value = value;
     }
     ;
+    getIndex() {
+        return this.index;
+    }
     print() {
         return "#" + this.index + ": " + this.value;
     }
@@ -28,10 +31,9 @@ class Counter {
         return this.name + ": " + this.index;
     }
     getNotesAtCurrentIndex() {
-        let i = this.index;
         return this.notes.
             filter((note) => {
-            return note.index == i;
+            return note.getIndex() == this.index;
         }).
             flatMap((note) => { return this.name + " " + note.print(); }).
             join('<br />');
