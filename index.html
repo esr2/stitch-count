@@ -9,7 +9,8 @@
     body {
       background: #20262E;
       padding: 20px;
-      font-family: Helvetica;
+      font-family: Roboto;
+      font-size: 24px;
     }
 
     .topnav{
@@ -88,6 +89,8 @@
     project.addCounter(secondaryCounter2);
 
     let updateDisplay = () => {
+      document.querySelector(".topnavText").innerHTML =
+          project.getName();
       document.querySelector(".projectState").innerHTML =
           project.print();
       document.querySelector(".noteContent").innerHTML =

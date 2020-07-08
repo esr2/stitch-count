@@ -63,6 +63,9 @@ class Project {
     addCounter(counter) {
         this.counters.push(counter);
     }
+    getName() {
+        return this.name;
+    }
     // TODO figure out if we ever want unliked Counters and accommodate that here.
     increase() {
         this.counters.forEach((counter) => {
@@ -75,7 +78,7 @@ class Project {
         });
     }
     print() {
-        return this.name + '<br />' + this.counters.
+        return this.counters.
             flatMap((counter) => {
             return counter.print();
         }).
