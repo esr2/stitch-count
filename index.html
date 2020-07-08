@@ -3,37 +3,7 @@
   <head>
     <title>Stitch Count</title>
   </head>
-  <script src="./code.js">
-  <script type="text/javascript">
-    let globalCounter = new Counter(
-    		"Global",
-        1,
-        [
-          new Comment(2, "comment for row 2"),
-          new Comment(4, "comment for row 4"),
-        ]);
-
-    let updateDisplay = () => {
-      document.querySelector(".counter").innerHTML =
-          globalCounter.print();
-      document.querySelector(".commentContent").innerHTML =
-          globalCounter.getCommentsAtCurrentRow();
-    };
-    updateDisplay();
-
-    document.querySelector("#increaseButton").addEventListener(
-    		"click",
-        () => {
-          globalCounter.increase();
-           updateDisplay();
-        });
-    document.querySelector("#decreaseButton").addEventListener(
-    		"click",
-        () => {
-          globalCounter.decrease();
-           updateDisplay();
-        });
-  </script>
+  <script src="./code.js"> </script>
 
   <style>
     body {
@@ -93,4 +63,36 @@
 
 
   </body>
+
+
+  <script type="text/javascript">
+    let globalCounter = new Counter(
+    		"Global",
+        1,
+        [
+          new Comment(2, "comment for row 2"),
+          new Comment(4, "comment for row 4"),
+        ]);
+
+    let updateDisplay = () => {
+      document.querySelector(".counter").innerHTML =
+          globalCounter.print();
+      document.querySelector(".commentContent").innerHTML =
+          globalCounter.getCommentsAtCurrentRow();
+    };
+    updateDisplay();
+
+    document.querySelector("#increaseButton").addEventListener(
+    		"click",
+        () => {
+          globalCounter.increase();
+           updateDisplay();
+        });
+    document.querySelector("#decreaseButton").addEventListener(
+    		"click",
+        () => {
+          globalCounter.decrease();
+           updateDisplay();
+        });
+  </script>
 </html>
