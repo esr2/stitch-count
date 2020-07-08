@@ -68,22 +68,22 @@
 
 
   <script type="text/javascript">
-    let globalCounter = new Counter(
-    		"Global",
-        1,
-        [
-          new Note(2, "note for row 2"),
-          new Note(4, "note for row 4"),
-        ]);
-    let secondaryCounter = new Counter(
+    let secondaryCounter1 = new Counter(
         		"border",
             1,
             [
               new Note(3, "note for row 3"),
               new Note(4, "note for row 4"),
             ]);
-    let project = new Project('Project Title', [globalCounter]);
-    project.addCounter(secondaryCounter);
+    let secondaryCounter2 = new Counter(
+        		"panel",
+            1,
+            [
+              new Note(3, "note for row 3"),
+              new Note(2, "note for row 2"),
+            ]);
+    let project = new Project('Project Title', [secondaryCounter1]);
+    project.addCounter(secondaryCounter2);
 
     let updateDisplay = () => {
       document.querySelector(".projectState").innerHTML =

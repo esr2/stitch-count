@@ -60,9 +60,9 @@ class Project {
   private name: string;
 	private counters: Counter[];
 
-  constructor(name: string, counters: Counter[]) {
+  constructor(name: string, secondaryCounters: Counter[]) {
   	this.name = name;
-    this.counters = counters;
+    this.counters = [new Counter("Global", 1, [])].concat(secondaryCounters);
   }
 
   addCounter(counter: Counter) {

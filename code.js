@@ -40,9 +40,9 @@ class Counter {
     }
 }
 class Project {
-    constructor(name, counters) {
+    constructor(name, secondaryCounters) {
         this.name = name;
-        this.counters = counters;
+        this.counters = [new Counter("Global", 1, [])].concat(secondaryCounters);
     }
     addCounter(counter) {
         this.counters.push(counter);
