@@ -20,14 +20,29 @@ class Counter {
     private name: string;
     private index: number;
     private notes: Note[];
+    private startIndex: number;
+    private endIndex?: number;
 
   constructor (
-       name: string,
-       index: number = 1,
-       notes: Note[] = []) {
+      name: string,
+      index: number = 1,
+      notes: Note[] = [],
+      startIndex: number = 1,
+      endIndex?: number) {
     this.name = name;
-    this.index = index;
     this.notes = notes;
+
+    if (index < startIndex || index > endIndex) {
+      alert(`Bad counter index ${index} on Counter ${name} out of bounds [${startIndex} - ${endIndex}]`);
+      // TODO Kill app
+    }
+    if (startIndex >= endIndex) {
+      alert(`Counter ${name} of has startIndex ${startIndex} greater than the ${endIndex}`);
+      // TODO Kill app
+    }
+    this.index = index;
+    this.startIndex = startIndex;
+    this.endIndex = endIndex;
   };
 
   addNote(note: Note) {
@@ -36,10 +51,16 @@ class Counter {
 
   increase() {
     this.index += 1;
+    if (this.index > this.endIndex) {
+      this.index = this.startIndex;
+    }
   }
 
   decrease() {
     this.index -= 1;
+    if (this.index < this.startIndex) {
+      this.index = this.endIndex;
+    }
   }
 
   print() {

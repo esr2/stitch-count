@@ -70,14 +70,16 @@
   <script type="text/javascript">
     let secondaryCounter1 = new Counter(
         		"border",
-            1,
+            1 /* index */,
             [
               new Note(3, "note for row 3"),
               new Note(4, "note for row 4"),
-            ]);
+            ],
+            1 /* startIndex */,
+            3 /* endIndex */);
     let secondaryCounter2 = new Counter(
         		"panel",
-            1,
+            1 /* index */,
             [
               new Note(3, "note for row 3"),
               new Note(2, "note for row 2"),
