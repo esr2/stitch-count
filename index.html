@@ -1,68 +1,103 @@
 <!doctype html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Stitch Count</title>
   </head>
   <script src="./code.js"> </script>
 
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
   <style>
-    body {
-      background: #20262E;
-      padding: 20px;
-      font-family: Roboto;
-      font-size: 24px;
+    .w3-button {
+      width: 100px;
     }
 
-    .topnav{
-      background: #339933;
-      color: white;
-      height: 30px;
+    /* Override .w3-button:hover to match .w3-theme-action */
+    .w3-button:hover {
+      color: #fff !important;
+      background-color: #265728!important;
     }
 
-    .topnavText {
-      left: 20px;
-      top: 5px;
-      position: relative;
+    .circle {
+      border-radius: 50%;
+      padding: 10px 13px;
+      border: 1px solid #000;
     }
 
-    .projectState {
-      background: #fff;
-      border-radius: 4px;
-      padding: 20px;
-      transition: all 0.2s;
-      text-align: center;
+    .hidden {
+      color: #fff;
+      border: 1px solid #fff;
     }
 
-    .noteWrapper {
-      background: #fff;
-      border-radius: 4px;
-      padding: 20px;
-      transition: all 0.2s;
-      text-align: center;
+    .counterIndex {
+      width: 140px;
+    }
+
+    .numResets {
+      width: 80px;
     }
   </style>
 
   <body>
-    <div class="topnav">
-      <div class="topnavText">
-      App Title
-      </div>
+    <header class="w3-top w3-bar w3-theme">
+      <!-- <button class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme" onclick="openSidebar()">&#9776;</button> -->
+      <h1 class="w3-bar-item">App Title</h1>
+    </header>
+
+    <div class="w3-container" style="margin-top:90px;">
+      <ul class="w3-ul w3-card-4 counters">
+        <li class="w3-cell-row">
+            <div class="w3-container w3-cell w3-cell-middle counterTitle">
+              <span>Global</span>
+            </div>
+            <div class="w3-container w3-cell w3-cell-middle counterIndex">
+              <span class="w3-xxlarge">34</span>
+            </div>
+            <div class="w3-container w3-cell w3-cell-middle numResets">
+              <span class="circle hidden">0</span>
+            </div>
+        </li>
+
+        <li class="w3-cell-row">
+            <div class="w3-container w3-cell w3-cell-middle counterTitle">
+              <span>Border</span>
+            </div>
+            <div class="w3-container w3-cell w3-cell-middle counterIndex">
+              <span class="w3-xxlarge">20</span>
+            </div>
+            <div class="w3-container w3-cell w3-cell-middle numResets">
+              <span class="circle hidden">0</span>
+            </div>
+        </li>
+
+        <li class="w3-cell-row">
+            <div class="w3-container w3-cell w3-cell-middle counterTitle">
+              <span>Panel</span>
+            </div>
+            <div class="w3-container w3-cell w3-cell-middle counterIndex">
+              <span class="w3-xxlarge">34</span>
+            </div>
+            <div class="w3-container w3-cell w3-cell-middle numResets">
+              <span class="circle">0</span>
+            </div>
+        </li>
+      </ul>
     </div>
 
     <div class="projectState">
     </div>
 
 
-    <button id="increaseButton">
-    Increase
-    </button>
-    <button id="decreaseButton">
-    Decrease
-    </button>
+    <button class="w3-button w3-jumbo w3-theme-action w3-padding-large w3-round-xxlarge" id="increaseButton">+</button>
+    <button class="w3-button w3-jumbo w3-theme-action w3-padding-large w3-round-xxlarge" id="decreaseButton">-</button>
 
-    <div class="noteWrapper">
-    Notes:
-    <div class="noteContent">
+    <div class="w3-container">
+      <div class="w3-panel w3-pale-green w3-border-green w3-border">
+        <p id="noteContent"></p>
+      </div>
+    </div>
+
 
 
   </body>
@@ -85,15 +120,15 @@
               new Note(3, "note for row 3"),
               new Note(2, "note for row 2"),
             ]);
-    let project = new Project('Project Title', [secondaryCounter1]);
+    let project = new Project('Celtic Throw', [secondaryCounter1]);
     project.addCounter(secondaryCounter2);
 
     let updateDisplay = () => {
-      document.querySelector(".topnavText").innerHTML =
+      document.querySelector(".w3-bar-item").innerHTML =
           project.getName();
       document.querySelector(".projectState").innerHTML =
           project.print();
-      document.querySelector(".noteContent").innerHTML =
+      document.querySelector("#noteContent").innerHTML =
           project.getNotesAtCurrentIndex();
     };
     updateDisplay();
