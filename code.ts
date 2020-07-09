@@ -72,6 +72,38 @@ class Counter {
         (!!this.endIndex ? `  num Resets: ${this.numResets}` : '') ;
   }
 
+  render(countersList: HTMLElement) {
+    let counterElement = document.createElement('li');
+    counterElement.classList.add("w3-cell-row");
+    countersList.appendChild(counterElement);
+
+    let titleElement = document.createElement('div');
+    titleElement.classList.add("w3-container", "w3-cell", "w3-cell-middle", "counterTitle");
+    let titleText = document.createElement('span');
+    titleText.textContent = this.name;
+    titleElement.appendChild(titleText);
+    counterElement.appendChild(titleElement);
+
+    let indexElement = document.createElement('div');
+    indexElement.classList.add("w3-container", "w3-cell", "w3-cell-middle", "counterIndex");
+    let indexText = document.createElement('span');
+    indexText.classList.add("w3-xxlarge");
+    indexText.textContent = this.index.toString();
+    indexElement.appendChild(indexText);
+    counterElement.appendChild(indexElement);
+
+    let resetsElement = document.createElement('div');
+    resetsElement.classList.add("w3-container", "w3-cell", "w3-cell-middle", "numResets");
+    let resetsText = document.createElement('span');
+    resetsText.textContent = this.numResets.toString();
+    resetsText.classList.add("circle");
+    if (this.numResets == 0) {
+      resetsText.classList.add( "hidden");
+    }
+    resetsElement.appendChild(resetsText);
+    counterElement.appendChild(resetsElement);
+  }
+
   getNotesAtCurrentIndex() {
     return this.notes.
 					filter((note: Note) => {
@@ -118,6 +150,12 @@ class Project {
             return counter.print();
           }).
         join('<br />');
+  }
+
+  render(countersList: HTMLElement) {
+    this.counters.forEach((counter: Counter) => {
+      counter.render(countersList);
+    });
   }
 
   getNotesAtCurrentIndex() {

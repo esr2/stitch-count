@@ -47,47 +47,8 @@
 
     <div class="w3-container" style="margin-top:90px;">
       <ul class="w3-ul w3-card-4 counters">
-        <li class="w3-cell-row">
-            <div class="w3-container w3-cell w3-cell-middle counterTitle">
-              <span>Global</span>
-            </div>
-            <div class="w3-container w3-cell w3-cell-middle counterIndex">
-              <span class="w3-xxlarge">34</span>
-            </div>
-            <div class="w3-container w3-cell w3-cell-middle numResets">
-              <span class="circle hidden">0</span>
-            </div>
-        </li>
-
-        <li class="w3-cell-row">
-            <div class="w3-container w3-cell w3-cell-middle counterTitle">
-              <span>Border</span>
-            </div>
-            <div class="w3-container w3-cell w3-cell-middle counterIndex">
-              <span class="w3-xxlarge">20</span>
-            </div>
-            <div class="w3-container w3-cell w3-cell-middle numResets">
-              <span class="circle hidden">0</span>
-            </div>
-        </li>
-
-        <li class="w3-cell-row">
-            <div class="w3-container w3-cell w3-cell-middle counterTitle">
-              <span>Panel</span>
-            </div>
-            <div class="w3-container w3-cell w3-cell-middle counterIndex">
-              <span class="w3-xxlarge">34</span>
-            </div>
-            <div class="w3-container w3-cell w3-cell-middle numResets">
-              <span class="circle">0</span>
-            </div>
-        </li>
       </ul>
     </div>
-
-    <div class="projectState">
-    </div>
-
 
     <button class="w3-button w3-jumbo w3-theme-action w3-padding-large w3-round-xxlarge" id="increaseButton">+</button>
     <button class="w3-button w3-jumbo w3-theme-action w3-padding-large w3-round-xxlarge" id="decreaseButton">-</button>
@@ -97,8 +58,6 @@
         <p id="noteContent"></p>
       </div>
     </div>
-
-
 
   </body>
 
@@ -126,8 +85,10 @@
     let updateDisplay = () => {
       document.querySelector(".w3-bar-item").innerHTML =
           project.getName();
-      document.querySelector(".projectState").innerHTML =
-          project.print();
+
+      // Clear current counters UI
+      document.querySelector(".counters").innerHTML = '';
+      project.render(document.querySelector(".counters"));
       document.querySelector("#noteContent").innerHTML =
           project.getNotesAtCurrentIndex();
     };
