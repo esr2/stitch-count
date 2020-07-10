@@ -34,14 +34,14 @@ class Counter {
     }
     increase() {
         this.index += 1;
-        if (this.index > this.endIndex) {
+        if (!!this.endIndex && this.index > this.endIndex) {
             this.index = this.startIndex;
             this.numResets += 1;
         }
     }
     decrease() {
         this.index -= 1;
-        if (this.index < this.startIndex) {
+        if (!!this.endIndex && this.index < this.startIndex) {
             this.index = this.endIndex;
             this.numResets -= 1;
         }
