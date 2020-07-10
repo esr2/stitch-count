@@ -32,33 +32,37 @@ function updateDisplay(project: Project) {
 };
 
 function createProject() {
-  let secondaryCounter1 = new Counter(
-          "border",
-          1 /* index */,
-          [
-            new Note(3, "note for row 3"),
-            new Note(4, "note for row 4"),
+  let secondaryCounter1 = new Counter({
+          name: "border",
+          index: 1,
+          notes: [
+            new Note({index: 3, value: "note for row 3"}),
+            new Note({index: 4, value: "note for row 4"}),
           ],
-          1 /* startIndex */,
-          3 /* endIndex */);
-  let secondaryCounter2 = new Counter(
-          "panel",
-          1 /* index */,
-          [
-            new Note(3, "note for row 3"),
-            new Note(2, "note for row 2"),
-          ]);
-  let secondaryCounter3 = new Counter(
-          "third",
-          1 /* index */,
-          [
-            new Note(5, "note for row 5"),
+          startIndex: 1,
+          endIndex: 3});
+  let secondaryCounter2 = new Counter({
+          name: "panel",
+          index: 1,
+          notes: [
+            new Note({index: 3, value: "note for row 3"}),
+            new Note({index: 2, value: "note for row 2"}),
+          ]});
+  let secondaryCounter3 = new Counter({
+          name: "third",
+          index: 1,
+          notes: [
+            new Note({index: 5, value: "note for row 5"}),
           ],
-          3 /* startIndex */,
-          7 /* endIndex */,
-          true /* showResets */);
-  let project = new Project('Celtic Throw', [secondaryCounter1]);
-  project.addCounters([secondaryCounter2, secondaryCounter3]);
+          startIndex: 3,
+          endIndex: 7,
+          showResets: true});
+  let project = new Project({name: 'Celtic Throw', counters: [
+     new Counter({name: "Global", index: 1, notes: []}),
+     secondaryCounter1,
+     secondaryCounter2,
+     secondaryCounter3
+   ]});
 
   return project;
 }

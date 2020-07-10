@@ -1,9 +1,8 @@
 class Note {
-    constructor(index, value) {
-        this.index = index;
-        this.value = value;
+    constructor(obj) {
+        this.index = obj.index;
+        this.value = obj.value;
     }
-    ;
     getIndex() {
         return this.index;
     }
@@ -12,18 +11,18 @@ class Note {
     }
 }
 class Counter {
-    constructor(name, index = 1, notes = [], startIndex = 1, endIndex, showResets = false) {
-        this.name = name;
-        this.notes = notes;
-        if (startIndex >= endIndex) {
-            alert(`Counter ${name} of has startIndex ${startIndex} greater than the ${endIndex}`);
+    constructor(obj) {
+        this.name = obj.name;
+        this.notes = obj.notes || [];
+        if (!!obj.endIndex && obj.startIndex >= obj.endIndex) {
+            alert(`Counter ${obj.name} of has startIndex ${obj.startIndex} greater than the ${obj.endIndex}`);
             // TODO Kill app
         }
-        this.index = index;
-        this.startIndex = startIndex;
-        this.endIndex = endIndex;
-        this.numResets = 0;
-        this.showResets = showResets;
+        this.index = obj.index;
+        this.startIndex = obj.startIndex || 1;
+        this.endIndex = obj.endIndex || null;
+        this.numResets = obj.numResets || 0;
+        this.showResets = obj.showResets || false;
     }
     ;
     addNote(note) {
@@ -79,11 +78,17 @@ class Counter {
             flatMap((note) => { return this.name + " " + note.print(); }).
             join('<br />');
     }
+    static create(json) {
+        let params = Object.assign(Object.assign({}, json), { notes: json.notes.map((n) => {
+                return new Note(n);
+            }) });
+        return new Counter(params);
+    }
 }
 class Project {
-    constructor(name, secondaryCounters) {
-        this.name = name;
-        this.counters = [new Counter("Global", 1, [])].concat(secondaryCounters);
+    constructor(obj) {
+        this.name = obj.name;
+        this.counters = obj.counters;
     }
     addCounters(counters) {
         this.counters = this.counters.concat(counters);
@@ -114,6 +119,12 @@ class Project {
         })
             .filter((notes) => { return notes.length > 0; })
             .join('<br />');
+    }
+    static create(json) {
+        let params = Object.assign(Object.assign({}, json), { counters: json.counters.map((c) => {
+                return Counter.create(c);
+            }) });
+        return new Project(params);
     }
 }
 //# sourceMappingURL=code.js.map

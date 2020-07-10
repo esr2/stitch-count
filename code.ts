@@ -2,10 +2,10 @@ class Note {
   private index: number;
   private value: string;
 
-  constructor (index: number, value: string) {
-    this.index = index;
-    this.value = value;
-  };
+  constructor(obj : {index: number, value: string}) {
+    this.index = obj.index;
+    this.value = obj.value;
+  }
 
   getIndex() {
     return this.index;
@@ -25,25 +25,26 @@ class Counter {
     private numResets?: number;
     private showResets: boolean;
 
-  constructor (
+  constructor (obj : {
       name: string,
-      index: number = 1,
-      notes: Note[] = [],
-      startIndex: number = 1,
+      index: number,
+      notes?: Note[],
+      startIndex?: number,
       endIndex?: number,
-      showResets: boolean = false) {
-    this.name = name;
-    this.notes = notes;
+      showResets?: boolean,
+      numResets?: number}) {
+    this.name = obj.name;
+    this.notes = obj.notes || [];
 
-    if (startIndex >= endIndex) {
-      alert(`Counter ${name} of has startIndex ${startIndex} greater than the ${endIndex}`);
+    if (!!obj.endIndex && obj.startIndex >= obj.endIndex) {
+      alert(`Counter ${obj.name} of has startIndex ${obj.startIndex} greater than the ${obj.endIndex}`);
       // TODO Kill app
     }
-    this.index = index;
-    this.startIndex = startIndex;
-    this.endIndex = endIndex;
-    this.numResets = 0;
-    this.showResets = showResets;
+    this.index = obj.index;
+    this.startIndex = obj.startIndex || 1;
+    this.endIndex = obj.endIndex || null;
+    this.numResets = obj.numResets || 0;
+    this.showResets = obj.showResets || false;
   };
 
   addNote(note: Note) {
@@ -107,15 +108,32 @@ class Counter {
     			flatMap((note: Note) => { return this.name + " " + note.print(); }).
 					join('<br />');
   }
+
+  static create(json: {
+    name: string,
+    index: number,
+    startIndex: number,
+    numResets: number,
+    showResets: boolean,
+    notes: Object[],
+    endIndex?: number,
+  }) : Counter {
+    let params = {
+      ...json,
+      notes : json.notes.map((n : {index: number, value: string}) : Note => {
+        return new Note(n);
+      })};
+    return new Counter(params);
+  }
 }
 
 class Project {
   private name: string;
 	private counters: Counter[];
 
-  constructor(name: string, secondaryCounters: Counter[]) {
-  	this.name = name;
-    this.counters = [new Counter("Global", 1, [])].concat(secondaryCounters);
+  constructor(obj: {name: string, counters: Counter[]}) {
+  	this.name = obj.name;
+    this.counters = obj.counters;
   }
 
   addCounters(counters: Counter[]) {
@@ -152,5 +170,25 @@ class Project {
             })
           .filter((notes: string) => { return notes.length > 0; })
           .join('<br />');
+  }
+
+  static create(json : {
+    name: string,
+    counters: Object[]
+  }) : Project {
+    let params = {
+      ...json,
+      counters : json.counters.map((c : {
+        name: string,
+        index: number,
+        startIndex: number,
+        numResets: number,
+        showResets: boolean,
+        notes: Object[],
+        endIndex?: number,
+      }) : Counter => {
+        return Counter.create(c);
+      })};
+    return new Project(params);
   }
 }
