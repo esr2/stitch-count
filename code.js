@@ -43,14 +43,9 @@ class Counter {
             this.numResets -= 1;
         }
     }
-    print() {
-        return this.name + ": " + this.index +
-            (!!this.endIndex ? `  num Resets: ${this.numResets}` : '');
-    }
-    render(countersList) {
+    render() {
         let counterElement = document.createElement('li');
         counterElement.classList.add("w3-cell-row");
-        countersList.appendChild(counterElement);
         let titleElement = document.createElement('div');
         titleElement.classList.add("w3-container", "w3-cell", "w3-cell-middle", "counterTitle");
         let titleText = document.createElement('span');
@@ -74,6 +69,7 @@ class Counter {
         }
         resetsElement.appendChild(resetsText);
         counterElement.appendChild(resetsElement);
+        return counterElement;
     }
     getNotesAtCurrentIndex() {
         return this.notes.
@@ -106,16 +102,9 @@ class Project {
             counter.decrease();
         });
     }
-    print() {
-        return this.counters.
-            flatMap((counter) => {
-            return counter.print();
-        }).
-            join('<br />');
-    }
-    render(countersList) {
-        this.counters.forEach((counter) => {
-            counter.render(countersList);
+    render() {
+        return this.counters.map((counter) => {
+            return counter.render();
         });
     }
     getNotesAtCurrentIndex() {

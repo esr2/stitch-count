@@ -24,7 +24,9 @@ function updateDisplay(project: Project) {
 
   // Clear current counters UI
   document.querySelector(".counters").innerHTML = '';
-  project.render(document.querySelector(".counters"));
+  project.render().forEach((element: HTMLElement) => {
+    document.querySelector(".counters").appendChild(element);
+  });
   document.querySelector("#noteContent").innerHTML =
       project.getNotesAtCurrentIndex();
 };
