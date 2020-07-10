@@ -88,8 +88,18 @@
               new Note(3, "note for row 3"),
               new Note(2, "note for row 2"),
             ]);
+    let secondaryCounter3 = new Counter(
+        		"third",
+            1 /* index */,
+            [
+              new Note(5, "note for row 5"),
+            ],
+            3 /* startIndex */,
+            7 /* endIndex */,
+            true /* showResets */);
     let project = new Project('Celtic Throw', [secondaryCounter1]);
     project.addCounter(secondaryCounter2);
+    project.addCounter(secondaryCounter3);
 
     let updateDisplay = () => {
       document.querySelector(".w3-bar-item").innerHTML =

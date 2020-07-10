@@ -23,20 +23,18 @@ class Counter {
     private startIndex: number;
     private endIndex?: number;
     private numResets?: number;
+    private showResets: boolean;
 
   constructor (
       name: string,
       index: number = 1,
       notes: Note[] = [],
       startIndex: number = 1,
-      endIndex?: number) {
+      endIndex?: number,
+      showResets: boolean = false) {
     this.name = name;
     this.notes = notes;
 
-    if (index < startIndex || index > endIndex) {
-      alert(`Bad counter index ${index} on Counter ${name} out of bounds [${startIndex} - ${endIndex}]`);
-      // TODO Kill app
-    }
     if (startIndex >= endIndex) {
       alert(`Counter ${name} of has startIndex ${startIndex} greater than the ${endIndex}`);
       // TODO Kill app
@@ -45,6 +43,7 @@ class Counter {
     this.startIndex = startIndex;
     this.endIndex = endIndex;
     this.numResets = 0;
+    this.showResets = showResets;
   };
 
   addNote(note: Note) {
@@ -97,7 +96,7 @@ class Counter {
     let resetsText = document.createElement('span');
     resetsText.textContent = this.numResets.toString();
     resetsText.classList.add("circle");
-    if (this.numResets == 0) {
+    if (!this.showResets) {
       resetsText.classList.add( "hidden");
     }
     resetsElement.appendChild(resetsText);
