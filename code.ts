@@ -122,8 +122,8 @@ class Project {
     this.counters = [new Counter("Global", 1, [])].concat(secondaryCounters);
   }
 
-  addCounter(counter: Counter) {
-    this.counters.push(counter);
+  addCounters(counters: Counter[]) {
+    this.counters = this.counters.concat(counters);
   }
 
   getName() {

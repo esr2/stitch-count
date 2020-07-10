@@ -5,6 +5,7 @@
     <title>Stitch Count</title>
   </head>
   <script src="./code.js"> </script>
+  <script src="./init.js"> </script>
 
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
@@ -69,61 +70,4 @@
     </div>
 
   </body>
-
-
-  <script type="text/javascript">
-    let secondaryCounter1 = new Counter(
-        		"border",
-            1 /* index */,
-            [
-              new Note(3, "note for row 3"),
-              new Note(4, "note for row 4"),
-            ],
-            1 /* startIndex */,
-            3 /* endIndex */);
-    let secondaryCounter2 = new Counter(
-        		"panel",
-            1 /* index */,
-            [
-              new Note(3, "note for row 3"),
-              new Note(2, "note for row 2"),
-            ]);
-    let secondaryCounter3 = new Counter(
-        		"third",
-            1 /* index */,
-            [
-              new Note(5, "note for row 5"),
-            ],
-            3 /* startIndex */,
-            7 /* endIndex */,
-            true /* showResets */);
-    let project = new Project('Celtic Throw', [secondaryCounter1]);
-    project.addCounter(secondaryCounter2);
-    project.addCounter(secondaryCounter3);
-
-    let updateDisplay = () => {
-      document.querySelector(".w3-bar-item").innerHTML =
-          project.getName();
-
-      // Clear current counters UI
-      document.querySelector(".counters").innerHTML = '';
-      project.render(document.querySelector(".counters"));
-      document.querySelector("#noteContent").innerHTML =
-          project.getNotesAtCurrentIndex();
-    };
-    updateDisplay();
-
-    document.querySelector("#increaseButton").addEventListener(
-    		"click",
-        () => {
-          project.increase();
-          updateDisplay();
-        });
-    document.querySelector("#decreaseButton").addEventListener(
-    		"click",
-        () => {
-          project.decrease();
-          updateDisplay();
-        });
-  </script>
 </html>
