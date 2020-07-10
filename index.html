@@ -19,6 +19,12 @@
       background-color: #265728!important;
     }
 
+    .buttonContainer {
+      display: flex;
+      padding: 20px;
+      justify-content: space-evenly;
+    }
+
     .circle {
       border-radius: 50%;
       padding: 10px 13px;
@@ -51,8 +57,10 @@
       </ul>
     </div>
 
-    <button class="w3-button w3-jumbo w3-theme-action w3-padding-large w3-round-xxlarge" id="decreaseButton">-</button>
-    <button class="w3-button w3-jumbo w3-theme-action w3-padding-large w3-round-xxlarge" id="increaseButton">+</button>
+    <div class="buttonContainer">
+      <button class="w3-button w3-jumbo w3-theme-action w3-padding-large w3-round-xxlarge" id="decreaseButton">-</button>
+      <button class="w3-button w3-jumbo w3-theme-action w3-padding-large w3-round-xxlarge" id="increaseButton">+</button>
+    </div>
 
     <div class="w3-container">
       <div class="w3-panel w3-pale-green w3-border-green w3-border">
