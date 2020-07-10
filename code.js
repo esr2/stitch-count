@@ -55,7 +55,7 @@ class Counter {
         let indexElement = document.createElement('div');
         indexElement.classList.add("w3-container", "w3-cell", "w3-cell-middle", "counterIndex");
         let indexText = document.createElement('span');
-        indexText.classList.add("w3-xxlarge");
+        indexText.classList.add("w3-xlarge");
         indexText.textContent = this.index.toString();
         indexElement.appendChild(indexText);
         counterElement.appendChild(indexElement);
