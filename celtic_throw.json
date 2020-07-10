@@ -1,0 +1,42 @@
+{
+   "name":"Celtic Throw",
+   "counters":[
+      {
+         "name":"Global",
+         "notes":[],
+         "index":1,
+         "startIndex":1,
+         "endIndex":null,
+         "numResets":0,
+         "showResets":false
+      },
+      {
+         "name":"Border",
+         "notes":[
+            {
+               "index":21,
+               "value":"2/2 RC"
+            }
+         ],
+         "index":1,
+         "startIndex":18,
+         "endIndex":21,
+         "numResets":0,
+         "showResets":false
+      },
+      {
+         "name":"Panel Threads",
+         "notes":[
+            {
+               "index":17,
+               "value":"2/2 RC"
+            },
+         ],
+         "index":1,
+         "startIndex":17,
+         "endIndex":20,
+         "numResets":0,
+         "showResets":false
+      },
+   ]
+}
