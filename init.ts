@@ -1,7 +1,7 @@
 window.onload = () => { onLoad() };
 
 function onLoad() {
-  let project = createProject();
+  let project = getOrCreateProject();
   updateDisplay(project);
 
   document.querySelector("#increaseButton").addEventListener(
@@ -29,9 +29,20 @@ function updateDisplay(project: Project) {
   });
   document.querySelector("#noteContent").innerHTML =
       project.getNotesAtCurrentIndex();
+
+  localStorage.setItem('state', JSON.stringify(project));
 };
 
-function createProject() {
+function getOrCreateProject() : Project {
+  let storedState = localStorage.getItem('state');
+  if (storedState) {
+    return Project.create(JSON.parse(storedState));
+  } else {
+    return createProject();
+  }
+};
+
+function createProject() : Project {
   let secondaryCounter1 = new Counter({
           name: "border",
           index: 1,
