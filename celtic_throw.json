@@ -11,8 +11,12 @@
          "showResets":false
       },
       {
-         "name":"Border",
+         "name":"Border & Threads",
          "notes":[
+            {
+              "index":17,
+              "value":"2/2 RC"
+            },
             {
                "index":21,
                "value":"2/2 RC"
@@ -25,16 +29,16 @@
          "showResets":false
       },
       {
-         "name":"Panel Threads",
+         "name":"Panel",
          "notes":[
             {
-               "index":17,
-               "value":"2/2 RC"
+               "index":85,
+               "value":"Skip next two rows on iteration 5"
             }
          ],
          "index":1,
-         "startIndex":17,
-         "endIndex":20,
+         "startIndex":15,
+         "endIndex":86,
          "numResets":0,
          "showResets":false
       }
