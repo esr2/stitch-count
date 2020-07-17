@@ -63,7 +63,7 @@ function createProject() : Promise<Project> {
 function loadPdf() {
   // If absolute URL from the remote server is provided, configure the CORS
   // header on that server.
-  var url = 'https://github.com/esr2/stitch-count/blob/master/AK-Celtic_Traveller_Throw-v052220.pdf';
+  var url = './AK-Celtic_Traveller_Throw-v052220.pdf';
 
   // Loaded via <script> tag, create shortcut to access PDF.js exports.
   var pdfjsLib = window['pdfjs-dist/build/pdf'];
