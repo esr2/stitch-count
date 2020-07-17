@@ -28,18 +28,24 @@ class Counter {
     addNote(note) {
         this.notes.push(note);
     }
-    increase() {
-        this.index += 1;
-        if (!!this.endIndex && this.index > this.endIndex) {
-            this.index = this.startIndex;
-            this.numResets += 1;
+    updateIndex(globalIndex) {
+        if (!this.endIndex) {
+            // Not a repeating counter, index should match globalIndex.
+            this.index = globalIndex;
         }
-    }
-    decrease() {
-        this.index -= 1;
-        if (!!this.endIndex && this.index < this.startIndex) {
-            this.index = this.endIndex;
-            this.numResets -= 1;
+        else {
+            // Repeating counter, reset index and numResets.
+            if (globalIndex <= this.endIndex) {
+                this.index = globalIndex;
+                this.numResets = 0;
+            }
+            else {
+                let remainder = globalIndex - this.startIndex;
+                // +1 because endIndex is inclusive.
+                let base = this.endIndex - this.startIndex + 1;
+                this.index = this.startIndex + (remainder % base);
+                this.numResets = Math.floor(remainder / base);
+            }
         }
     }
     render() {
@@ -89,6 +95,7 @@ class Project {
     constructor(obj) {
         this.name = obj.name;
         this.counters = obj.counters;
+        this.globalIndex = 1;
     }
     addCounters(counters) {
         this.counters = this.counters.concat(counters);
@@ -98,14 +105,10 @@ class Project {
     }
     // TODO figure out if we ever want unliked Counters and accommodate that here.
     increase() {
-        this.counters.forEach((counter) => {
-            counter.increase();
-        });
+        this.updateIndices(this.globalIndex + 1);
     }
     decrease() {
-        this.counters.forEach((counter) => {
-            counter.decrease();
-        });
+        this.updateIndices(this.globalIndex - 1);
     }
     render() {
         return this.counters.map((counter) => {
@@ -120,11 +123,22 @@ class Project {
             .filter((notes) => { return notes.length > 0; })
             .join('<br />');
     }
-    static create(json) {
+    updateIndices(globalIndex) {
+        this.globalIndex = globalIndex;
+        this.counters.forEach((counter) => {
+            counter.updateIndex(globalIndex);
+        });
+    }
+    getGlobalIndex() {
+        return this.globalIndex;
+    }
+    static create(json, globalIndex) {
         let params = Object.assign(Object.assign({}, json), { counters: json.counters.map((c) => {
                 return Counter.create(c);
             }) });
-        return new Project(params);
+        const project = new Project(params);
+        project.updateIndices(globalIndex);
+        return project;
     }
 }
 //# sourceMappingURL=code.js.map

@@ -51,19 +51,22 @@ class Counter {
     this.notes.push(note);
   }
 
-  increase() {
-    this.index += 1;
-    if (!!this.endIndex && this.index > this.endIndex) {
-      this.index = this.startIndex;
-      this.numResets += 1;
-    }
-  }
-
-  decrease() {
-    this.index -= 1;
-    if (!!this.endIndex && this.index < this.startIndex) {
-      this.index = this.endIndex;
-      this.numResets -= 1;
+  updateIndex(globalIndex : number) {
+    if (!this.endIndex) {
+      // Not a repeating counter, index should match globalIndex.
+      this.index = globalIndex;
+    } else {
+      // Repeating counter, reset index and numResets.
+      if (globalIndex <= this.endIndex) {
+        this.index = globalIndex;
+        this.numResets = 0;
+      } else {
+        let remainder = globalIndex - this.startIndex;
+        // +1 because endIndex is inclusive.
+        let base = this.endIndex - this.startIndex + 1;
+        this.index = this.startIndex + (remainder % base);
+        this.numResets = Math.floor(remainder / base);
+      }
     }
   }
 
@@ -130,10 +133,12 @@ class Counter {
 class Project {
   private name: string;
 	private counters: Counter[];
+  private globalIndex: number;
 
   constructor(obj: {name: string, counters: Counter[]}) {
   	this.name = obj.name;
     this.counters = obj.counters;
+    this.globalIndex = 1;
   }
 
   addCounters(counters: Counter[]) {
@@ -146,15 +151,11 @@ class Project {
 
   // TODO figure out if we ever want unliked Counters and accommodate that here.
   increase() {
-  	this.counters.forEach((counter) => {
-    	counter.increase();
-    });
+    this.updateIndices(this.globalIndex + 1);
   }
 
   decrease() {
-  	this.counters.forEach((counter) => {
-    	counter.decrease();
-    });
+  	this.updateIndices(this.globalIndex - 1);
   }
 
   render() : HTMLElement[] {
@@ -172,10 +173,21 @@ class Project {
           .join('<br />');
   }
 
+  updateIndices(globalIndex) {
+    this.globalIndex = globalIndex;
+    this.counters.forEach((counter) => {
+    	counter.updateIndex(globalIndex);
+    });
+  }
+
+  getGlobalIndex() {
+    return this.globalIndex;
+  }
+
   static create(json : {
     name: string,
     counters: Object[]
-  }) : Project {
+  }, globalIndex: number) : Project {
     let params = {
       ...json,
       counters : json.counters.map((c : {
@@ -189,6 +201,8 @@ class Project {
       }) : Counter => {
         return Counter.create(c);
       })};
-    return new Project(params);
+    const project = new Project(params);
+    project.updateIndices(globalIndex);
+    return project;
   }
 }

@@ -1,5 +1,7 @@
 window.onload = () => { onLoad() };
 
+const STORAGE_KEY = "ID-1";
+
 function onLoad() {
   getOrCreateProject().then((project) => {
     updateDisplay(project);
@@ -38,26 +40,22 @@ function updateDisplay(project: Project) {
   document.querySelector("#noteContent").innerHTML =
       project.getNotesAtCurrentIndex();
 
-  localStorage.setItem('state', JSON.stringify(project));
+  localStorage.setItem(STORAGE_KEY, project.getGlobalIndex().toString());
 };
 
 function getOrCreateProject() : Promise<Project> {
-  let storedState = localStorage.getItem('state');
-  if (storedState) {
-    return Promise.resolve(Project.create(JSON.parse(storedState)));
-  } else {
-    return createProject();
-  }
+  let storedIndex = parseInt(localStorage.getItem(STORAGE_KEY)) || 1;
+  return createProject(storedIndex);
 };
 
-function createProject() : Promise<Project> {
+function createProject(globalIndex: number) : Promise<Project> {
   return new Promise((resolve, reject) => {
     let oXHR = new XMLHttpRequest();
     // Initiate request.
     oXHR.onreadystatechange = () => {
       // Check if request is complete.
       if (oXHR.readyState == 4) {
-        resolve(Project.create(JSON.parse(oXHR.responseText)));
+        resolve(Project.create(JSON.parse(oXHR.responseText), globalIndex));
       }
     };
     oXHR.open("GET", "https://esr2.github.io/stitch-count/celtic_throw.json", true);  // get json file.
