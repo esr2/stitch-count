@@ -65,7 +65,7 @@ function createProject() : Promise<Project> {
   });
 }
 
-PDF_VIEWS = [];
+const PDF_VIEWS = [];
 var DEFAULT_SCALE_DELTA = 1.1;
 var MIN_SCALE = 0.25;
 var MAX_SCALE = 10.0;
