@@ -40,7 +40,7 @@
          "startIndex":15,
          "endIndex":86,
          "numResets":0,
-         "showResets":false
+         "showResets":true
       }
    ]
 }
