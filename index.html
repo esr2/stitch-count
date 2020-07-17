@@ -5,6 +5,7 @@
     <title>Stitch Count</title>
   </head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf_viewer.js"></script>
   <script src="./code.js"> </script>
   <script src="./init.js"> </script>
 
@@ -46,6 +47,10 @@
     .numResets {
       width: 80px;
     }
+
+    .page {
+      position: relative;
+    }
   </style>
 
   <body>
@@ -69,7 +74,7 @@
       </div>
     </div>
 
-    <canvas id="the-canvas"></canvas>
+    <div id="pageContainer"></div>
 
   </body>
 </html>

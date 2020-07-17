@@ -71,37 +71,38 @@ function loadPdf() {
   // The workerSrc property shall be specified.
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.worker.min.js';
 
-  // Asynchronous download of PDF
-  var loadingTask = pdfjsLib.getDocument(url);
-  loadingTask.promise.then(function(pdf) {
-    console.log('PDF loaded');
+  var DEFAULT_SCALE = 1.0;
+  var DEFAULT_URL = url;
+  var container = document.getElementById("pageContainer");
 
-    // Fetch the first page
-    var pageNumber = 1;
-    pdf.getPage(pageNumber).then(function(page) {
-      console.log('Page loaded');
+  var eventBus = new pdfjsViewer.EventBus();
 
-      var scale = 1.5;
-      var viewport = page.getViewport({scale: scale});
+  // Fetch the PDF document from the URL using promises.
+  var loadingTask = pdfjsLib.getDocument(DEFAULT_URL);
+  loadingTask.promise.then(function (doc) {
+    // Use a promise to fetch and render the next page.
+    var promise = Promise.resolve();
 
-      // Prepare canvas using PDF page dimensions
-      var canvas = document.getElementById('the-canvas') as HTMLCanvasElement;
-      var context = canvas.getContext('2d');
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
+    for (var i = 5; i <= doc.numPages; i++) {
+      promise = promise.then(
+        function (pageNum) {
+          return doc.getPage(pageNum).then(function (pdfPage) {
+            // Create the page view.
+            var pdfPageView = new pdfjsViewer.PDFPageView({
+              container: container,
+              id: pageNum,
+              scale: DEFAULT_SCALE,
+              defaultViewport: pdfPage.getViewport({ scale: DEFAULT_SCALE }),
+              eventBus: eventBus,
+              annotationLayerFactory: new pdfjsViewer.DefaultAnnotationLayerFactory(),
+              renderInteractiveForms: true,
+            });
 
-      // Render PDF page into canvas context
-      var renderContext = {
-        canvasContext: context,
-        viewport: viewport
-      };
-      var renderTask = page.render(renderContext);
-      renderTask.promise.then(function () {
-        console.log('Page rendered');
-      });
-    });
-  }, function (reason) {
-    // PDF loading error
-    console.error(reason);
-  });
+            // Associate the actual page with the view and draw it.
+            pdfPageView.setPdfPage(pdfPage);
+            return pdfPageView.draw();
+          });
+        }.bind(null, i)
+      );
+    }
 }
