@@ -10,6 +10,8 @@ function onLoad() {
             project.decrease();
             updateDisplay(project);
         });
+        document.querySelector("#zoomInButton").addEventListener("click", () => { zoomIn(); });
+        document.querySelector("#zoomOutButton").addEventListener("click", () => { zoomOut(); });
     });
     loadPdf();
 }
@@ -50,6 +52,10 @@ function createProject() {
         oXHR.send();
     });
 }
+PDF_VIEWS = [];
+var DEFAULT_SCALE_DELTA = 1.1;
+var MIN_SCALE = 0.25;
+var MAX_SCALE = 10.0;
 function loadPdf() {
     // If absolute URL from the remote server is provided, configure the CORS
     // header on that server.
@@ -83,6 +89,7 @@ function loadPdf() {
                         annotationLayerFactory: new pdfjsViewer.DefaultAnnotationLayerFactory(),
                         renderInteractiveForms: false,
                     });
+                    PDF_VIEWS.push(pdfPageView);
                     pdfPageView.update(scale, -90);
                     // Associate the actual page with the view and draw it.
                     pdfPageView.setPdfPage(pdfPage);
@@ -90,6 +97,26 @@ function loadPdf() {
                 });
             }.bind(null, i));
         }
+    });
+}
+function zoomIn() {
+    PDF_VIEWS.forEach((pdfView) => {
+        // pdfView.update(/* scale */, 0 /* rotation */);
+        var newScale = pdfView.scale;
+        newScale = (newScale * DEFAULT_SCALE_DELTA).toFixed(2);
+        newScale = Math.ceil(newScale * 10) / 10;
+        newScale = Math.min(MAX_SCALE, newScale);
+        pdfView.update(newScale, -90);
+    });
+}
+function zoomOut() {
+    PDF_VIEWS.forEach((pdfView) => {
+        // pdfView.update(/* scale */, 0 /* rotation */);
+        var newScale = pdfView.scale;
+        newScale = (newScale / DEFAULT_SCALE_DELTA).toFixed(2);
+        newScale = Math.floor(newScale * 10) / 10;
+        newScale = Math.max(MIN_SCALE, newScale);
+        pdfView.update(newScale, -90);
     });
 }
 //# sourceMappingURL=init.js.map
