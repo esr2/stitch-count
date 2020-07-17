@@ -72,6 +72,8 @@ function loadPdf() {
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.worker.min.js';
 
   var DEFAULT_SCALE = 1.0;
+  var desiredWidth = 230;
+
   var DEFAULT_URL = url;
   var container = document.getElementById("pageContainer");
 
@@ -87,16 +89,21 @@ function loadPdf() {
       promise = promise.then(
         function (pageNum) {
           return doc.getPage(pageNum).then(function (pdfPage) {
+            var viewport = pdfPage.getViewport({ scale: DEFAULT_SCALE, });
+            var scale = desiredWidth / viewport.width;
+
             // Create the page view.
             var pdfPageView = new pdfjsViewer.PDFPageView({
               container: container,
               id: pageNum,
-              scale: DEFAULT_SCALE,
-              defaultViewport: pdfPage.getViewport({ scale: DEFAULT_SCALE }),
+              scale: scale,
+              defaultViewport: pdfPage.getViewport({ scale: scale }),
               eventBus: eventBus,
               annotationLayerFactory: new pdfjsViewer.DefaultAnnotationLayerFactory(),
-              renderInteractiveForms: true,
+              renderInteractiveForms: false,
             });
+
+            pdfPageView.update(scale, -90)
 
             // Associate the actual page with the view and draw it.
             pdfPageView.setPdfPage(pdfPage);
