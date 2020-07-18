@@ -60,8 +60,8 @@ function loadPdf() {
     var pdfjsLib = window['pdfjs-dist/build/pdf'];
     // The workerSrc property shall be specified.
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.worker.min.js';
-    var DEFAULT_SCALE = 1.0;
-    var desiredWidth = 230;
+    var DEFAULT_SCALE = .6;
+    var desiredWidth = window.innerWidth;
     var DEFAULT_URL = url;
     var container = document.getElementById("pageContainer");
     var eventBus = new pdfjsViewer.EventBus();
