@@ -65,17 +65,18 @@
       position: relative;
     }
 
+    .topContainer {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
     #pageContainer {
       overflow: scroll;
-      position: relative;
-      top: 410px;
-      height: 300px;
     }
 
     .controlContainer {
-      height: 410px;
       width: 100%;
-      position: fixed;
     }
 
     #highlight {
@@ -92,26 +93,28 @@
       <h2 class="w3-bar-item">App Title</h2>
     </header>
 
-    <div class="controlContainer">
-      <div class="w3-container" style="margin-top:80px;">
-        <ul class="w3-ul w3-card-4 counters">
-        </ul>
-      </div>
-
-      <div class="buttonContainer">
-        <button class="w3-button w3-xlarge w3-theme-action w3-padding-medium w3-round-xxlarge" id="decreaseButton">-</button>
-        <button class="w3-button w3-xlarge w3-theme-action w3-padding-medium w3-round-xxlarge" id="increaseButton">+</button>
-      </div>
-
-        <div class="w3-panel w3-pale-green w3-border-green w3-border">
-          <p id="noteContent"></p>
+    <div class="topContainer">
+      <div class="controlContainer">
+        <div class="w3-container" style="margin-top:80px;">
+          <ul class="w3-ul w3-card-4 counters">
+          </ul>
         </div>
-    </div>
 
-    <div id="pageContainer">
-      <div class="buttonContainer">
-        <button class="w3-button w3-medium w3-theme-action w3-padding-small w3-round-xxlarge" id="zoomInButton">zoom in</button>
-        <button class="w3-button w3-medium w3-theme-action w3-padding-small w3-round-xxlarge" id="zoomOutButton">zoom out</button>
+        <div class="buttonContainer">
+          <button class="w3-button w3-xlarge w3-theme-action w3-padding-medium w3-round-xxlarge" id="decreaseButton">-</button>
+          <button class="w3-button w3-xlarge w3-theme-action w3-padding-medium w3-round-xxlarge" id="increaseButton">+</button>
+        </div>
+
+          <div class="w3-panel w3-pale-green w3-border-green w3-border">
+            <p id="noteContent"></p>
+          </div>
+      </div>
+
+      <div id="pageContainer">
+        <div class="buttonContainer">
+          <button class="w3-button w3-medium w3-theme-action w3-padding-small w3-round-xxlarge" id="zoomInButton">zoom in</button>
+          <button class="w3-button w3-medium w3-theme-action w3-padding-small w3-round-xxlarge" id="zoomOutButton">zoom out</button>
+        </div>
       </div>
     </div>
 
