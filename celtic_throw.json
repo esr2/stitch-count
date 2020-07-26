@@ -3,7 +3,16 @@
    "counters":[
       {
          "name":"Global",
-         "notes":[],
+         "notes":[
+            {
+              "index":14,
+              "value":"Increase row"
+            },
+            {
+              "index":373,
+              "value":" Decrease row"
+            }
+         ],
          "index":1,
          "startIndex":1,
          "endIndex":null,
@@ -32,8 +41,140 @@
          "name":"Panel",
          "notes":[
             {
+               "index":15,
+               "value":"cross diamonds inwards at edge"
+            },
+            {
+               "index":21,
+               "value":"cross diamonds inwards at edge"
+            },
+            {
+               "index":27,
+               "value":"purl cross diamonds inwards at edge to decrease"
+            },
+            {
+               "index":29,
+               "value":"purl cross diamonds inwards at edge to decrease"
+            },
+            {
+               "index":31,
+               "value":"purl cross diamonds inwards at edge to decrease"
+            },
+            {
+               "index":27,
+               "value":"purl cross split knot thread into 2"
+            },
+            {
+               "index":29,
+               "value":"cross knot outwards"
+            },
+            {
+               "index":31,
+               "value":"purl cross split knot into 3"
+            },
+            {
+               "index":39,
+               "value":"purl cross split knot into 3"
+            },
+            {
+               "index":63,
+               "value":"purl cross split knot into 3"
+            },
+            {
+               "index":35,
+               "value":"purl cross combine knot into 2"
+            },
+            {
+               "index":67,
+               "value":"purl cross combine knot into 2"
+            },
+            {
+               "index":37,
+               "value":"knot 2/2 LC both branches"
+            },
+            {
+               "index":61,
+               "value":"knot 2/2 LC both branches"
+            },
+            {
+               "index":41,
+               "value":"cross knot outwards on all 3 branches (LC, RC, RC)"
+            },
+            {
+               "index":43,
+               "value":"purl cross split knot into 4 via 2/1, 4x 2/2, 2/1"
+            },
+            {
+               "index":45,
+               "value":"2/1 PC outer knot branches. 2/2 LC inner branches"
+            },
+            {
+               "index":47,
+               "value":"k2 outer branch, purl cross split inner branches into 3"
+            },
+            {
+               "index":49,
+               "value":"k2 outer branches, 2/2 RC middle branch"
+            },
+            {
+               "index":51,
+               "value":"k2 outer branch, purl cross combine 3 inner branches into 2"
+            },
+            {
+               "index":53,
+               "value":"2/1 PC outer knot branches. 2/2 LC inner branches"
+            },
+            {
+               "index":55,
+               "value":"purl cross combine knot into 3 via 2/1, 4x 2/2, 2/1"
+            },
+            {
+               "index":57,
+               "value":"purl cross outer branches inward, 2/2 RC inner branch"
+            },
+            {
+               "index":59,
+               "value":"purl cross combine knot into 2"
+            },
+            {
+               "index":33,
+               "value":"2/2 RC middle branch"
+            },
+            {
+               "index":65,
+               "value":"2/2 RC middle branch"
+            },
+            {
+               "index":69,
+               "value":"purl cross knot inwards"
+            },
+            {
+               "index":71,
+               "value":"purl cross combine knot into 1"
+            },
+            {
+               "index":67,
+               "value":"2/2 split diamonds"
+            },
+            {
+               "index":69,
+               "value":"increase diamond"
+            },
+            {
+               "index":71,
+               "value":"increase diamond"
+            },
+            {
+               "index":73,
+               "value":"cross diamond outwards at center"
+            },
+            {
+               "index":79,
+               "value":"cross diamond outwards at center"
+            },
+            {
                "index":85,
-               "value":"Skip next two rows on iteration 5"
+               "value":"Do not work on final repeat"
             }
          ],
          "index":1,
