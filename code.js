@@ -61,13 +61,17 @@ class Counter {
         counterElement.appendChild(indexElement);
         let resetsElement = document.createElement('div');
         resetsElement.classList.add("w3-container", "w3-cell", "w3-cell-middle", "numResets");
-        let resetsText = document.createElement('span');
-        resetsText.textContent = this.numResets.toString();
-        resetsText.classList.add("circle");
-        if (!this.showResets) {
-            resetsText.classList.add("hidden");
+        if (this.showResets) {
+            let resetsText = document.createElement('span');
+            resetsText.innerHTML =
+                "<span class='numerator'>" +
+                    this.numResets.toString() +
+                    "</span><span class='slash-entity'>⁄</span><span class='denominator'>" +
+                    this.maxResets.toString() +
+                    "</span>";
+            resetsText.classList.add("circle");
+            resetsElement.appendChild(resetsText);
         }
-        resetsElement.appendChild(resetsText);
         counterElement.appendChild(resetsElement);
         return counterElement;
     }
