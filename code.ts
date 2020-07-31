@@ -69,8 +69,9 @@ class Counter {
       });
   }
 
-  private calculateState(globalIndex: number) {
-    let index, numRepeats;
+  private calculateState(globalIndex: number) :
+        {index: number, numRepeats: number, maxRepeats: number} {
+    let index: number, numRepeats: number;
     let {startIndex, maxRepeats} = this.getRepeat(globalIndex);
 
     if (globalIndex < startIndex + this.numRows) {
@@ -137,7 +138,7 @@ class Counter {
     return counterElement;
   }
 
-  getNotesAtIndex(globalIndex) {
+  getNotesAtIndex(globalIndex: number) {
     let {index} = this.calculateState(globalIndex);
     return this.notes.
 					filter((note: Note) => {
@@ -233,8 +234,7 @@ class Project {
       }) : Counter => {
         return Counter.create(c);
       })};
-    const project = new Project(params);
-    return project;
+    return new Project(params);
   }
 }
 

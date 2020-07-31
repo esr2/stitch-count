@@ -149,8 +149,7 @@ class Project {
         let params = Object.assign(Object.assign({}, json), { index: globalIndex, counters: json.counters.map((c) => {
                 return Counter.create(c);
             }) });
-        const project = new Project(params);
-        return project;
+        return new Project(params);
     }
 }
 function createElement(type, ...tokens) {
