@@ -13,10 +13,8 @@
               "value":" Decrease row"
             }
          ],
-         "index":1,
          "startIndex":1,
          "endIndex":null,
-         "numResets":0,
          "showResets":false
       },
       {
@@ -31,10 +29,8 @@
                "value":"2/2 RC"
             }
          ],
-         "index":1,
          "startIndex":18,
          "endIndex":21,
-         "numResets":0,
          "showResets":false
       },
       {
@@ -177,10 +173,8 @@
                "value":"Do not work on final repeat"
             }
          ],
-         "index":1,
          "startIndex":15,
          "endIndex":86,
-         "numResets":0,
          "showResets":true
       }
    ]

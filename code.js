@@ -14,14 +14,15 @@ class Counter {
     constructor(obj) {
         this.name = obj.name;
         this.notes = obj.notes || [];
+        // These values will be reset immedidately after creation via #updateIndex.
+        this.index = 1;
+        this.numResets = 0;
         if (!!obj.endIndex && obj.startIndex >= obj.endIndex) {
             alert(`Counter ${obj.name} of has startIndex ${obj.startIndex} greater than the ${obj.endIndex}`);
             // TODO Kill app
         }
-        this.index = obj.index;
         this.startIndex = obj.startIndex || 1;
         this.endIndex = obj.endIndex || null;
-        this.numResets = obj.numResets || 0;
         this.showResets = obj.showResets || false;
     }
     ;
