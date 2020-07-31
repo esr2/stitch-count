@@ -76,35 +76,38 @@ class Counter {
   }
 
   render() : HTMLElement {
-    let counterElement = document.createElement('li');
-    counterElement.classList.add("w3-cell-row");
+    let counterElement = createElement('li', "w3-cell-row");
 
-    let titleElement = document.createElement('div');
-    titleElement.classList.add("w3-container", "w3-cell", "w3-cell-middle", "counterTitle");
-    let titleText = document.createElement('span');
+    let titleElement = createElement(
+        'div', "w3-container", "w3-cell", "w3-cell-middle", "counterTitle");
+    let titleText = createElement('span');
     titleText.textContent = this.name;
     titleElement.appendChild(titleText);
     counterElement.appendChild(titleElement);
 
-    let indexElement = document.createElement('div');
-    indexElement.classList.add("w3-container", "w3-cell", "w3-cell-middle", "counterIndex");
-    let indexText = document.createElement('span');
-    indexText.classList.add("w3-xlarge");
+    let indexElement = createElement(
+      'div', "w3-container", "w3-cell", "w3-cell-middle", "counterIndex");
+    let indexText = createElement('span', "w3-xlarge");
     indexText.textContent = this.index.toString();
     indexElement.appendChild(indexText);
     counterElement.appendChild(indexElement);
 
-    let resetsElement = document.createElement('div');
-    resetsElement.classList.add("w3-container", "w3-cell", "w3-cell-middle", "numResets");
+    let resetsElement = createElement(
+        'div', "w3-container", "w3-cell", "w3-cell-middle", "numResets");
     if (this.showResets) {
-      let resetsText = document.createElement('span');
-      resetsText.innerHTML =
-          "<span class='numerator'>" +
-          this.numResets.toString() +
-          "</span><span class='slash-entity'>⁄</span><span class='denominator'>" +
-          this.maxResets.toString() +
-          "</span>";
-      resetsText.classList.add("circle");
+      let resetsText = createElement('span', "circle");
+      let numerator = createElement('span', 'numerator');
+      numerator.innerText = this.numResets.toString();
+      resetsText.appendChild(numerator);
+
+      let slash = createElement('span', 'slash-entity');
+      slash.innerText = "⁄";
+      resetsText.appendChild(slash);
+
+      let denominator = createElement('span', 'denominator');
+      denominator.innerText = this.maxResets.toString();
+      resetsText.appendChild(denominator);
+
       resetsElement.appendChild(resetsText);
     }
     counterElement.appendChild(resetsElement);
@@ -210,4 +213,10 @@ class Project {
     project.updateIndices(globalIndex);
     return project;
   }
+}
+
+function createElement(type: string, ...tokens : string[]) {
+  let element = document.createElement(type);
+  element.classList.add(...tokens);
+  return element;
 }
