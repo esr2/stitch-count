@@ -20,17 +20,21 @@ class Counter {
     private name: string;
     private index: number;
     private notes: Note[];
+    // Inclusive row number of the first row within the repeated block.
     private startIndex: number;
-    // Inclusive end index.
-    private endIndex?: number;
+    // Inclusive row number of the last row within the repeated block.
+    private endIndex: number;
+    // Current repetition.
     private numResets: number;
+    // Whether to show repeats within the counter.
     private showResets: boolean;
 
   constructor (obj : {
       name: string,
       notes?: Note[],
-      startIndex?: number,
-      endIndex?: number,
+      startIndex: number,
+      endIndex: number,
+      maxResets?: number,
       showResets?: boolean}) {
     this.name = obj.name;
     this.notes = obj.notes || [];
@@ -44,8 +48,8 @@ class Counter {
       // TODO Kill app
     }
 
-    this.startIndex = obj.startIndex || 1;
-    this.endIndex = obj.endIndex || null;
+    this.startIndex = obj.startIndex;
+    this.endIndex = obj.endIndex;
     this.showResets = obj.showResets || false;
   };
 
@@ -54,21 +58,15 @@ class Counter {
   }
 
   updateIndex(globalIndex : number) {
-    if (!this.endIndex) {
-      // Not a repeating counter, index should match globalIndex.
+    if (globalIndex <= this.endIndex) {
       this.index = globalIndex;
+      this.numResets = 0;
     } else {
-      // Repeating counter, reset index and numResets.
-      if (globalIndex <= this.endIndex) {
-        this.index = globalIndex;
-        this.numResets = 0;
-      } else {
-        let remainder = globalIndex - this.startIndex;
-        // +1 because endIndex is inclusive.
-        let base = this.endIndex - this.startIndex + 1;
-        this.index = this.startIndex + (remainder % base);
-        this.numResets = Math.floor(remainder / base);
-      }
+      let remainder = globalIndex - this.startIndex;
+      // +1 because endIndex is inclusive.
+      let base = this.endIndex - this.startIndex + 1;
+      this.index = this.startIndex + (remainder % base);
+      this.numResets = Math.floor(remainder / base);
     }
   }
 
@@ -119,7 +117,7 @@ class Counter {
     startIndex: number,
     showResets: boolean,
     notes: Object[],
-    endIndex?: number,
+    endIndex: number,
   }) : Counter {
     let params = {
       ...json,
@@ -195,7 +193,7 @@ class Project {
         startIndex: number,
         showResets: boolean,
         notes: Object[],
-        endIndex?: number,
+        endIndex: number,
       }) : Counter => {
         return Counter.create(c);
       })};
