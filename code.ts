@@ -21,6 +21,7 @@ class Counter {
     private index: number;
     private notes: Note[];
     private startIndex: number;
+    // Inclusive end index.
     private endIndex?: number;
     private numResets?: number;
     private showResets: boolean;
