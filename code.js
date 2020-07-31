@@ -16,41 +16,49 @@ class Counter {
         this.notes = obj.notes || [];
         this.numRows = obj.numRows;
         this.showRepeats = obj.showRepeats || false;
-        this.startIndex = obj.startIndex;
-        this.maxRepeats = obj.maxRepeats || null;
-        // These values will be reset immedidately after creation via #updateIndex.
-        this.index = 1;
-        this.numRepeats = 0;
+        // Assumes each repeat is a disjoint range.
+        this.repeats = obj.repeats;
     }
     ;
     addNote(note) {
         this.notes.push(note);
     }
-    updateIndex(globalIndex) {
-        if (globalIndex < this.startIndex + this.numRows) {
-            this.index = globalIndex;
-            this.numRepeats = 0;
-        }
-        else {
-            let remainder = globalIndex - this.startIndex;
-            this.index = this.startIndex + (remainder % this.numRows);
-            this.numRepeats = Math.floor(remainder / this.numRows);
-        }
-    }
-    isApplicable(globalIndex) {
-        if (globalIndex < this.startIndex) {
+    isWithinRepeat(globalIndex, startIndex, maxRepeats) {
+        if (globalIndex < startIndex) {
             return false;
         }
-        else if (globalIndex < this.startIndex + this.numRows) {
-            // Within initial block.
-            return true;
-        }
-        if (this.numRepeats < this.maxRepeats) {
-            return true;
-        }
-        return false;
+        return globalIndex < (this.numRows * maxRepeats) + startIndex;
     }
-    render() {
+    getRepeat(globalIndex) {
+        return this.repeats.find((repeat) => {
+            return this.isWithinRepeat(globalIndex, repeat.startIndex, repeat.maxRepeats);
+        });
+    }
+    calculateState(globalIndex) {
+        let index, numRepeats;
+        let { startIndex, maxRepeats } = this.getRepeat(globalIndex);
+        if (globalIndex < startIndex + this.numRows) {
+            index = globalIndex;
+            numRepeats = 0;
+        }
+        else {
+            let remainder = globalIndex - startIndex;
+            index = startIndex + (remainder % this.numRows);
+            numRepeats = Math.floor(remainder / this.numRows);
+        }
+        return {
+            "index": index,
+            "numRepeats": numRepeats,
+            "maxRepeats": maxRepeats
+        };
+    }
+    isApplicable(globalIndex) {
+        return !!this.getRepeat(globalIndex);
+    }
+    render(globalIndex) {
+        // Calculate values from globalIndex.
+        let { maxRepeats, index, numRepeats } = this.calculateState(globalIndex);
+        // Create HTMLElement.
         let counterElement = createElement('li', "w3-cell-row");
         let titleElement = createElement('div', "w3-container", "w3-cell", "w3-cell-middle", "counterTitle");
         let titleText = createElement('span');
@@ -59,30 +67,31 @@ class Counter {
         counterElement.appendChild(titleElement);
         let indexElement = createElement('div', "w3-container", "w3-cell", "w3-cell-middle", "counterIndex");
         let indexText = createElement('span', "w3-xlarge");
-        indexText.textContent = this.index.toString();
+        indexText.textContent = index.toString();
         indexElement.appendChild(indexText);
         counterElement.appendChild(indexElement);
         let repeatsElement = createElement('div', "w3-container", "w3-cell", "w3-cell-middle", "numRepeats");
         if (this.showRepeats) {
             let repeatsText = createElement('span', "circle");
             let numerator = createElement('span', 'numerator');
-            numerator.innerText = this.numRepeats.toString();
+            numerator.innerText = numRepeats.toString();
             repeatsText.appendChild(numerator);
             let slash = createElement('span', 'slash-entity');
             slash.innerText = "⁄";
             repeatsText.appendChild(slash);
             let denominator = createElement('span', 'denominator');
-            denominator.innerText = this.maxRepeats.toString();
+            denominator.innerText = maxRepeats.toString();
             repeatsText.appendChild(denominator);
             repeatsElement.appendChild(repeatsText);
         }
         counterElement.appendChild(repeatsElement);
         return counterElement;
     }
-    getNotesAtCurrentIndex() {
+    getNotesAtIndex(globalIndex) {
+        let { index } = this.calculateState(globalIndex);
         return this.notes.
             filter((note) => {
-            return note.getIndex() == this.index;
+            return note.getIndex() == index;
         }).
             flatMap((note) => { return this.name + " " + note.print(); }).
             join('<br />');
@@ -98,7 +107,7 @@ class Project {
     constructor(obj) {
         this.name = obj.name;
         this.counters = obj.counters;
-        this.globalIndex = 1;
+        this.globalIndex = obj.index;
     }
     addCounters(counters) {
         this.counters = this.counters.concat(counters);
@@ -108,10 +117,10 @@ class Project {
     }
     // TODO figure out if we ever want unliked Counters and accommodate that here.
     increase() {
-        this.updateIndices(this.globalIndex + 1);
+        this.globalIndex++;
     }
     decrease() {
-        this.updateIndices(this.globalIndex - 1);
+        this.globalIndex--;
     }
     render() {
         return this.counters
@@ -119,7 +128,7 @@ class Project {
             return counter.isApplicable(this.globalIndex);
         })
             .map((counter) => {
-            return counter.render();
+            return counter.render(this.globalIndex);
         });
     }
     getNotesAtCurrentIndex() {
@@ -128,26 +137,19 @@ class Project {
             return counter.isApplicable(this.globalIndex);
         })
             .flatMap((counter) => {
-            return counter.getNotesAtCurrentIndex();
+            return counter.getNotesAtIndex(this.globalIndex);
         })
             .filter((notes) => { return notes.length > 0; })
             .join('<br />');
-    }
-    updateIndices(globalIndex) {
-        this.globalIndex = globalIndex;
-        this.counters.forEach((counter) => {
-            counter.updateIndex(globalIndex);
-        });
     }
     getGlobalIndex() {
         return this.globalIndex;
     }
     static create(json, globalIndex) {
-        let params = Object.assign(Object.assign({}, json), { counters: json.counters.map((c) => {
+        let params = Object.assign(Object.assign({}, json), { index: globalIndex, counters: json.counters.map((c) => {
                 return Counter.create(c);
             }) });
         const project = new Project(params);
-        project.updateIndices(globalIndex);
         return project;
     }
 }

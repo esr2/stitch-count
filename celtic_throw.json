@@ -15,8 +15,12 @@
          ],
          "numRows":385,
          "showRepeats":false,
-         "startIndex":1,
-         "maxRepeats":1
+         "repeats":[
+            {
+              "startIndex":1,
+              "maxRepeats":1
+            }
+          ]
       },
       {
          "name":"Border / Threads",
@@ -32,8 +36,12 @@
          ],
          "numRows":4,
          "showRepeats":false,
-         "startIndex":18,
-         "maxRepeats":88
+         "repeats":[
+            {
+              "startIndex":18,
+              "maxRepeats":88
+            }
+          ]
       },
       {
          "name":"Panel",
@@ -177,8 +185,12 @@
          ],
          "numRows":72,
          "showRepeats":true,
-         "startIndex":15,
-         "maxRepeats":5
+         "repeats":[
+            {
+              "startIndex":15,
+              "maxRepeats":5
+            }
+          ]
       }
    ]
 }
