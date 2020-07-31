@@ -20,37 +20,40 @@ class Counter {
     private name: string;
     private index: number;
     private notes: Note[];
-    // Inclusive row number of the first row within the repeated block.
-    private startIndex: number;
+
     // Total number of rows within a repeated block.
     private numRows: number;
-    // Current repetition.
-    private numRepeats: number;
+    // Whether to show repeats within the counter.
+    private showRepeats: boolean;
+
+    // Inclusive row number of the first row within the repeated block.
+    private startIndex: number;
     // Maximum number of repetitions to do this block from the when the
     // globalIndex matches the startIndex of the block. If null, continually
     // repeat.
     private maxRepeats?: number;
-    // Whether to show repeats within the counter.
-    private showRepeats: boolean;
+
+    // Current repetition.
+    private numRepeats: number;
 
   constructor (obj : {
       name: string,
       notes?: Note[],
-      startIndex: number,
       numRows: number,
-      maxRepeats?: number,
-      showRepeats?: boolean}) {
+      showRepeats?: boolean,
+      startIndex: number,
+      maxRepeats?: number}) {
     this.name = obj.name;
     this.notes = obj.notes || [];
+    this.numRows = obj.numRows;
+    this.showRepeats = obj.showRepeats || false;
+
+    this.startIndex = obj.startIndex;
+    this.maxRepeats = obj.maxRepeats || null;
 
     // These values will be reset immedidately after creation via #updateIndex.
     this.index = 1;
     this.numRepeats = 0;
-
-    this.startIndex = obj.startIndex;
-    this.numRows = obj.numRows;
-    this.maxRepeats = obj.maxRepeats || null;
-    this.showRepeats = obj.showRepeats || false;
   };
 
   addNote(note: Note) {

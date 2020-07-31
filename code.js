@@ -14,13 +14,13 @@ class Counter {
     constructor(obj) {
         this.name = obj.name;
         this.notes = obj.notes || [];
+        this.numRows = obj.numRows;
+        this.showRepeats = obj.showRepeats || false;
+        this.startIndex = obj.startIndex;
+        this.maxRepeats = obj.maxRepeats || null;
         // These values will be reset immedidately after creation via #updateIndex.
         this.index = 1;
         this.numRepeats = 0;
-        this.startIndex = obj.startIndex;
-        this.numRows = obj.numRows;
-        this.maxRepeats = obj.maxRepeats || null;
-        this.showRepeats = obj.showRepeats || false;
     }
     ;
     addNote(note) {
