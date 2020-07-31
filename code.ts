@@ -75,6 +75,18 @@ class Counter {
     }
   }
 
+  isApplicable(globalIndex) : boolean {
+    if (globalIndex < this.startIndex) {
+      return false;
+    } else if (globalIndex <= this.endIndex) {
+      // Between startIndex and endIndex without accounting for repeats.
+      return true;
+    } if (this.numRepeats < this.maxRepeats) {
+      return true;
+    }
+    return false;
+  }
+
   render() : HTMLElement {
     let counterElement = createElement('li', "w3-cell-row");
 
@@ -169,13 +181,20 @@ class Project {
   }
 
   render() : HTMLElement[] {
-    return this.counters.map((counter: Counter): HTMLElement => {
-      return counter.render();
-    });
+    return this.counters
+        .filter((counter: Counter) => {
+            return counter.isApplicable(this.globalIndex);
+          })
+        .map((counter: Counter): HTMLElement => {
+          return counter.render();
+        });
   }
 
   getNotesAtCurrentIndex() {
       return this.counters
+          .filter((counter: Counter) => {
+              return counter.isApplicable(this.globalIndex);
+            })
           .flatMap((counter: Counter) => {
               return counter.getNotesAtCurrentIndex();
             })
@@ -215,7 +234,7 @@ class Project {
   }
 }
 
-function createElement(type: string, ...tokens : string[]) {
+function createElement(type: string, ...tokens : string[]) : HTMLElement {
   let element = document.createElement(type);
   element.classList.add(...tokens);
   return element;

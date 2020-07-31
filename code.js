@@ -43,6 +43,19 @@ class Counter {
             this.numRepeats = Math.floor(remainder / base);
         }
     }
+    isApplicable(globalIndex) {
+        if (globalIndex < this.startIndex) {
+            return false;
+        }
+        else if (globalIndex <= this.endIndex) {
+            // Between startIndex and endIndex without accounting for repeats.
+            return true;
+        }
+        if (this.numRepeats < this.maxRepeats) {
+            return true;
+        }
+        return false;
+    }
     render() {
         let counterElement = createElement('li', "w3-cell-row");
         let titleElement = createElement('div', "w3-container", "w3-cell", "w3-cell-middle", "counterTitle");
@@ -107,12 +120,19 @@ class Project {
         this.updateIndices(this.globalIndex - 1);
     }
     render() {
-        return this.counters.map((counter) => {
+        return this.counters
+            .filter((counter) => {
+            return counter.isApplicable(this.globalIndex);
+        })
+            .map((counter) => {
             return counter.render();
         });
     }
     getNotesAtCurrentIndex() {
         return this.counters
+            .filter((counter) => {
+            return counter.isApplicable(this.globalIndex);
+        })
             .flatMap((counter) => {
             return counter.getNotesAtCurrentIndex();
         })
