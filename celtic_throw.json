@@ -32,6 +32,7 @@
          ],
          "startIndex":18,
          "endIndex":21,
+         "maxResets":80,
          "showResets":false
       },
       {
