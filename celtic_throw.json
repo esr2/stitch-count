@@ -14,7 +14,7 @@
             }
          ],
          "startIndex":1,
-         "endIndex":385,
+         "numRows":385,
          "maxRepeats":1,
          "showRepeats":false
       },
@@ -31,7 +31,7 @@
             }
          ],
          "startIndex":18,
-         "endIndex":21,
+         "numRows":4,
          "maxRepeats":88,
          "showRepeats":false
       },
@@ -176,7 +176,7 @@
             }
          ],
          "startIndex":15,
-         "endIndex":86,
+         "numRows":72,
          "maxRepeats":5,
          "showRepeats":true
       }

@@ -17,12 +17,8 @@ class Counter {
         // These values will be reset immedidately after creation via #updateIndex.
         this.index = 1;
         this.numRepeats = 0;
-        if (!!obj.endIndex && obj.startIndex >= obj.endIndex) {
-            alert(`Counter ${obj.name} of has startIndex ${obj.startIndex} greater than the ${obj.endIndex}`);
-            // TODO Kill app
-        }
         this.startIndex = obj.startIndex;
-        this.endIndex = obj.endIndex;
+        this.numRows = obj.numRows;
         this.maxRepeats = obj.maxRepeats || null;
         this.showRepeats = obj.showRepeats || false;
     }
@@ -31,24 +27,22 @@ class Counter {
         this.notes.push(note);
     }
     updateIndex(globalIndex) {
-        if (globalIndex <= this.endIndex) {
+        if (globalIndex <= this.startIndex + this.numRows) {
             this.index = globalIndex;
             this.numRepeats = 0;
         }
         else {
             let remainder = globalIndex - this.startIndex;
-            // +1 because endIndex is inclusive.
-            let base = this.endIndex - this.startIndex + 1;
-            this.index = this.startIndex + (remainder % base);
-            this.numRepeats = Math.floor(remainder / base);
+            this.index = this.startIndex + (remainder % this.numRows);
+            this.numRepeats = Math.floor(remainder / this.numRows);
         }
     }
     isApplicable(globalIndex) {
         if (globalIndex < this.startIndex) {
             return false;
         }
-        else if (globalIndex <= this.endIndex) {
-            // Between startIndex and endIndex without accounting for repeats.
+        else if (globalIndex <= this.startIndex + this.numRows) {
+            // Within initial block.
             return true;
         }
         if (this.numRepeats < this.maxRepeats) {

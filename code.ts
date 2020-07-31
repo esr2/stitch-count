@@ -22,8 +22,8 @@ class Counter {
     private notes: Note[];
     // Inclusive row number of the first row within the repeated block.
     private startIndex: number;
-    // Inclusive row number of the last row within the repeated block.
-    private endIndex: number;
+    // Total number of rows within a repeated block.
+    private numRows: number;
     // Current repetition.
     private numRepeats: number;
     // Maximum number of repetitions to do this block from the when the
@@ -37,7 +37,7 @@ class Counter {
       name: string,
       notes?: Note[],
       startIndex: number,
-      endIndex: number,
+      numRows: number,
       maxRepeats?: number,
       showRepeats?: boolean}) {
     this.name = obj.name;
@@ -47,13 +47,8 @@ class Counter {
     this.index = 1;
     this.numRepeats = 0;
 
-    if (!!obj.endIndex && obj.startIndex >= obj.endIndex) {
-      alert(`Counter ${obj.name} of has startIndex ${obj.startIndex} greater than the ${obj.endIndex}`);
-      // TODO Kill app
-    }
-
     this.startIndex = obj.startIndex;
-    this.endIndex = obj.endIndex;
+    this.numRows = obj.numRows;
     this.maxRepeats = obj.maxRepeats || null;
     this.showRepeats = obj.showRepeats || false;
   };
@@ -63,23 +58,21 @@ class Counter {
   }
 
   updateIndex(globalIndex : number) {
-    if (globalIndex <= this.endIndex) {
+    if (globalIndex <= this.startIndex + this.numRows) {
       this.index = globalIndex;
       this.numRepeats = 0;
     } else {
       let remainder = globalIndex - this.startIndex;
-      // +1 because endIndex is inclusive.
-      let base = this.endIndex - this.startIndex + 1;
-      this.index = this.startIndex + (remainder % base);
-      this.numRepeats = Math.floor(remainder / base);
+      this.index = this.startIndex + (remainder % this.numRows);
+      this.numRepeats = Math.floor(remainder / this.numRows);
     }
   }
 
   isApplicable(globalIndex) : boolean {
     if (globalIndex < this.startIndex) {
       return false;
-    } else if (globalIndex <= this.endIndex) {
-      // Between startIndex and endIndex without accounting for repeats.
+    } else if (globalIndex <= this.startIndex + this.numRows) {
+      // Within initial block.
       return true;
     } if (this.numRepeats < this.maxRepeats) {
       return true;
@@ -141,7 +134,7 @@ class Counter {
     startIndex: number,
     showRepeats: boolean,
     notes: Object[],
-    endIndex: number,
+    numRows: number,
   }) : Counter {
     let params = {
       ...json,
@@ -224,7 +217,7 @@ class Project {
         startIndex: number,
         showRepeats: boolean,
         notes: Object[],
-        endIndex: number,
+        numRows: number,
       }) : Counter => {
         return Counter.create(c);
       })};
