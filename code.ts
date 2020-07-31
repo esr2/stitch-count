@@ -183,7 +183,7 @@ class Project {
           .join('<br />');
   }
 
-  updateIndices(globalIndex) {
+  updateIndices(globalIndex: number) {
     this.globalIndex = globalIndex;
     this.counters.forEach((counter) => {
     	counter.updateIndex(globalIndex);
