@@ -25,27 +25,27 @@ class Counter {
     // Inclusive row number of the last row within the repeated block.
     private endIndex: number;
     // Current repetition.
-    private numResets: number;
+    private numRepeats: number;
     // Maximum number of repetitions to do this block from the when the
     // globalIndex matches the startIndex of the block. If null, continually
     // repeat.
-    private maxResets?: number;
+    private maxRepeats?: number;
     // Whether to show repeats within the counter.
-    private showResets: boolean;
+    private showRepeats: boolean;
 
   constructor (obj : {
       name: string,
       notes?: Note[],
       startIndex: number,
       endIndex: number,
-      maxResets?: number,
-      showResets?: boolean}) {
+      maxRepeats?: number,
+      showRepeats?: boolean}) {
     this.name = obj.name;
     this.notes = obj.notes || [];
 
     // These values will be reset immedidately after creation via #updateIndex.
     this.index = 1;
-    this.numResets = 0;
+    this.numRepeats = 0;
 
     if (!!obj.endIndex && obj.startIndex >= obj.endIndex) {
       alert(`Counter ${obj.name} of has startIndex ${obj.startIndex} greater than the ${obj.endIndex}`);
@@ -54,8 +54,8 @@ class Counter {
 
     this.startIndex = obj.startIndex;
     this.endIndex = obj.endIndex;
-    this.maxResets = obj.maxResets || null;
-    this.showResets = obj.showResets || false;
+    this.maxRepeats = obj.maxRepeats || null;
+    this.showRepeats = obj.showRepeats || false;
   };
 
   addNote(note: Note) {
@@ -65,13 +65,13 @@ class Counter {
   updateIndex(globalIndex : number) {
     if (globalIndex <= this.endIndex) {
       this.index = globalIndex;
-      this.numResets = 0;
+      this.numRepeats = 0;
     } else {
       let remainder = globalIndex - this.startIndex;
       // +1 because endIndex is inclusive.
       let base = this.endIndex - this.startIndex + 1;
       this.index = this.startIndex + (remainder % base);
-      this.numResets = Math.floor(remainder / base);
+      this.numRepeats = Math.floor(remainder / base);
     }
   }
 
@@ -92,25 +92,25 @@ class Counter {
     indexElement.appendChild(indexText);
     counterElement.appendChild(indexElement);
 
-    let resetsElement = createElement(
-        'div', "w3-container", "w3-cell", "w3-cell-middle", "numResets");
-    if (this.showResets) {
-      let resetsText = createElement('span', "circle");
+    let repeatsElement = createElement(
+        'div', "w3-container", "w3-cell", "w3-cell-middle", "numRepeats");
+    if (this.showRepeats) {
+      let repeatsText = createElement('span', "circle");
       let numerator = createElement('span', 'numerator');
-      numerator.innerText = this.numResets.toString();
-      resetsText.appendChild(numerator);
+      numerator.innerText = this.numRepeats.toString();
+      repeatsText.appendChild(numerator);
 
       let slash = createElement('span', 'slash-entity');
       slash.innerText = "⁄";
-      resetsText.appendChild(slash);
+      repeatsText.appendChild(slash);
 
       let denominator = createElement('span', 'denominator');
-      denominator.innerText = this.maxResets.toString();
-      resetsText.appendChild(denominator);
+      denominator.innerText = this.maxRepeats.toString();
+      repeatsText.appendChild(denominator);
 
-      resetsElement.appendChild(resetsText);
+      repeatsElement.appendChild(repeatsText);
     }
-    counterElement.appendChild(resetsElement);
+    counterElement.appendChild(repeatsElement);
 
     return counterElement;
   }
@@ -127,7 +127,7 @@ class Counter {
   static create(json: {
     name: string,
     startIndex: number,
-    showResets: boolean,
+    showRepeats: boolean,
     notes: Object[],
     endIndex: number,
   }) : Counter {
@@ -203,7 +203,7 @@ class Project {
       counters : json.counters.map((c : {
         name: string,
         startIndex: number,
-        showResets: boolean,
+        showRepeats: boolean,
         notes: Object[],
         endIndex: number,
       }) : Counter => {

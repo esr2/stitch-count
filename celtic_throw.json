@@ -15,8 +15,8 @@
          ],
          "startIndex":1,
          "endIndex":385,
-         "maxResets":1,
-         "showResets":false
+         "maxRepeats":1,
+         "showRepeats":false
       },
       {
          "name":"Border / Threads",
@@ -32,8 +32,8 @@
          ],
          "startIndex":18,
          "endIndex":21,
-         "maxResets":80,
-         "showResets":false
+         "maxRepeats":80,
+         "showRepeats":false
       },
       {
          "name":"Panel",
@@ -177,8 +177,8 @@
          ],
          "startIndex":15,
          "endIndex":86,
-         "maxResets":5,
-         "showResets":true
+         "maxRepeats":5,
+         "showRepeats":true
       }
    ]
 }

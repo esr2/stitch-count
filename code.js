@@ -16,15 +16,15 @@ class Counter {
         this.notes = obj.notes || [];
         // These values will be reset immedidately after creation via #updateIndex.
         this.index = 1;
-        this.numResets = 0;
+        this.numRepeats = 0;
         if (!!obj.endIndex && obj.startIndex >= obj.endIndex) {
             alert(`Counter ${obj.name} of has startIndex ${obj.startIndex} greater than the ${obj.endIndex}`);
             // TODO Kill app
         }
         this.startIndex = obj.startIndex;
         this.endIndex = obj.endIndex;
-        this.maxResets = obj.maxResets || null;
-        this.showResets = obj.showResets || false;
+        this.maxRepeats = obj.maxRepeats || null;
+        this.showRepeats = obj.showRepeats || false;
     }
     ;
     addNote(note) {
@@ -33,14 +33,14 @@ class Counter {
     updateIndex(globalIndex) {
         if (globalIndex <= this.endIndex) {
             this.index = globalIndex;
-            this.numResets = 0;
+            this.numRepeats = 0;
         }
         else {
             let remainder = globalIndex - this.startIndex;
             // +1 because endIndex is inclusive.
             let base = this.endIndex - this.startIndex + 1;
             this.index = this.startIndex + (remainder % base);
-            this.numResets = Math.floor(remainder / base);
+            this.numRepeats = Math.floor(remainder / base);
         }
     }
     render() {
@@ -55,21 +55,21 @@ class Counter {
         indexText.textContent = this.index.toString();
         indexElement.appendChild(indexText);
         counterElement.appendChild(indexElement);
-        let resetsElement = createElement('div', "w3-container", "w3-cell", "w3-cell-middle", "numResets");
-        if (this.showResets) {
-            let resetsText = createElement('span', "circle");
+        let repeatsElement = createElement('div', "w3-container", "w3-cell", "w3-cell-middle", "numRepeats");
+        if (this.showRepeats) {
+            let repeatsText = createElement('span', "circle");
             let numerator = createElement('span', 'numerator');
-            numerator.innerText = this.numResets.toString();
-            resetsText.appendChild(numerator);
+            numerator.innerText = this.numRepeats.toString();
+            repeatsText.appendChild(numerator);
             let slash = createElement('span', 'slash-entity');
             slash.innerText = "⁄";
-            resetsText.appendChild(slash);
+            repeatsText.appendChild(slash);
             let denominator = createElement('span', 'denominator');
-            denominator.innerText = this.maxResets.toString();
-            resetsText.appendChild(denominator);
-            resetsElement.appendChild(resetsText);
+            denominator.innerText = this.maxRepeats.toString();
+            repeatsText.appendChild(denominator);
+            repeatsElement.appendChild(repeatsText);
         }
-        counterElement.appendChild(resetsElement);
+        counterElement.appendChild(repeatsElement);
         return counterElement;
     }
     getNotesAtCurrentIndex() {
