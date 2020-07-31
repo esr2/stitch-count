@@ -15,6 +15,7 @@
          ],
          "startIndex":1,
          "endIndex":385,
+         "maxResets":1,
          "showResets":false
       },
       {
@@ -175,6 +176,7 @@
          ],
          "startIndex":15,
          "endIndex":86,
+         "maxResets":5,
          "showResets":true
       }
    ]

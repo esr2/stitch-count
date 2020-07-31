@@ -23,6 +23,7 @@ class Counter {
         }
         this.startIndex = obj.startIndex;
         this.endIndex = obj.endIndex;
+        this.maxResets = obj.maxResets || null;
         this.showResets = obj.showResets || false;
     }
     ;

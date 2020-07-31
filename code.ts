@@ -26,6 +26,10 @@ class Counter {
     private endIndex: number;
     // Current repetition.
     private numResets: number;
+    // Maximum number of repetitions to do this block from the when the
+    // globalIndex matches the startIndex of the block. If null, continually
+    // repeat.
+    private maxResets?: number;
     // Whether to show repeats within the counter.
     private showResets: boolean;
 
@@ -50,6 +54,7 @@ class Counter {
 
     this.startIndex = obj.startIndex;
     this.endIndex = obj.endIndex;
+    this.maxResets = obj.maxResets || null;
     this.showResets = obj.showResets || false;
   };
 
