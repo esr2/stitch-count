@@ -58,7 +58,7 @@ class Counter {
   }
 
   updateIndex(globalIndex : number) {
-    if (globalIndex <= this.startIndex + this.numRows) {
+    if (globalIndex < this.startIndex + this.numRows) {
       this.index = globalIndex;
       this.numRepeats = 0;
     } else {
@@ -71,7 +71,7 @@ class Counter {
   isApplicable(globalIndex) : boolean {
     if (globalIndex < this.startIndex) {
       return false;
-    } else if (globalIndex <= this.startIndex + this.numRows) {
+    } else if (globalIndex < this.startIndex + this.numRows) {
       // Within initial block.
       return true;
     } if (this.numRepeats < this.maxRepeats) {

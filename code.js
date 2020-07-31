@@ -27,7 +27,7 @@ class Counter {
         this.notes.push(note);
     }
     updateIndex(globalIndex) {
-        if (globalIndex <= this.startIndex + this.numRows) {
+        if (globalIndex < this.startIndex + this.numRows) {
             this.index = globalIndex;
             this.numRepeats = 0;
         }
@@ -41,7 +41,7 @@ class Counter {
         if (globalIndex < this.startIndex) {
             return false;
         }
-        else if (globalIndex <= this.startIndex + this.numRows) {
+        else if (globalIndex < this.startIndex + this.numRows) {
             // Within initial block.
             return true;
         }
