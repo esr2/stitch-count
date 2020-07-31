@@ -13,10 +13,10 @@
               "value":" Decrease row"
             }
          ],
-         "startIndex":1,
          "numRows":385,
-         "maxRepeats":1,
-         "showRepeats":false
+         "showRepeats":false,
+         "startIndex":1,
+         "maxRepeats":1
       },
       {
          "name":"Border / Threads",
@@ -30,10 +30,10 @@
                "value":"2/2 RC"
             }
          ],
-         "startIndex":18,
          "numRows":4,
-         "maxRepeats":88,
-         "showRepeats":false
+         "showRepeats":false,
+         "startIndex":18,
+         "maxRepeats":88
       },
       {
          "name":"Panel",
@@ -175,10 +175,10 @@
                "value":"Do not work on final repeat"
             }
          ],
-         "startIndex":15,
          "numRows":72,
-         "maxRepeats":5,
-         "showRepeats":true
+         "showRepeats":true,
+         "startIndex":15,
+         "maxRepeats":5
       }
    ]
 }
