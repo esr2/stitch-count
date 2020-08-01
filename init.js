@@ -1,7 +1,7 @@
 window.onload = () => { onLoad(); };
-const STORAGE_KEY = "ID-1";
+const CELTIC_THROW_STORAGE_KEY = "ID-1";
 function onLoad() {
-    getOrCreateProject().then((project) => {
+    getProject().then((project) => {
         updateDisplay(project);
         document.querySelector("#increaseButton").addEventListener("click", () => {
             project.increase();
@@ -26,15 +26,11 @@ function updateDisplay(project) {
     });
     document.querySelector("#noteContent").innerHTML =
         project.getNotesAtCurrentIndex();
-    localStorage.setItem(STORAGE_KEY, project.getGlobalIndex().toString());
+    localStorage.setItem(CELTIC_THROW_STORAGE_KEY, project.getGlobalIndex().toString());
 }
 ;
-function getOrCreateProject() {
-    let storedIndex = parseInt(localStorage.getItem(STORAGE_KEY)) || 1;
-    return createProject(storedIndex);
-}
-;
-function createProject(globalIndex) {
+function getProject() {
+    let globalIndex = parseInt(localStorage.getItem(CELTIC_THROW_STORAGE_KEY)) || 1;
     return new Promise((resolve, reject) => {
         let oXHR = new XMLHttpRequest();
         // Initiate request.
