@@ -15,6 +15,7 @@ class Counter {
         this.name = obj.name;
         this.notes = obj.notes || [];
         this.numRows = obj.numRows;
+        this.showRelativeIndex = obj.showRelativeIndex || false;
         this.showRepeats = obj.showRepeats || false;
         // Assumes each repeat is a disjoint range.
         this.repeats = obj.repeats;
@@ -38,12 +39,12 @@ class Counter {
         let index, numRepeats;
         let { startIndex, maxRepeats } = this.getRepeat(globalIndex);
         if (globalIndex < startIndex + this.numRows) {
-            index = globalIndex;
+            index = this.calculateIndex(globalIndex, startIndex);
             numRepeats = 0;
         }
         else {
             let remainder = globalIndex - startIndex;
-            index = startIndex + (remainder % this.numRows);
+            index = this.calculateIndex(startIndex + (remainder % this.numRows), startIndex);
             numRepeats = Math.floor(remainder / this.numRows);
         }
         return {
@@ -51,6 +52,13 @@ class Counter {
             "numRepeats": numRepeats,
             "maxRepeats": maxRepeats
         };
+    }
+    // Adjust previously calculated index value to account for whether the index
+    // should be shown relative to the repeat block or to the global index.
+    calculateIndex(calculatedValue, startIndex) {
+        return this.showRelativeIndex ?
+            calculatedValue - startIndex + 1 :
+            calculatedValue;
     }
     isApplicable(globalIndex) {
         return !!this.getRepeat(globalIndex);

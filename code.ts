@@ -22,7 +22,11 @@ class Counter {
 
     // Total number of rows within a repeated block.
     private numRows: number;
-    // Whether to show repeats within the counter.
+    // Whether to show the row index relative to the repeated block rather than
+    // the beginning of the pattern. Affects note indices as well.
+    // Defaults to false.
+    private showRelativeIndex: boolean;
+    // Whether to show repeats within the counter. Defaults to false.
     private showRepeats: boolean;
 
     /**
@@ -37,11 +41,13 @@ class Counter {
       name: string,
       notes?: Note[],
       numRows: number,
+      showRelativeIndex?: boolean,
       showRepeats?: boolean,
       repeats: {startIndex: number, maxRepeats: number}[]}) {
     this.name = obj.name;
     this.notes = obj.notes || [];
     this.numRows = obj.numRows;
+    this.showRelativeIndex = obj.showRelativeIndex || false;
     this.showRepeats = obj.showRepeats || false;
 
     // Assumes each repeat is a disjoint range.
@@ -75,11 +81,12 @@ class Counter {
     let {startIndex, maxRepeats} = this.getRepeat(globalIndex);
 
     if (globalIndex < startIndex + this.numRows) {
-      index = globalIndex;
+      index = this.calculateIndex(globalIndex, startIndex);
       numRepeats = 0;
     } else {
       let remainder = globalIndex - startIndex;
-      index = startIndex + (remainder % this.numRows);
+      index = this.calculateIndex(
+        startIndex + (remainder % this.numRows), startIndex);
       numRepeats = Math.floor(remainder / this.numRows);
     }
 
@@ -88,6 +95,14 @@ class Counter {
       "numRepeats": numRepeats,
       "maxRepeats": maxRepeats
     }
+  }
+
+  // Adjust previously calculated index value to account for whether the index
+  // should be shown relative to the repeat block or to the global index.
+  private calculateIndex(calculatedValue: number, startIndex: number) : number {
+    return this.showRelativeIndex ?
+        calculatedValue - startIndex + 1:
+        calculatedValue;
   }
 
   isApplicable(globalIndex: number) : boolean {
@@ -151,6 +166,7 @@ class Counter {
   static create(json: {
     name: string,
     showRepeats: boolean,
+    showRelativeIndex?: boolean,
     notes: Object[],
     numRows: number,
     repeats: {startIndex: number, maxRepeats: number}[],
@@ -228,6 +244,7 @@ class Project {
       counters : json.counters.map((c : {
         name: string,
         showRepeats: boolean,
+        showRelativeIndex?: boolean,
         notes: Object[],
         numRows: number,
         repeats: {startIndex: number, maxRepeats: number}[],
