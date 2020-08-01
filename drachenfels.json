@@ -28,6 +28,7 @@
         ],
         "numRows":6,
         "showRepeats":true,
+        "showRelativeIndex":true,
         "repeats":[
           {
             "startIndex":2,
@@ -57,6 +58,7 @@
         ],
         "numRows":10,
         "showRepeats":false,
+        "showRelativeIndex":true,
         "repeats":[
           {
             "startIndex":80,
@@ -77,6 +79,7 @@
         "notes":[],
         "numRows":6,
         "showRepeats":true,
+        "showRelativeIndex":true,
         "repeats":[
           {
             "startIndex":200,
@@ -89,6 +92,7 @@
         "notes":[],
         "numRows":30,
         "showRepeats":true,
+        "showRelativeIndex":true,
         "repeats":[
           {
             "startIndex":356,
