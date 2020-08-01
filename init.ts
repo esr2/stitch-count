@@ -1,28 +1,51 @@
 window.onload = () => { onLoad() };
 
-const CELTIC_THROW_STORAGE_KEY = "ID-1";
+interface ProjectDetails {
+  storageKey: string;
+  patternUrl: string;
+  pdfUrl: string;
+  pdfStartPage: number;
+  pdfRotation: number;
+}
+
+const PROJECT_VALUES = {
+  "celtic_throw" : {
+    storageKey: "ID-1",
+    patternUrl: "https://esr2.github.io/stitch-count/celtic_throw.json",
+    pdfUrl: './AK-Celtic_Traveller_Throw-v052220.pdf',
+    pdfStartPage: 5,
+    pdfRotation: -90,
+  },
+  "drachenfels" : {
+    storageKey: "ID-2",
+    patternUrl: "https://esr2.github.io/stitch-count/drachenfels.json",
+    pdfUrl: './Drachenfels.pdf',
+    pdfStartPage: 3,
+    pdfRotation: 0,
+  }
+}
 
 function onLoad() {
   showProjectPicker().then((projectName: string) => {
-    init();
+    init(PROJECT_VALUES[projectName]);
   });
 }
 
-function init() {
-  getProject().then((project) => {
-    updateDisplay(project);
+function init(details : ProjectDetails) {
+  getProject(details).then((project) => {
+    updateDisplay(project, details.storageKey);
 
     document.querySelector("#increaseButton").addEventListener(
         "click",
         () => {
           project.increase();
-          updateDisplay(project);
+          updateDisplay(project, details.storageKey);
         });
     document.querySelector("#decreaseButton").addEventListener(
         "click",
         () => {
           project.decrease();
-          updateDisplay(project);
+          updateDisplay(project, details.storageKey);
         });
 
     document.querySelector("#zoomInButton").addEventListener(
@@ -31,10 +54,10 @@ function init() {
       "click", () => { zoomOut(); });
   });
 
-  loadPdf();
+  loadPdf(details);
 }
 
-function updateDisplay(project: Project) {
+function updateDisplay(project: Project, storageKey: string) {
   document.querySelector(".w3-bar-item").innerHTML =
       project.getName();
 
@@ -47,12 +70,12 @@ function updateDisplay(project: Project) {
       project.getNotesAtCurrentIndex();
 
   localStorage.setItem(
-      CELTIC_THROW_STORAGE_KEY, project.getGlobalIndex().toString());
+      storageKey, project.getGlobalIndex().toString());
 };
 
-function getProject() : Promise<Project> {
+function getProject(details : ProjectDetails) : Promise<Project> {
   let globalIndex =
-      parseInt(localStorage.getItem(CELTIC_THROW_STORAGE_KEY)) || 1;
+      parseInt(localStorage.getItem(details.storageKey)) || 1;
   return new Promise((resolve, reject) => {
     let oXHR = new XMLHttpRequest();
     // Initiate request.
@@ -62,7 +85,7 @@ function getProject() : Promise<Project> {
         resolve(Project.create(JSON.parse(oXHR.responseText), globalIndex));
       }
     };
-    oXHR.open("GET", "https://esr2.github.io/stitch-count/celtic_throw.json", true);  // get json file.
+    oXHR.open("GET", details.patternUrl, true);  // get json file.
     oXHR.send();
   });
 }
@@ -90,11 +113,13 @@ const PDF_VIEWS = [];
 var DEFAULT_SCALE_DELTA = 1.1;
 var MIN_SCALE = 0.25;
 var MAX_SCALE = 10.0;
+var PDF_ROTATION = 0;
 
-function loadPdf() {
+function loadPdf(details: ProjectDetails) {
   // If absolute URL from the remote server is provided, configure the CORS
   // header on that server.
-  var url = './AK-Celtic_Traveller_Throw-v052220.pdf';
+  var url = details.pdfUrl;
+  PDF_ROTATION = details.pdfRotation;
 
   // Loaded via <script> tag, create shortcut to access PDF.js exports.
   var pdfjsLib = window['pdfjs-dist/build/pdf'];
@@ -116,7 +141,7 @@ function loadPdf() {
     // Use a promise to fetch and render the next page.
     var promise = Promise.resolve();
 
-    for (var i = 5; i <= doc.numPages; i++) {
+    for (var i = details.pdfStartPage; i <= doc.numPages; i++) {
       promise = promise.then(
         function (pageNum) {
           return doc.getPage(pageNum).then(function (pdfPage) {
@@ -135,7 +160,7 @@ function loadPdf() {
             });
 
             PDF_VIEWS.push(pdfPageView);
-            pdfPageView.update(scale, -90)
+            pdfPageView.update(scale, PDF_ROTATION)
 
             // Associate the actual page with the view and draw it.
             pdfPageView.setPdfPage(pdfPage);
@@ -155,7 +180,7 @@ function zoomIn() {
     newScale = Math.ceil(newScale * 10) / 10;
     newScale = Math.min(MAX_SCALE, newScale);
 
-    pdfView.update(newScale, -90);
+    pdfView.update(newScale, PDF_ROTATION);
   });
 }
 
@@ -167,6 +192,6 @@ function zoomOut() {
     newScale = Math.floor(newScale * 10) / 10;
     newScale = Math.max(MIN_SCALE, newScale);
 
-    pdfView.update(newScale, -90);
+    pdfView.update(newScale, PDF_ROTATION);
   });
 }

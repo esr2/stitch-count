@@ -1,27 +1,42 @@
 window.onload = () => { onLoad(); };
-const CELTIC_THROW_STORAGE_KEY = "ID-1";
+const PROJECT_VALUES = {
+    "celtic_throw": {
+        storageKey: "ID-1",
+        patternUrl: "https://esr2.github.io/stitch-count/celtic_throw.json",
+        pdfUrl: './AK-Celtic_Traveller_Throw-v052220.pdf',
+        pdfStartPage: 5,
+        pdfRotation: -90,
+    },
+    "drachenfels": {
+        storageKey: "ID-2",
+        patternUrl: "https://esr2.github.io/stitch-count/drachenfels.json",
+        pdfUrl: './Drachenfels.pdf',
+        pdfStartPage: 3,
+        pdfRotation: 0,
+    }
+};
 function onLoad() {
     showProjectPicker().then((projectName) => {
-        init();
+        init(PROJECT_VALUES[projectName]);
     });
 }
-function init() {
-    getProject().then((project) => {
-        updateDisplay(project);
+function init(details) {
+    getProject(details).then((project) => {
+        updateDisplay(project, details.storageKey);
         document.querySelector("#increaseButton").addEventListener("click", () => {
             project.increase();
-            updateDisplay(project);
+            updateDisplay(project, details.storageKey);
         });
         document.querySelector("#decreaseButton").addEventListener("click", () => {
             project.decrease();
-            updateDisplay(project);
+            updateDisplay(project, details.storageKey);
         });
         document.querySelector("#zoomInButton").addEventListener("click", () => { zoomIn(); });
         document.querySelector("#zoomOutButton").addEventListener("click", () => { zoomOut(); });
     });
-    loadPdf();
+    loadPdf(details);
 }
-function updateDisplay(project) {
+function updateDisplay(project, storageKey) {
     document.querySelector(".w3-bar-item").innerHTML =
         project.getName();
     // Clear current counters UI
@@ -31,11 +46,11 @@ function updateDisplay(project) {
     });
     document.querySelector("#noteContent").innerHTML =
         project.getNotesAtCurrentIndex();
-    localStorage.setItem(CELTIC_THROW_STORAGE_KEY, project.getGlobalIndex().toString());
+    localStorage.setItem(storageKey, project.getGlobalIndex().toString());
 }
 ;
-function getProject() {
-    let globalIndex = parseInt(localStorage.getItem(CELTIC_THROW_STORAGE_KEY)) || 1;
+function getProject(details) {
+    let globalIndex = parseInt(localStorage.getItem(details.storageKey)) || 1;
     return new Promise((resolve, reject) => {
         let oXHR = new XMLHttpRequest();
         // Initiate request.
@@ -45,7 +60,7 @@ function getProject() {
                 resolve(Project.create(JSON.parse(oXHR.responseText), globalIndex));
             }
         };
-        oXHR.open("GET", "https://esr2.github.io/stitch-count/celtic_throw.json", true); // get json file.
+        oXHR.open("GET", details.patternUrl, true); // get json file.
         oXHR.send();
     });
 }
@@ -69,10 +84,12 @@ const PDF_VIEWS = [];
 var DEFAULT_SCALE_DELTA = 1.1;
 var MIN_SCALE = 0.25;
 var MAX_SCALE = 10.0;
-function loadPdf() {
+var PDF_ROTATION = 0;
+function loadPdf(details) {
     // If absolute URL from the remote server is provided, configure the CORS
     // header on that server.
-    var url = './AK-Celtic_Traveller_Throw-v052220.pdf';
+    var url = details.pdfUrl;
+    PDF_ROTATION = details.pdfRotation;
     // Loaded via <script> tag, create shortcut to access PDF.js exports.
     var pdfjsLib = window['pdfjs-dist/build/pdf'];
     // The workerSrc property shall be specified.
@@ -87,7 +104,7 @@ function loadPdf() {
     loadingTask.promise.then(function (doc) {
         // Use a promise to fetch and render the next page.
         var promise = Promise.resolve();
-        for (var i = 5; i <= doc.numPages; i++) {
+        for (var i = details.pdfStartPage; i <= doc.numPages; i++) {
             promise = promise.then(function (pageNum) {
                 return doc.getPage(pageNum).then(function (pdfPage) {
                     var viewport = pdfPage.getViewport({ scale: DEFAULT_SCALE, });
@@ -103,7 +120,7 @@ function loadPdf() {
                         renderInteractiveForms: false,
                     });
                     PDF_VIEWS.push(pdfPageView);
-                    pdfPageView.update(scale, -90);
+                    pdfPageView.update(scale, PDF_ROTATION);
                     // Associate the actual page with the view and draw it.
                     pdfPageView.setPdfPage(pdfPage);
                     return pdfPageView.draw();
@@ -119,7 +136,7 @@ function zoomIn() {
         newScale = (newScale * DEFAULT_SCALE_DELTA).toFixed(2);
         newScale = Math.ceil(newScale * 10) / 10;
         newScale = Math.min(MAX_SCALE, newScale);
-        pdfView.update(newScale, -90);
+        pdfView.update(newScale, PDF_ROTATION);
     });
 }
 function zoomOut() {
@@ -129,7 +146,7 @@ function zoomOut() {
         newScale = (newScale / DEFAULT_SCALE_DELTA).toFixed(2);
         newScale = Math.floor(newScale * 10) / 10;
         newScale = Math.max(MIN_SCALE, newScale);
-        pdfView.update(newScale, -90);
+        pdfView.update(newScale, PDF_ROTATION);
     });
 }
 //# sourceMappingURL=init.js.map
