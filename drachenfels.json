@@ -150,7 +150,68 @@
       },
       {
         "name":"Edging",
-        "notes":[],
+        "notes":[
+          {
+            "index":1,
+            "value":"Color B - purlwise"
+          },
+          {
+            "index":3,
+            "value":"Color C"
+          },
+          {
+            "index":5,
+            "value":"Color B - purlwise"
+          },
+          {
+            "index":7,
+            "value":"Color C - 2 stitch increase"
+          },
+          {
+            "index":9,
+            "value":"Color B"
+          },
+          {
+            "index":11,
+            "value":"Color C - 2 stitch increase"
+          },
+          {
+            "index":13,
+            "value":"Color B - purlwise"
+          },
+          {
+            "index":15,
+            "value":"Color C"
+          },
+          {
+            "index":17,
+            "value":"Color B - purlwise"
+          },
+          {
+            "index":19,
+            "value":"Color C - 2 stitch increase"
+          },
+          {
+            "index":21,
+            "value":"Color B"
+          },
+          {
+            "index":23,
+            "value":"Color C - 2 stitch increase"
+          },
+          {
+            "index":25,
+            "value":"Color B - purlwise"
+          },
+          {
+            "index":27,
+            "value":"Color C"
+          },
+          {
+            "index":29,
+            "value":"Color B - 2 stitch increase"
+          }
+        ],
         "numRows":30,
         "showRepeats":true,
         "showRelativeIndex":true,
