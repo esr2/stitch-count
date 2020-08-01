@@ -3,6 +3,12 @@ window.onload = () => { onLoad() };
 const CELTIC_THROW_STORAGE_KEY = "ID-1";
 
 function onLoad() {
+  showProjectPicker().then((projectName: string) => {
+    init();
+  });
+}
+
+function init() {
   getProject().then((project) => {
     updateDisplay(project);
 
@@ -59,6 +65,25 @@ function getProject() : Promise<Project> {
     oXHR.open("GET", "https://esr2.github.io/stitch-count/celtic_throw.json", true);  // get json file.
     oXHR.send();
   });
+}
+
+function showProjectPicker() : Promise<string> {
+  let promise = new Promise<string>((resolve, reject) => {
+    document.getElementById('projectPickerSelectButton').onclick = () => {
+      // Hide the modal.
+      document.getElementById('projectPickerModal').style.display = 'none';
+
+      // Find the selected value and return it.
+      let form = document.getElementById('projectPickerForm') as HTMLFormElement;
+      let checkedItem = Array.from(form.elements).find((radioElement) => {
+        return radioElement.checked;
+      });
+      resolve(checkedItem.value);
+    }
+  });
+
+  document.getElementById('projectPickerModal').style.display = 'block';
+  return promise;
 }
 
 const PDF_VIEWS = [];
