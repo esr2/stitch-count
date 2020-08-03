@@ -48,9 +48,9 @@ class Counter {
             numRepeats = Math.floor(remainder / this.numRows);
         }
         return {
-            "index": index,
-            "numRepeats": numRepeats,
-            "maxRepeats": maxRepeats
+            index: index,
+            numRepeats: numRepeats,
+            maxRepeats: maxRepeats
         };
     }
     // Adjust previously calculated index value to account for whether the index

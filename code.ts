@@ -91,9 +91,9 @@ class Counter {
     }
 
     return {
-      "index": index,
-      "numRepeats": numRepeats,
-      "maxRepeats": maxRepeats
+      index: index,
+      numRepeats: numRepeats,
+      maxRepeats: maxRepeats
     }
   }
 
