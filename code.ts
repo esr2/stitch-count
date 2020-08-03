@@ -199,7 +199,6 @@ class Project {
     return this.name;
   }
 
-  // TODO figure out if we ever want unliked Counters and accommodate that here.
   increase() {
     this.globalIndex++;
   }
