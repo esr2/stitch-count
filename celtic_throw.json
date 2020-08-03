@@ -9,6 +9,10 @@
               "value":"Increase row"
             },
             {
+              "index":17,
+              "value":"Borders and Threads 2/2 RC"
+            },
+            {
               "index":373,
               "value":" Decrease row"
             }
@@ -25,10 +29,6 @@
       {
          "name":"Border / Threads",
          "notes":[
-            {
-              "index":17,
-              "value":"2/2 RC"
-            },
             {
                "index":21,
                "value":"2/2 RC"
