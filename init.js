@@ -2,14 +2,14 @@ window.onload = () => { onLoad(); };
 const PROJECT_VALUES = {
     "celtic_throw": {
         storageKey: "ID-1",
-        patternUrl: "https://esr2.github.io/stitch-count/celtic_throw.json",
+        patternUrl: "https://esr2.github.io/stitch-count/pattern-json/celtic_throw.json",
         pdfUrl: './pattern-pdfs/AK-Celtic_Traveller_Throw-v052220.pdf',
         pdfStartPage: 5,
         pdfRotation: -90,
     },
     "drachenfels": {
         storageKey: "ID-2",
-        patternUrl: "https://esr2.github.io/stitch-count/drachenfels.json",
+        patternUrl: "https://esr2.github.io/stitch-count/pattern-json/drachenfels.json",
         pdfUrl: './pattern-pdfs/Drachenfels.pdf',
         pdfStartPage: 3,
         pdfRotation: 0,
