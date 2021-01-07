@@ -182,7 +182,6 @@ function loadPdf(details: ProjectDetails) {
 
 function zoomIn() {
   PDF_VIEWS.forEach((pdfView) => {
-    // pdfView.update(/* scale */, 0 /* rotation */);
     var newScale = pdfView.scale;
     newScale = (newScale * DEFAULT_SCALE_DELTA).toFixed(2);
     newScale = Math.ceil(newScale * 10) / 10;
@@ -194,7 +193,6 @@ function zoomIn() {
 
 function zoomOut() {
   PDF_VIEWS.forEach((pdfView) => {
-    // pdfView.update(/* scale */, 0 /* rotation */);
     var newScale = pdfView.scale;
     newScale = (newScale / DEFAULT_SCALE_DELTA).toFixed(2);
     newScale = Math.floor(newScale * 10) / 10;
