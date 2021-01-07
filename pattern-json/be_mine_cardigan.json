@@ -9,32 +9,28 @@
             "value":"Switch to provisional stitches"
           },
           {
-            "index":104,
+            "index":109,
             "value":"Pick up stitches"
           },
           {
-            "index":105,
+            "index":110,
             "value":"Lace setup row"
           },
           {
-            "index":170,
+            "index":175,
             "value":"Repeat lace cable repeat 4 times"
           },
           {
-            "index":314,
-            "value":"Ash Blue"
+            "index":183,
+            "value":"Separate Sleeves"
           },
           {
-            "index":337,
-            "value":"Make sure there is 17g of Ash Blue remaining."
+            "index":272,
+            "value":"Pocket Preparation Row"
           },
           {
-            "index":343,
-            "value":"Make sure there is 17g of Ash Blue remaining."
-          },
-          {
-            "index":349,
-            "value":"Make sure there is 17g of Ash Blue remaining."
+            "index":319,
+            "value":"Start ribbing"
           }
         ],
         "numRows":385,
@@ -56,6 +52,14 @@
           {
             "index":19,
             "value":"1/1 inwards cable"
+          },
+          {
+            "index":16,
+            "value":"Body - check length"
+          },
+          {
+            "index":32,
+            "value":"Body - check length"
           }
         ],
         "numRows":32,
@@ -63,26 +67,8 @@
         "showRelativeIndex":true,
         "repeats":[
           {
-            "startIndex":106,
-            "maxRepeats":2
-          }
-        ]
-      },
-      {
-        "name":"Lace Pattern (raglan yoke)",
-        "notes":[
-          {
-            "index":3,
-            "value":"1/1 inwards cable"
-          }
-        ],
-        "numRows":8,
-        "showRepeats":true,
-        "showRelativeIndex":true,
-        "repeats":[
-          {
-            "startIndex":170,
-            "maxRepeats":1
+            "startIndex":111,
+            "maxRepeats":7
           }
         ]
       },
@@ -111,100 +97,30 @@
         "showRelativeIndex":true,
         "repeats":[
           {
-            "startIndex":106,
+            "startIndex":111,
             "maxRepeats":18
           }
         ]
       },
       {
-        "name":"Ridges",
-        "notes":[
-          {
-            "index":5,
-            "value":"2 stitch increase"
-          }
-        ],
-        "numRows":6,
-        "showRepeats":true,
-        "showRelativeIndex":true,
-        "repeats":[
-          {
-            "startIndex":200,
-            "maxRepeats":26
-          }
-        ]
-      },
-      {
-        "name":"Edging",
+        "name":"Body Setup",
         "notes":[
           {
             "index":1,
-            "value":"Haze - purlwise"
+            "value":"Knit columns at border of raglans"
           },
           {
-            "index":3,
-            "value":"Ash Blue"
-          },
-          {
-            "index":5,
-            "value":"Haze - purlwise"
-          },
-          {
-            "index":7,
-            "value":"Ash Blue - 2 stitch increase"
-          },
-          {
-            "index":9,
-            "value":"Haze"
-          },
-          {
-            "index":11,
-            "value":"Ash Blue - 2 stitch increase"
-          },
-          {
-            "index":13,
-            "value":"Haze - purlwise"
-          },
-          {
-            "index":15,
-            "value":"Ash Blue"
-          },
-          {
-            "index":17,
-            "value":"Haze - purlwise"
-          },
-          {
-            "index":19,
-            "value":"Ash Blue - 2 stitch increase"
-          },
-          {
-            "index":21,
-            "value":"Haze"
-          },
-          {
-            "index":23,
-            "value":"Ash Blue - 2 stitch increase"
-          },
-          {
-            "index":25,
-            "value":"Haze - purlwise"
-          },
-          {
-            "index":27,
-            "value":"Ash Blue"
-          },
-          {
-            "index":29,
-            "value":"Haze - 2 stitch increase"
+            "index":2,
+            "value":"Purl columns at border of raglans and 2 lifted increases"
           }
         ],
-        "numRows":30,
+        "numRows":2,
         "showRepeats":true,
         "showRelativeIndex":true,
         "repeats":[
           {
-            "startIndex":356,
-            "maxRepeats":1
+            "startIndex":184,
+            "maxRepeats":3
           }
         ]
       }
