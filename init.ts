@@ -8,7 +8,15 @@ interface ProjectDetails {
   pdfRotation: number;
 }
 
+// Next ID: 4
 const PROJECT_VALUES = {
+  "be_mine_cardigan" : {
+    storageKey: "ID-3",
+    patternUrl: "https://esr2.github.io/stitch-count/pattern-json/be_mine_cardigan.json",
+    pdfUrl: './pattern-pdfs/Be_Mine_Cardigan-medium_highlighted.pdf',
+    pdfStartPage: 3,
+    pdfRotation: 0,
+  },
   "celtic_throw" : {
     storageKey: "ID-1",
     patternUrl: "https://esr2.github.io/stitch-count/pattern-json/celtic_throw.json",
