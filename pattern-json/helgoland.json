@@ -9,35 +9,59 @@
             "value":"30 st total"
           },
           {
+            "index":38,
+            "value":"Knit only"
+          },
+          {
+            "index":43,
+            "value":"34 st total"
+          },
+          {
+            "index":79,
+            "value":"50 st total"
+          },
+          {
+            "index":80,
+            "value":"Knit only"
+          },
+          {
+            "index":85,
+            "value":"54 st total"
+          },
+          {
+            "index":229,
+            "value":"150 st total"
+          },
+          {
             "index":230,
-            "value":"Ash Blue, Haze, Isar Pebble"
+            "value":"Knit only"
           },
           {
-            "index":236,
-            "value":"Alternate Haze & Isar Pebble"
+            "index":235,
+            "value":"154 st total"
           },
           {
-            "index":266,
-            "value":"Alternate Ash Blue & Haze"
+            "index":481,
+            "value":"298 st total"
           },
           {
-            "index":314,
-            "value":"Ash Blue"
+            "index":482,
+            "value":"K1b"
           },
           {
-            "index":337,
-            "value":"Make sure there is 17g of Ash Blue remaining."
+            "index":488,
+            "value":"Section 1 - Row 1"
           },
           {
-            "index":343,
-            "value":"Make sure there is 17g of Ash Blue remaining."
+            "index":489,
+            "value":"Section 1 - Row 2"
           },
           {
-            "index":349,
-            "value":"Make sure there is 17g of Ash Blue remaining."
+            "index":490,
+            "value":"Bindoff"
           }
         ],
-        "numRows":385,
+        "numRows":490,
         "showRepeats":false,
         "repeats":[
            {
@@ -71,16 +95,16 @@
             "maxRepeats":6
           },
           {
-            "startIndex":90,
-            "maxRepeats":5
+            "startIndex":44,
+            "maxRepeats":4
           },
           {
-            "startIndex":130,
-            "maxRepeats":5
+            "startIndex":86,
+            "maxRepeats":24
           },
           {
-            "startIndex":170,
-            "maxRepeats":5
+            "startIndex":482,
+            "maxRepeats":1
           }
         ]
       },
@@ -117,108 +141,16 @@
         "showRelativeIndex":true,
         "repeats":[
           {
+            "startIndex":38,
+            "maxRepeats":1
+          },
+          {
             "startIndex":80,
             "maxRepeats":1
           },
           {
-            "startIndex":120,
-            "maxRepeats":1
-          },
-          {
-            "startIndex":160,
-            "maxRepeats":1
-          }
-        ]
-      },
-      {
-        "name":"Ridges",
-        "notes":[
-          {
-            "index":5,
-            "value":"2 stitch increase"
-          }
-        ],
-        "numRows":6,
-        "showRepeats":true,
-        "showRelativeIndex":true,
-        "repeats":[
-          {
-            "startIndex":200,
-            "maxRepeats":26
-          }
-        ]
-      },
-      {
-        "name":"Edging",
-        "notes":[
-          {
-            "index":1,
-            "value":"Haze - purlwise"
-          },
-          {
-            "index":3,
-            "value":"Ash Blue"
-          },
-          {
-            "index":5,
-            "value":"Haze - purlwise"
-          },
-          {
-            "index":7,
-            "value":"Ash Blue - 2 stitch increase"
-          },
-          {
-            "index":9,
-            "value":"Haze"
-          },
-          {
-            "index":11,
-            "value":"Ash Blue - 2 stitch increase"
-          },
-          {
-            "index":13,
-            "value":"Haze - purlwise"
-          },
-          {
-            "index":15,
-            "value":"Ash Blue"
-          },
-          {
-            "index":17,
-            "value":"Haze - purlwise"
-          },
-          {
-            "index":19,
-            "value":"Ash Blue - 2 stitch increase"
-          },
-          {
-            "index":21,
-            "value":"Haze"
-          },
-          {
-            "index":23,
-            "value":"Ash Blue - 2 stitch increase"
-          },
-          {
-            "index":25,
-            "value":"Haze - purlwise"
-          },
-          {
-            "index":27,
-            "value":"Ash Blue"
-          },
-          {
-            "index":29,
-            "value":"Haze - 2 stitch increase"
-          }
-        ],
-        "numRows":30,
-        "showRepeats":true,
-        "showRelativeIndex":true,
-        "repeats":[
-          {
-            "startIndex":356,
-            "maxRepeats":1
+            "startIndex":230,
+            "maxRepeats":37
           }
         ]
       }
