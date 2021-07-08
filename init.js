@@ -1,5 +1,5 @@
 window.onload = () => { onLoad(); };
-// Next ID: 4
+// Next ID: 5
 const PROJECT_VALUES = {
     "be_mine_cardigan": {
         storageKey: "ID-3",
@@ -19,6 +19,13 @@ const PROJECT_VALUES = {
         storageKey: "ID-2",
         patternUrl: "https://esr2.github.io/stitch-count/pattern-json/drachenfels.json",
         pdfUrl: './pattern-pdfs/Drachenfels.pdf',
+        pdfStartPage: 3,
+        pdfRotation: 0,
+    },
+    "helgoland": {
+        storageKey: "ID-4",
+        patternUrl: "https://esr2.github.io/stitch-count/pattern-json/helgoland.json",
+        pdfUrl: './pattern-pdfs/Helgoland-en.pdf',
         pdfStartPage: 3,
         pdfRotation: 0,
     }
