@@ -17,51 +17,59 @@
             "value":"34 st total"
           },
           {
-            "index":79,
+            "index":68,
             "value":"50 st total"
           },
           {
-            "index":80,
+            "index":69,
             "value":"Knit only"
           },
           {
-            "index":85,
+            "index":73,
             "value":"54 st total"
           },
           {
-            "index":229,
+            "index":145,
+            "value":"102 st total"
+          },,
+          {
+            "index":217,
             "value":"150 st total"
           },
           {
-            "index":230,
+            "index":218,
             "value":"Knit only"
           },
           {
-            "index":235,
+            "index":223,
             "value":"154 st total"
           },
           {
-            "index":481,
+            "index":331,
+            "value":"226 st total"
+          },
+          {
+            "index":439,
             "value":"298 st total"
           },
           {
-            "index":482,
+            "index":440,
             "value":"K1b"
           },
           {
-            "index":488,
+            "index":441,
             "value":"Section 1 - Row 1"
           },
           {
-            "index":489,
+            "index":442,
             "value":"Section 1 - Row 2"
           },
           {
-            "index":490,
+            "index":443,
             "value":"Bindoff"
           }
         ],
-        "numRows":490,
+        "numRows":443,
         "showRepeats":false,
         "repeats":[
            {
@@ -99,11 +107,11 @@
             "maxRepeats":4
           },
           {
-            "startIndex":86,
+            "startIndex":74,
             "maxRepeats":24
           },
           {
-            "startIndex":482,
+            "startIndex":440,
             "maxRepeats":1
           }
         ]
@@ -145,11 +153,11 @@
             "maxRepeats":1
           },
           {
-            "startIndex":80,
+            "startIndex":68,
             "maxRepeats":1
           },
           {
-            "startIndex":230,
+            "startIndex":218,
             "maxRepeats":37
           }
         ]
