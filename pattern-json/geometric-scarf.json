@@ -1,0 +1,17 @@
+{
+    "name":"Geometric Scarf",
+    "counters":[
+      {
+        "name":"Global",
+        "notes":[],
+        "numRows":8,
+        "showRepeats":false,
+        "repeats":[
+           {
+             "startIndex":1,
+             "maxRepeats":1000
+           }
+         ]
+      }
+    ]
+}
