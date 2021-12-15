@@ -8,7 +8,7 @@ interface ProjectDetails {
   pdfRotation: number;
 }
 
-// Next ID: 5
+// Next ID: 6
 const PROJECT_VALUES = {
   "be_mine_cardigan" : {
     storageKey: "ID-3",
@@ -29,6 +29,13 @@ const PROJECT_VALUES = {
     patternUrl: "https://esr2.github.io/stitch-count/pattern-json/drachenfels.json",
     pdfUrl: './pattern-pdfs/Drachenfels.pdf',
     pdfStartPage: 3,
+    pdfRotation: 0,
+  },
+  "geometric_scarf" : {
+    storageKey: "ID-5",
+    patternUrl: "https://esr2.github.io/stitch-count/pattern-json/geometric_scarf.json",
+    pdfUrl: './pattern-pdfs/Geometric-scarf.pdf',
+    pdfStartPage: 0,
     pdfRotation: 0,
   },
   "helgoland" : {
