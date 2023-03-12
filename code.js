@@ -105,9 +105,12 @@ class Counter {
             join('<br />');
     }
     static create(json) {
-        let params = Object.assign(Object.assign({}, json), { notes: json.notes.map((n) => {
+        let params = {
+            ...json,
+            notes: json.notes.map((n) => {
                 return new Note(n);
-            }) });
+            })
+        };
         return new Counter(params);
     }
 }
@@ -153,9 +156,13 @@ class Project {
         return this.globalIndex;
     }
     static create(json, globalIndex) {
-        let params = Object.assign(Object.assign({}, json), { index: globalIndex, counters: json.counters.map((c) => {
+        let params = {
+            ...json,
+            index: globalIndex,
+            counters: json.counters.map((c) => {
                 return Counter.create(c);
-            }) });
+            })
+        };
         return new Project(params);
     }
 }

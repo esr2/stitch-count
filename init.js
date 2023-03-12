@@ -1,5 +1,5 @@
 window.onload = () => { onLoad(); };
-// Next ID: 5
+// Next ID: 6
 const PROJECT_VALUES = {
     "be_mine_cardigan": {
         storageKey: "ID-3",
@@ -20,6 +20,13 @@ const PROJECT_VALUES = {
         patternUrl: "https://esr2.github.io/stitch-count/pattern-json/drachenfels.json",
         pdfUrl: './pattern-pdfs/Drachenfels.pdf',
         pdfStartPage: 3,
+        pdfRotation: 0,
+    },
+    "geometric_scarf": {
+        storageKey: "ID-5",
+        patternUrl: "https://esr2.github.io/stitch-count/pattern-json/geometric_scarf.json",
+        pdfUrl: './pattern-pdfs/Geometric-scarf.pdf',
+        pdfStartPage: 0,
         pdfRotation: 0,
     },
     "helgoland": {
@@ -87,7 +94,8 @@ function showProjectPicker() {
             // Find the selected value and return it.
             let form = document.getElementById('projectPickerForm');
             let checkedItem = Array.from(form.elements).find((radioElement) => {
-                return radioElement.checked;
+                const el = radioElement;
+                return el.checked;
             });
             resolve(checkedItem.value);
         };

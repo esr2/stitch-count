@@ -121,8 +121,9 @@ function showProjectPicker() : Promise<string> {
       // Find the selected value and return it.
       let form = document.getElementById('projectPickerForm') as HTMLFormElement;
       let checkedItem = Array.from(form.elements).find((radioElement) => {
-        return radioElement.checked;
-      });
+        const el = radioElement as HTMLInputElement;
+        return el.checked;
+      }) as HTMLInputElement;
       resolve(checkedItem.value);
     }
   });
