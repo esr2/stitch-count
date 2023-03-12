@@ -252,6 +252,26 @@ class Project {
       })};
     return new Project(params);
   }
+
+  static createSimple(name: string, globalIndex: number, numRepeats: number, numRows: number) {
+    return new Project({
+      name, 
+      counters: [
+        new Counter({
+          name: '', 
+          notes:[], 
+          numRows, 
+          showRelativeIndex: true, 
+          showRepeats: numRepeats != 1,
+          repeats: [{
+            startIndex: 1,
+            maxRepeats: numRepeats,
+          }],
+        },
+      ],
+      index: globalIndex,
+    });
+  }
 }
 
 function createElement(type: string, ...tokens : string[]) : HTMLElement {

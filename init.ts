@@ -2,7 +2,8 @@ window.onload = () => { onLoad() };
 
 interface ProjectDetails {
   storageKey: string;
-  patternUrl: string;
+  name?: string;
+  patternUrl?: string;
   pdfUrl: string;
   pdfStartPage: number;
   pdfRotation: number;
@@ -42,6 +43,14 @@ const PROJECT_VALUES = {
     storageKey: "ID-4",
     patternUrl: "https://esr2.github.io/stitch-count/pattern-json/helgoland.json",
     pdfUrl: './pattern-pdfs/Helgoland-en.pdf',
+    pdfStartPage: 3,
+    pdfRotation: 0,
+  },
+  "ingrid_sweater": {
+    storageKey: "ID-6",
+    name: "Ingrid Sweater",
+    // patternUrl: "./pattern-json/ingrid_sweater.json",
+    pdfUrl: "./pattern-pdfs/Ingrid_Sweater-small_highlighted.pdf",
     pdfStartPage: 3,
     pdfRotation: 0,
   }
@@ -98,6 +107,16 @@ function updateDisplay(project: Project, storageKey: string) {
 function getProject(details : ProjectDetails) : Promise<Project> {
   let globalIndex =
       parseInt(localStorage.getItem(details.storageKey)) || 1;
+
+  // Support as-you-go patterns counting
+  if (!details.patternUrl) {
+    const numRepeats = 
+        parseInt(localStorage.getItem(details.storageKey+"-numRepeats")) || 1;
+    const numRows = parseInt(localStorage.getItem(details.storageKey+"-numRows")) || 1;
+
+    return Promise.resolve(Project.createSimple(details.name, globalIndex, numRepeats, numRows));
+  }
+
   return new Promise((resolve, reject) => {
     let oXHR = new XMLHttpRequest();
     // Initiate request.

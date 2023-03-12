@@ -165,6 +165,25 @@ class Project {
         };
         return new Project(params);
     }
+    static createSimple(name, globalIndex, numRepeats, numRows) {
+        return new Project({
+            name,
+            counters: [
+                new Counter({
+                    name: '',
+                    notes: [],
+                    numRows,
+                    showRelativeIndex: true,
+                    showRepeats: numRepeats != 1,
+                    repeats: [{
+                            startIndex: 1,
+                            maxRepeats: numRepeats,
+                        }],
+                })
+            ],
+            index: globalIndex,
+        });
+    }
 }
 function createElement(type, ...tokens) {
     let element = document.createElement(type);

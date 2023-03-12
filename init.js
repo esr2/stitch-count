@@ -35,6 +35,14 @@ const PROJECT_VALUES = {
         pdfUrl: './pattern-pdfs/Helgoland-en.pdf',
         pdfStartPage: 3,
         pdfRotation: 0,
+    },
+    "ingrid_sweater": {
+        storageKey: "ID-6",
+        name: "Ingrid Sweater",
+        // patternUrl: "./pattern-json/ingrid_sweater.json",
+        pdfUrl: "./pattern-pdfs/Ingrid_Sweater-small_highlighted.pdf",
+        pdfStartPage: 3,
+        pdfRotation: 0,
     }
 };
 function onLoad() {
@@ -73,6 +81,12 @@ function updateDisplay(project, storageKey) {
 ;
 function getProject(details) {
     let globalIndex = parseInt(localStorage.getItem(details.storageKey)) || 1;
+    // Support as-you-go patterns counting
+    if (!details.patternUrl) {
+        const numRepeats = parseInt(localStorage.getItem(details.storageKey + "-numRepeats")) || 1;
+        const numRows = parseInt(localStorage.getItem(details.storageKey + "-numRows")) || 1;
+        return Promise.resolve(Project.createSimple(details.name, globalIndex, numRepeats, numRows));
+    }
     return new Promise((resolve, reject) => {
         let oXHR = new XMLHttpRequest();
         // Initiate request.
