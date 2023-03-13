@@ -68,11 +68,13 @@ class Counter {
         let { maxRepeats, index, numRepeats } = this.calculateState(globalIndex);
         // Create HTMLElement.
         let counterElement = createElement('li', "w3-cell-row");
-        let titleElement = createElement('div', "w3-container", "w3-cell", "w3-cell-middle", "counterTitle");
-        let titleText = createElement('span');
-        titleText.textContent = this.name;
-        titleElement.appendChild(titleText);
-        counterElement.appendChild(titleElement);
+        if (this.name) {
+            let titleElement = createElement('div', "w3-container", "w3-cell", "w3-cell-middle", "counterTitle");
+            let titleText = createElement('span');
+            titleText.textContent = this.name;
+            titleElement.appendChild(titleText);
+            counterElement.appendChild(titleElement);
+        }
         let indexElement = createElement('div', "w3-container", "w3-cell", "w3-cell-middle", "counterIndex");
         let indexText = createElement('span', "w3-xlarge");
         indexText.textContent = index.toString();
