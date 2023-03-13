@@ -179,7 +179,7 @@ class Project {
                             startIndex: 1,
                             maxRepeats: numRepeats,
                         }],
-                })
+                }),
             ],
             index: globalIndex,
         });

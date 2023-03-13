@@ -47,24 +47,25 @@ const PROJECT_VALUES = {
 };
 function onLoad() {
     showProjectPicker().then((projectName) => {
-        init(PROJECT_VALUES[projectName]);
+        const projectDetails = PROJECT_VALUES[projectName];
+        getProject(projectDetails).then((project) => {
+            init(project, projectDetails.storageKey);
+            loadPdf(projectDetails);
+        });
     });
 }
-function init(details) {
-    getProject(details).then((project) => {
-        updateDisplay(project, details.storageKey);
-        document.querySelector("#increaseButton").addEventListener("click", () => {
-            project.increase();
-            updateDisplay(project, details.storageKey);
-        });
-        document.querySelector("#decreaseButton").addEventListener("click", () => {
-            project.decrease();
-            updateDisplay(project, details.storageKey);
-        });
-        document.querySelector("#zoomInButton").addEventListener("click", () => { zoomIn(); });
-        document.querySelector("#zoomOutButton").addEventListener("click", () => { zoomOut(); });
+function init(project, storageKey) {
+    updateDisplay(project, storageKey);
+    document.querySelector("#increaseButton").addEventListener("click", () => {
+        project.increase();
+        updateDisplay(project, storageKey);
     });
-    loadPdf(details);
+    document.querySelector("#decreaseButton").addEventListener("click", () => {
+        project.decrease();
+        updateDisplay(project, storageKey);
+    });
+    document.querySelector("#zoomInButton").addEventListener("click", () => { zoomIn(); });
+    document.querySelector("#zoomOutButton").addEventListener("click", () => { zoomOut(); });
 }
 function updateDisplay(project, storageKey) {
     document.querySelector(".w3-bar-item").innerHTML =
@@ -83,8 +84,11 @@ function getProject(details) {
     let globalIndex = parseInt(localStorage.getItem(details.storageKey)) || 1;
     // Support as-you-go patterns counting
     if (!details.patternUrl) {
+        const editCounterButton = document.getElementById("freeStyleEditCounterButton");
+        editCounterButton.style.display = "block";
+        editCounterButton.onclick = () => { showFreestyleCounterEditModal(details.storageKey, details.name); };
         const numRepeats = parseInt(localStorage.getItem(details.storageKey + "-numRepeats")) || 1;
-        const numRows = parseInt(localStorage.getItem(details.storageKey + "-numRows")) || 1;
+        const numRows = parseInt(localStorage.getItem(details.storageKey + "-numRows")) || 500;
         return Promise.resolve(Project.createSimple(details.name, globalIndex, numRepeats, numRows));
     }
     return new Promise((resolve, reject) => {
@@ -116,6 +120,31 @@ function showProjectPicker() {
     });
     document.getElementById('projectPickerModal').style.display = 'block';
     return promise;
+}
+function showFreestyleCounterEditModal(storageKey, projectName) {
+    // Prepopulate the form fields with the current values
+    let numRows = parseInt(localStorage.getItem(storageKey + "-numRows"));
+    document.getElementById('numRows').value = numRows.toString();
+    let numRepeats = parseInt(localStorage.getItem(storageKey + "-numRepeats"));
+    document.getElementById('numRepeats').value = numRepeats.toString();
+    // Show the modal
+    document.getElementById('freeStyleInputModal').style.display = 'block';
+    // Set up the onClicks
+    document.getElementById("freeStyleInputResetButton").onclick = () => {
+        document.getElementById('numRows').value = "500";
+        document.getElementById('numRepeats').value = "1";
+    };
+    document.getElementById('freeStyleInputUpdateButton').onclick = () => {
+        // Hide the modal.
+        document.getElementById('freeStyleInputModal').style.display = 'none';
+        // Store the new values.
+        let numRows = document.getElementById('numRows').value;
+        let numRepeats = document.getElementById('numRepeats').value;
+        localStorage.setItem(storageKey, "1");
+        localStorage.setItem(storageKey + "-numRows", numRows);
+        localStorage.setItem(storageKey + "-numRepeats", numRepeats);
+        init(Project.createSimple(projectName, 1 /* globalIndex */, parseInt(numRepeats), parseInt(numRows)), storageKey);
+    };
 }
 const PDF_VIEWS = [];
 var DEFAULT_SCALE_DELTA = 1.1;

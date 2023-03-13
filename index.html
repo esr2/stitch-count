@@ -103,6 +103,7 @@
   <body>
     <header class="w3-top w3-bar w3-theme">
       <h2 class="w3-bar-item">Stitch Count</h2>
+      <button id="freeStyleEditCounterButton" style="display:none" class="w3-button w3-block w3-white w3-section w3-padding w3-right">Edit</button>
     </header>
 
     <div id="projectPickerModal" class="w3-modal">
@@ -136,6 +137,26 @@
             </p>
           </form>
           <button id="projectPickerSelectButton" class="w3-button w3-block w3-green w3-section w3-padding w3-right">Select</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="freeStyleInputModal" class="w3-modal">
+      <div class="w3-modal-content w3-card-4">
+        <div class="w3-container w3-card-4">
+          <form id="freeStyleInputForm">
+            <h2>Counter</h2>
+            <p>
+              <input class="w3-input" type="number" id="numRows" name="numRows" min="1" max="500">
+              <label for="numRows">Number of Rows</label>
+            </p>
+            <p>
+              <input class="w3-input" type="number" id="numRepeats" name="numRepeats" min="1" max="50">
+              <label for="numRepeats">Number of Repeats</label>
+            </p>
+          </form>
+          <button id="freeStyleInputResetButton" class="w3-button w3-block w3-green w3-section w3-padding w3-left">Reset</button>
+          <button id="freeStyleInputUpdateButton" class="w3-button w3-block w3-green w3-section w3-padding w3-right">Select</button>
         </div>
       </div>
     </div>
