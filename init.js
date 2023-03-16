@@ -55,6 +55,9 @@ function onLoad() {
     });
 }
 function init(project, storageKey) {
+    const domContainer = document.querySelector('#project_container');
+    const root = ReactDOM.createRoot(domContainer);
+    root.render(e(LikeButton));
     updateDisplay(project, storageKey);
     document.querySelector("#increaseButton").addEventListener("click", () => {
         project.increase();
