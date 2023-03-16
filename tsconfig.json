@@ -10,7 +10,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
-    "jsx": "react"
+    "jsx": "react",
+    "rootDir": "src",
+    "outDir": "build"
   },
   "exclude": ["node_modules"]
 }

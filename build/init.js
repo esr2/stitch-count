@@ -1,49 +1,51 @@
-window.onload = () => { onLoad(); };
+window.onload = () => {
+    onLoad();
+};
 // Next ID: 6
 const PROJECT_VALUES = {
-    "be_mine_cardigan": {
+    be_mine_cardigan: {
         storageKey: "ID-3",
         patternUrl: "https://esr2.github.io/stitch-count/pattern-json/be_mine_cardigan.json",
-        pdfUrl: './pattern-pdfs/Be_Mine_Cardigan-medium_highlighted.pdf',
+        pdfUrl: "./pattern-pdfs/Be_Mine_Cardigan-medium_highlighted.pdf",
         pdfStartPage: 3,
         pdfRotation: 0,
     },
-    "celtic_throw": {
+    celtic_throw: {
         storageKey: "ID-1",
         patternUrl: "https://esr2.github.io/stitch-count/pattern-json/celtic_throw.json",
-        pdfUrl: './pattern-pdfs/AK-Celtic_Traveller_Throw-v052220.pdf',
+        pdfUrl: "./pattern-pdfs/AK-Celtic_Traveller_Throw-v052220.pdf",
         pdfStartPage: 5,
         pdfRotation: -90,
     },
-    "drachenfels": {
+    drachenfels: {
         storageKey: "ID-2",
         patternUrl: "https://esr2.github.io/stitch-count/pattern-json/drachenfels.json",
-        pdfUrl: './pattern-pdfs/Drachenfels.pdf',
+        pdfUrl: "./pattern-pdfs/Drachenfels.pdf",
         pdfStartPage: 3,
         pdfRotation: 0,
     },
-    "geometric_scarf": {
+    geometric_scarf: {
         storageKey: "ID-5",
         patternUrl: "https://esr2.github.io/stitch-count/pattern-json/geometric_scarf.json",
-        pdfUrl: './pattern-pdfs/Geometric-scarf.pdf',
+        pdfUrl: "./pattern-pdfs/Geometric-scarf.pdf",
         pdfStartPage: 0,
         pdfRotation: 0,
     },
-    "helgoland": {
+    helgoland: {
         storageKey: "ID-4",
         patternUrl: "https://esr2.github.io/stitch-count/pattern-json/helgoland.json",
-        pdfUrl: './pattern-pdfs/Helgoland-en.pdf',
+        pdfUrl: "./pattern-pdfs/Helgoland-en.pdf",
         pdfStartPage: 3,
         pdfRotation: 0,
     },
-    "ingrid_sweater": {
+    ingrid_sweater: {
         storageKey: "ID-6",
         name: "Ingrid Sweater",
         // patternUrl: "./pattern-json/ingrid_sweater.json",
         pdfUrl: "./pattern-pdfs/Ingrid_Sweater-small_highlighted.pdf",
         pdfStartPage: 3,
         pdfRotation: 0,
-    }
+    },
 };
 function onLoad() {
     showProjectPicker().then((projectName) => {
@@ -55,9 +57,6 @@ function onLoad() {
     });
 }
 function init(project, storageKey) {
-    const domContainer = document.querySelector('#project_container');
-    const root = ReactDOM.createRoot(domContainer);
-    root.render(e(LikeButton));
     updateDisplay(project, storageKey);
     document.querySelector("#increaseButton").addEventListener("click", () => {
         project.increase();
@@ -67,14 +66,17 @@ function init(project, storageKey) {
         project.decrease();
         updateDisplay(project, storageKey);
     });
-    document.querySelector("#zoomInButton").addEventListener("click", () => { zoomIn(); });
-    document.querySelector("#zoomOutButton").addEventListener("click", () => { zoomOut(); });
+    document.querySelector("#zoomInButton").addEventListener("click", () => {
+        zoomIn();
+    });
+    document.querySelector("#zoomOutButton").addEventListener("click", () => {
+        zoomOut();
+    });
 }
 function updateDisplay(project, storageKey) {
-    document.querySelector(".w3-bar-item").innerHTML =
-        project.getName();
+    document.querySelector(".w3-bar-item").innerHTML = project.getName();
     // Clear current counters UI
-    document.querySelector(".counters").innerHTML = '';
+    document.querySelector(".counters").innerHTML = "";
     project.render().forEach((element) => {
         document.querySelector(".counters").appendChild(element);
     });
@@ -82,14 +84,15 @@ function updateDisplay(project, storageKey) {
         project.getNotesAtCurrentIndex();
     localStorage.setItem(storageKey, project.getGlobalIndex().toString());
 }
-;
 function getProject(details) {
     let globalIndex = parseInt(localStorage.getItem(details.storageKey)) || 1;
     // Support as-you-go patterns counting
     if (!details.patternUrl) {
         const editCounterButton = document.getElementById("freeStyleEditCounterButton");
         editCounterButton.style.display = "block";
-        editCounterButton.onclick = () => { showFreestyleCounterEditModal(details.storageKey, details.name); };
+        editCounterButton.onclick = () => {
+            showFreestyleCounterEditModal(details.storageKey, details.name);
+        };
         const numRepeats = parseInt(localStorage.getItem(details.storageKey + "-numRepeats")) || 1;
         const numRows = parseInt(localStorage.getItem(details.storageKey + "-numRows")) || 500;
         return Promise.resolve(Project.createSimple(details.name, globalIndex, numRepeats, numRows));
@@ -109,11 +112,11 @@ function getProject(details) {
 }
 function showProjectPicker() {
     let promise = new Promise((resolve, reject) => {
-        document.getElementById('projectPickerSelectButton').onclick = () => {
+        document.getElementById("projectPickerSelectButton").onclick = () => {
             // Hide the modal.
-            document.getElementById('projectPickerModal').style.display = 'none';
+            document.getElementById("projectPickerModal").style.display = "none";
             // Find the selected value and return it.
-            let form = document.getElementById('projectPickerForm');
+            let form = document.getElementById("projectPickerForm");
             let checkedItem = Array.from(form.elements).find((radioElement) => {
                 const el = radioElement;
                 return el.checked;
@@ -121,28 +124,32 @@ function showProjectPicker() {
             resolve(checkedItem.value);
         };
     });
-    document.getElementById('projectPickerModal').style.display = 'block';
+    document.getElementById("projectPickerModal").style.display = "block";
     return promise;
 }
 function showFreestyleCounterEditModal(storageKey, projectName) {
     // Prepopulate the form fields with the current values
     let numRows = parseInt(localStorage.getItem(storageKey + "-numRows"));
-    document.getElementById('numRows').value = numRows.toString();
+    document.getElementById("numRows").value =
+        numRows.toString();
     let numRepeats = parseInt(localStorage.getItem(storageKey + "-numRepeats"));
-    document.getElementById('numRepeats').value = numRepeats.toString();
+    document.getElementById("numRepeats").value =
+        numRepeats.toString();
     // Show the modal
-    document.getElementById('freeStyleInputModal').style.display = 'block';
+    document.getElementById("freeStyleInputModal").style.display = "block";
     // Set up the onClicks
     document.getElementById("freeStyleInputResetButton").onclick = () => {
-        document.getElementById('numRows').value = "500";
-        document.getElementById('numRepeats').value = "1";
+        document.getElementById("numRows").value = "500";
+        document.getElementById("numRepeats").value = "1";
     };
-    document.getElementById('freeStyleInputUpdateButton').onclick = () => {
+    document.getElementById("freeStyleInputUpdateButton").onclick = () => {
         // Hide the modal.
-        document.getElementById('freeStyleInputModal').style.display = 'none';
+        document.getElementById("freeStyleInputModal").style.display = "none";
         // Store the new values.
-        let numRows = document.getElementById('numRows').value;
-        let numRepeats = document.getElementById('numRepeats').value;
+        let numRows = document.getElementById("numRows")
+            .value;
+        let numRepeats = document.getElementById("numRepeats")
+            .value;
         localStorage.setItem(storageKey, "1");
         localStorage.setItem(storageKey + "-numRows", numRows);
         localStorage.setItem(storageKey + "-numRepeats", numRepeats);
@@ -160,10 +167,11 @@ function loadPdf(details) {
     var url = details.pdfUrl;
     PDF_ROTATION = details.pdfRotation;
     // Loaded via <script> tag, create shortcut to access PDF.js exports.
-    var pdfjsLib = window['pdfjs-dist/build/pdf'];
+    var pdfjsLib = window["pdfjs-dist/build/pdf"];
     // The workerSrc property shall be specified.
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.worker.min.js';
-    var DEFAULT_SCALE = .6;
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.worker.min.js";
+    var DEFAULT_SCALE = 0.6;
     var desiredWidth = window.innerWidth;
     var DEFAULT_URL = url;
     var container = document.getElementById("pageContainer");
@@ -176,7 +184,7 @@ function loadPdf(details) {
         for (var i = details.pdfStartPage; i <= doc.numPages; i++) {
             promise = promise.then(function (pageNum) {
                 return doc.getPage(pageNum).then(function (pdfPage) {
-                    var viewport = pdfPage.getViewport({ scale: DEFAULT_SCALE, });
+                    var viewport = pdfPage.getViewport({ scale: DEFAULT_SCALE });
                     var scale = desiredWidth / viewport.width;
                     // Create the page view.
                     var pdfPageView = new pdfjsViewer.PDFPageView({
