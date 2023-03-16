@@ -1,19 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Stitch Count</title>
     <link rel="manifest" href="./manifest.json" />
-    <meta name="theme-color" content="#ddffdd">
+    <meta name="theme-color" content="#ddffdd" />
   </head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf_viewer.js"></script>
-  
-  <script src="./code.js"> </script>
-  <script src="./init.js"> </script>
 
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
+  <script src="./code.js"></script>
+  <script src="./init.js"></script>
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link
+    rel="stylesheet"
+    href="https://www.w3schools.com/lib/w3-theme-green.css"
+  />
   <style>
     .w3-button {
       width: 100px;
@@ -22,7 +25,7 @@
     /* Override .w3-button:hover to match .w3-theme-action */
     .w3-button:hover {
       color: #fff !important;
-      background-color: #265728!important;
+      background-color: #265728 !important;
     }
 
     .w3-panel {
@@ -82,29 +85,35 @@
       top: 500px;
       height: 20px;
       width: 100%;
-      background-color: rgba(255, 236, 101, .5);
+      background-color: rgba(255, 236, 101, 0.5);
     }
 
     .numerator {
-       font-size:.7em;
-       line-height:.7em;
-       vertical-align:.3em;
+      font-size: 0.7em;
+      line-height: 0.7em;
+      vertical-align: 0.3em;
     }
     .denominator {
-       font-size:.7em;
-       line-height:.7em;
-       vertical-align:-.2em;
+      font-size: 0.7em;
+      line-height: 0.7em;
+      vertical-align: -0.2em;
     }
     .slash-entity {
-       font-size:.8em;
-       line-height:.8em;
+      font-size: 0.8em;
+      line-height: 0.8em;
     }
   </style>
 
   <body>
     <header class="w3-top w3-bar w3-theme">
       <h2 class="w3-bar-item">Stitch Count</h2>
-      <button id="freeStyleEditCounterButton" style="display:none" class="w3-button w3-block w3-white w3-section w3-padding w3-right">Edit</button>
+      <button
+        id="freeStyleEditCounterButton"
+        style="display: none"
+        class="w3-button w3-block w3-white w3-section w3-padding w3-right"
+      >
+        Edit
+      </button>
     </header>
 
     <div id="projectPickerModal" class="w3-modal">
@@ -113,15 +122,33 @@
           <form id="projectPickerForm">
             <h2>Projects</h2>
             <p>
-              <input class="w3-radio" type="radio" name="project" value="be_mine_cardigan" id="be_mine_cardigan">
+              <input
+                class="w3-radio"
+                type="radio"
+                name="project"
+                value="be_mine_cardigan"
+                id="be_mine_cardigan"
+              />
               <label for="be_mine_cardigan">Be Mine Cardigan</label>
             </p>
             <p>
-              <input class="w3-radio" type="radio" name="project" value="celtic_throw" id="celtic_throw">
+              <input
+                class="w3-radio"
+                type="radio"
+                name="project"
+                value="celtic_throw"
+                id="celtic_throw"
+              />
               <label for="celtic_throw">Celtic Throw</label>
             </p>
             <p>
-              <input class="w3-radio" type="radio" name="project" value="drachenfels" id="drachenfels">
+              <input
+                class="w3-radio"
+                type="radio"
+                name="project"
+                value="drachenfels"
+                id="drachenfels"
+              />
               <label for="drachenfels">Drachenfels</label>
             </p>
             <!-- <p>
@@ -129,15 +156,33 @@
               <label for="geometric-scarf">Geometric Scarf</label>
             </p> -->
             <p>
-              <input class="w3-radio" type="radio" name="project" value="helgoland" id="helgoland">
+              <input
+                class="w3-radio"
+                type="radio"
+                name="project"
+                value="helgoland"
+                id="helgoland"
+              />
               <label for="helgoland">Helgoland</label>
             </p>
             <p>
-              <input class="w3-radio" type="radio" name="project" value="ingrid_sweater" id="ingrid_sweater" checked>
+              <input
+                class="w3-radio"
+                type="radio"
+                name="project"
+                value="ingrid_sweater"
+                id="ingrid_sweater"
+                checked
+              />
               <label for="geometric-scarf">Ingrid Sweater</label>
             </p>
           </form>
-          <button id="projectPickerSelectButton" class="w3-button w3-block w3-green w3-section w3-padding w3-right">Select</button>
+          <button
+            id="projectPickerSelectButton"
+            class="w3-button w3-block w3-green w3-section w3-padding w3-right"
+          >
+            Select
+          </button>
         </div>
       </div>
     </div>
@@ -148,16 +193,40 @@
           <form id="freeStyleInputForm">
             <h2>Counter</h2>
             <p>
-              <input class="w3-input" type="number" id="numRows" name="numRows" min="1" max="500">
+              <input
+                class="w3-input"
+                type="number"
+                id="numRows"
+                name="numRows"
+                min="1"
+                max="500"
+              />
               <label for="numRows">Number of Rows</label>
             </p>
             <p>
-              <input class="w3-input" type="number" id="numRepeats" name="numRepeats" min="1" max="50">
+              <input
+                class="w3-input"
+                type="number"
+                id="numRepeats"
+                name="numRepeats"
+                min="1"
+                max="50"
+              />
               <label for="numRepeats">Number of Repeats</label>
             </p>
           </form>
-          <button id="freeStyleInputResetButton" class="w3-button w3-block w3-green w3-section w3-padding w3-left">Reset</button>
-          <button id="freeStyleInputUpdateButton" class="w3-button w3-block w3-green w3-section w3-padding w3-right">Select</button>
+          <button
+            id="freeStyleInputResetButton"
+            class="w3-button w3-block w3-green w3-section w3-padding w3-left"
+          >
+            Reset
+          </button>
+          <button
+            id="freeStyleInputUpdateButton"
+            class="w3-button w3-block w3-green w3-section w3-padding w3-right"
+          >
+            Select
+          </button>
         </div>
       </div>
     </div>
@@ -168,41 +237,84 @@
           <form id="freeStyleInputForm">
             <h2>Counter</h2>
             <p>
-              <input class="w3-input" type="number" id="numRows" name="numRows" min="1" max="500">
+              <input
+                class="w3-input"
+                type="number"
+                id="numRows"
+                name="numRows"
+                min="1"
+                max="500"
+              />
               <label for="numRows">Number of Rows</label>
             </p>
             <p>
-              <input class="w3-input" type="number" id="numRepeats" name="numRepeats" min="1" max="50">
+              <input
+                class="w3-input"
+                type="number"
+                id="numRepeats"
+                name="numRepeats"
+                min="1"
+                max="50"
+              />
               <label for="numRepeats">Number of Repeats</label>
             </p>
           </form>
-          <button id="freeStyleInputResetButton" class="w3-button w3-block w3-green w3-section w3-padding w3-left">Reset</button>
-          <button id="freeStyleInputUpdateButton" class="w3-button w3-block w3-green w3-section w3-padding w3-right">Select</button>
+          <button
+            id="freeStyleInputResetButton"
+            class="w3-button w3-block w3-green w3-section w3-padding w3-left"
+          >
+            Reset
+          </button>
+          <button
+            id="freeStyleInputUpdateButton"
+            class="w3-button w3-block w3-green w3-section w3-padding w3-right"
+          >
+            Select
+          </button>
         </div>
       </div>
     </div>
 
     <div class="topContainer">
       <div class="controlContainer">
-        <div class="w3-container" style="margin-top:80px;">
-          <ul class="w3-ul w3-card-4 counters">
-          </ul>
+        <div class="w3-container" style="margin-top: 80px">
+          <ul class="w3-ul w3-card-4 counters"></ul>
         </div>
 
         <div class="buttonContainer">
-          <button class="w3-button w3-xlarge w3-theme-action w3-padding-medium w3-round-xxlarge" id="decreaseButton">-</button>
-          <button class="w3-button w3-xlarge w3-theme-action w3-padding-medium w3-round-xxlarge" id="increaseButton">+</button>
+          <button
+            class="w3-button w3-xlarge w3-theme-action w3-padding-medium w3-round-xxlarge"
+            id="decreaseButton"
+          >
+            -
+          </button>
+          <button
+            class="w3-button w3-xlarge w3-theme-action w3-padding-medium w3-round-xxlarge"
+            id="increaseButton"
+          >
+            +
+          </button>
         </div>
 
-          <div class="w3-panel w3-pale-green w3-border-green w3-border">
-            <p id="noteContent"></p>
-          </div>
+        <div class="w3-panel w3-pale-green w3-border-green w3-border">
+          <p id="noteContent"></p>
+        </div>
       </div>
 
       <div class="pageContainer" id="pageContainer">
         <div class="buttonContainer">
-          <button class="w3-button w3-medium w3-theme-action w3-padding-small w3-round-xxlarge" id="zoomInButton">zoom in</button>
-          <button class="w3-button w3-medium w3-theme-action w3-padding-small w3-round-xxlarge" id="zoomOutButton">zoom out</button>
+          <button
+            class="w3-button w3-medium w3-theme-action w3-padding-small w3-round-xxlarge"
+            id="zoomInButton"
+          >
+            zoom in
+          </button>
+          <button
+            class="w3-button w3-medium w3-theme-action w3-padding-small w3-round-xxlarge"
+            id="zoomOutButton"
+          >
+            zoom out
+          </button>
         </div>
       </div>
     </div>
@@ -211,9 +323,14 @@
 
     <div id="like-button-root"></div>
 
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script
+      src="https://unpkg.com/react@18/umd/react.production.min.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+      crossorigin
+    ></script>
     <script src="like-button.js"></script>
-
   </body>
 </html>
