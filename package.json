@@ -1,0 +1,22 @@
+{
+  "name": "stitch-count",
+  "version": "1.0.0",
+  "description": "A knitting counter",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esr2/stitch-count.git"
+  },
+  "keywords": [
+    "knitting"
+  ],
+  "author": "Erin Sardo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/esr2/stitch-count/issues"
+  },
+  "homepage": "https://github.com/esr2/stitch-count#readme",
+  "dependencies": {
+    "@types/node": "^18.15.3"
+  }
+}
