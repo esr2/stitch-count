@@ -5,6 +5,7 @@ export interface ProjectDetails {
   pdfUrl: string;
   pdfStartPage: number;
   pdfRotation: number;
+  isDefault?: boolean;
 }
 
 // Next ID: 7
@@ -55,5 +56,6 @@ export const PROJECT_VALUES: ProjectDetails[] = [
     pdfUrl: "../pattern-pdfs/Ingrid_Sweater-small_highlighted.pdf",
     pdfStartPage: 3,
     pdfRotation: 0,
+    isDefault: true,
   },
 ];

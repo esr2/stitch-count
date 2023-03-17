@@ -1,9 +1,13 @@
 import React from "react";
-import "./App.css";
+import "./App.scss";
 import ProjectPicker from "./ProjectPicker";
 
 function App() {
-  return <ProjectPicker />;
+  return (
+    <>
+      <ProjectPicker />
+    </>
+  );
 }
 
 export default App;
