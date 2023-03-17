@@ -10,21 +10,21 @@
     "@types/node": "^16.18.16",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
-    "react-bootstrap": "^2.7.2",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4",
     "bootstrap": "4.3.1",
     "classnames": "2.3.1",
     "headroom.js": "0.12.0",
     "moment": "2.29.4",
     "nouislider": "14.1.1",
     "react": "18.2.0",
+    "react-bootstrap": "^2.7.2",
     "react-datetime": "3.1.1",
     "react-dom": "18.2.0",
     "react-router-dom": "5.1.2",
     "react-scripts": "5.0.1",
-    "reactstrap": "8.4.1",
-    "sass": "1.53.0"
+    "reactstrap": "^8.10.1",
+    "sass": "1.53.0",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -49,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/reactstrap": "^8.7.2"
   }
 }

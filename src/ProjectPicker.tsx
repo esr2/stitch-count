@@ -1,4 +1,4 @@
-// import { Button } from "reactstrap";
+import { Button } from "reactstrap";
 
 import { ProjectDetails, PROJECT_VALUES } from "./ProjectDetails";
 
@@ -22,7 +22,7 @@ function ProjectPicker() {
         );
       })}
 
-      {/* <Button color="primary">Pick</Button> */}
+      <Button color="primary">Pick</Button>
     </>
   );
 }
