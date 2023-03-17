@@ -59,7 +59,6 @@ const PROJECT_VALUES: ProjectDetails[] = [
   {
     storageKey: "ID-6",
     name: "Ingrid Sweater",
-    // patternUrl: "./pattern-json/ingrid_sweater.json",
     pdfUrl: "./pattern-pdfs/Ingrid_Sweater-small_highlighted.pdf",
     pdfStartPage: 3,
     pdfRotation: 0,
