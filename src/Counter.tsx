@@ -68,8 +68,8 @@ function Counter(props: { details: CounterDetails; globalIndex: number }) {
     <li className="list-group-item">
       <div className="row align-items-center">
         {name && <div className="col">{name}</div>}
-        <div className="col">
-          <h3 className="text-right">{index}</h3>
+        <div className={`col ${name ? "col-4" : ""}`}>
+          <h3 className={`${name ? "text-right" : "text-center"}`}>{index}</h3>
         </div>
       </div>
       {maxRepeats > 1 && (
