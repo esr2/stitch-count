@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { ProjectDetails, PROJECT_VALUES } from "./ProjectDetails";
+import Counter, { CounterDetails } from "./Counter";
 import { Card, CardBody, CardHeader, Button } from "reactstrap";
 
 function Project(props: { project: ProjectDetails }) {
@@ -20,9 +21,24 @@ function Project(props: { project: ProjectDetails }) {
     setGlobalIndex(globalIndex - 1);
   };
 
+  const counters = patternJson.counters.map((counterJson: CounterDetails) => {
+    const { name, notes, numRows, showRelativeIndex, showRepeats, repeats } =
+      counterJson;
+    return (
+      <Counter
+        name={name}
+        notes={notes}
+        numRows={numRows}
+        showRelativeIndex
+        showRepeats
+        repeats={repeats}
+      />
+    );
+  });
+
   return (
     <Card className="shadow">
-      // TODO make this the first counter
+      {/* TODO make this the first counter */}
       <CardHeader>
         <div className="row align-items-center">
           <div className="col">
@@ -41,14 +57,10 @@ function Project(props: { project: ProjectDetails }) {
         </div>
       </CardHeader>
       <CardBody>
-        <ul className="list-group list-group-flush"></ul>
+        <ul className="list-group list-group-flush">{counters}</ul>
       </CardBody>
     </Card>
   );
 }
-
-Project.propTypes = {
-  projectId: PropTypes.string,
-};
 
 export default Project;
