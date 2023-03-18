@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Progress } from "reactstrap";
+import { Alert, Progress } from "reactstrap";
 
 export interface CounterDetails {
   name: string;
@@ -11,7 +11,7 @@ export interface CounterDetails {
 }
 
 function Counter(props: { details: CounterDetails; globalIndex: number }) {
-  const { name, showRelativeIndex, numRows, repeats } = props.details;
+  const { name, showRelativeIndex, numRows, repeats, notes } = props.details;
   const globalIndex = props.globalIndex;
 
   function isWithinRepeat(
@@ -64,19 +64,38 @@ function Counter(props: { details: CounterDetails; globalIndex: number }) {
   }
   const perecent = Math.floor((numRepeats / maxRepeats) * 100);
 
+  const getNoteAtIndex = () => {
+    const notesAtIndex = notes.filter(
+      (value: { index: number; value: string }) => {
+        return value.index === index;
+      }
+    );
+    if (notesAtIndex.length > 1) {
+      return <Alert color="error">"Multiple notes specified"</Alert>;
+    } else if (notesAtIndex.length == 1) {
+      return <Alert color="info">{notesAtIndex[0].value}</Alert>;
+    }
+    return null;
+  };
+
   return (
     <li className="list-group-item">
-      <div className="row align-items-center">
-        {name && <div className="col">{name}</div>}
-        <div className={`col ${name ? "col-4" : ""}`}>
-          <h3 className={`${name ? "text-right" : "text-center"}`}>{index}</h3>
+      <>
+        <div className="row align-items-center">
+          {name && <div className="col">{name}</div>}
+          <div className={`col ${name ? "col-4" : ""}`}>
+            <h3 className={`${name ? "text-right" : "text-center"}`}>
+              {index}
+            </h3>
+          </div>
         </div>
-      </div>
-      {maxRepeats > 1 && (
-        <Progress max="100" value={perecent}>
-          {numRepeats} / {maxRepeats}
-        </Progress>
-      )}
+        {maxRepeats > 1 && (
+          <Progress max="100" value={perecent}>
+            {numRepeats} / {maxRepeats}
+          </Progress>
+        )}
+        {getNoteAtIndex()}
+      </>
     </li>
   );
 }
