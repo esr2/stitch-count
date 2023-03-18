@@ -73,16 +73,9 @@ function Counter(props: { details: CounterDetails; globalIndex: number }) {
         </div>
       </div>
       {maxRepeats > 1 && (
-        <div className="progress-wrapper">
-          <div className="progress-info">
-            <div className="progress-percentage">
-              <span>
-                {numRepeats} / {maxRepeats}
-              </span>
-            </div>
-          </div>
-          <Progress max="100" value={perecent} />
-        </div>
+        <Progress max="100" value={perecent}>
+          {numRepeats} / {maxRepeats}
+        </Progress>
       )}
     </li>
   );
