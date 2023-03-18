@@ -22,18 +22,7 @@ function Project(props: { project: ProjectDetails }) {
   };
 
   const counters = patternJson.counters.map((counterJson: CounterDetails) => {
-    const { name, notes, numRows, showRelativeIndex, showRepeats, repeats } =
-      counterJson;
-    return (
-      <Counter
-        name={name}
-        notes={notes}
-        numRows={numRows}
-        showRelativeIndex
-        showRepeats
-        repeats={repeats}
-      />
-    );
+    return <Counter details={counterJson} globalIndex={globalIndex} />;
   });
 
   return (
@@ -42,16 +31,16 @@ function Project(props: { project: ProjectDetails }) {
       <CardHeader>
         <div className="row align-items-center">
           <div className="col">
-            <Button block color="primary" size="lg" onClick={() => increase()}>
-              <i className="fa fa-plus"></i>
+            <Button block color="primary" size="lg" onClick={() => decrease()}>
+              <i className="fa fa-minus"></i>
             </Button>
-          </div>
+          </div>{" "}
           <div className="col">
             <h1 className="display-1 text-center">{globalIndex}</h1>
           </div>
           <div className="col">
-            <Button block color="primary" size="lg" onClick={() => decrease()}>
-              <i className="fa fa-minus"></i>
+            <Button block color="primary" size="lg" onClick={() => increase()}>
+              <i className="fa fa-plus"></i>
             </Button>
           </div>
         </div>
