@@ -3,7 +3,7 @@ import { Progress } from "reactstrap";
 
 export interface CounterDetails {
   name: string;
-  notes: object;
+  notes: { index: number; value: string }[];
   numRows: number;
   showRelativeIndex?: boolean;
   showRepeats?: boolean;

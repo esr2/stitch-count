@@ -1,3 +1,4 @@
+import { CounterDetails } from "./Counter";
 import BeMineJSON from "./pattern-json/be_mine_cardigan.json";
 import CelticThrowJSON from "./pattern-json/celtic_throw.json";
 import DrachenfelsJSON from "./pattern-json/drachenfels.json";
@@ -7,7 +8,7 @@ import HelgolandJSON from "./pattern-json/helgoland.json";
 export interface ProjectDetails {
   storageKey: string;
   name: string;
-  patternJson?: any;
+  patternJson?: { name: string; counters: CounterDetails[] };
   pdfUrl: string;
   pdfStartPage: number;
   pdfRotation: number;

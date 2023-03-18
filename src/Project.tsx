@@ -21,7 +21,7 @@ function Project(props: { project: ProjectDetails }) {
     setGlobalIndex(globalIndex - 1);
   };
 
-  const counters = patternJson.counters.map((counterJson: CounterDetails) => {
+  const counters = patternJson?.counters.map((counterJson: CounterDetails) => {
     return <Counter details={counterJson} globalIndex={globalIndex} />;
   });
 
