@@ -26,7 +26,10 @@ function ProjectPicker(props: { onProjectPick: (projectId: string) => void }) {
       <CardBody>
         {PROJECT_VALUES.map((value: ProjectDetails) => {
           return (
-            <div className="custom-control custom-radio mb-3">
+            <div
+              key={value.storageKey}
+              className="custom-control custom-radio mb-3"
+            >
               <input
                 className="custom-control-input"
                 id={value.storageKey}
