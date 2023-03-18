@@ -4,20 +4,27 @@ import { ProjectDetails, PROJECT_VALUES } from "./ProjectDetails";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-function ProjectPicker(props: { onProjectPick: (projectId: string) => void }) {
+function ProjectPicker(props: {
+  onProjectPick: (project: ProjectDetails) => void;
+}) {
   const defaultDetails =
     PROJECT_VALUES.find((value) => {
       return value.isDefault;
     }) || PROJECT_VALUES[0];
 
-  const [selectedId, setSelectedId] = useState(defaultDetails.storageKey);
+  const [selectedDetails, setSelectedDetails] = useState(defaultDetails);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedId(e.target.id);
+    const newId = e.target.id;
+    setSelectedDetails(
+      PROJECT_VALUES.find((value) => {
+        return value.storageKey === newId;
+      }) || PROJECT_VALUES[0]
+    );
   };
   const onButtonPress = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    props.onProjectPick(selectedId);
+    props.onProjectPick(selectedDetails);
   };
 
   return (

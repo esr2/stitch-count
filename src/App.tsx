@@ -3,12 +3,13 @@ import "./App.scss";
 import ProjectPicker from "./ProjectPicker";
 import Project from "./Project";
 import { NavbarBrand, Navbar, Container } from "reactstrap";
+import { ProjectDetails } from "./ProjectDetails";
 
 function App() {
-  const [selectedProjectId, setSelectedProjectId] = useState("");
+  const [selectedDetails, setSelectedDetails] = useState<ProjectDetails>();
 
-  function onProjectPick(projectId: string) {
-    setSelectedProjectId(projectId);
+  function onProjectPick(project: ProjectDetails) {
+    setSelectedDetails(project);
   }
 
   return (
@@ -19,7 +20,7 @@ function App() {
       >
         <Container>
           <NavbarBrand href="#" onClick={(e) => e.preventDefault()}>
-            {!selectedProjectId ? "Stitch Count" : selectedProjectId}
+            {!selectedDetails ? "Stitch Count" : selectedDetails.name}
           </NavbarBrand>
         </Container>
       </Navbar>
@@ -39,10 +40,10 @@ function App() {
               <span />
             </div>
             <Container>
-              {!selectedProjectId ? (
+              {!selectedDetails ? (
                 <ProjectPicker onProjectPick={onProjectPick} />
               ) : (
-                <Project projectId={selectedProjectId} />
+                <Project project={selectedDetails} />
               )}
             </Container>
           </section>
