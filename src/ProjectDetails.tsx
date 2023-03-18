@@ -1,7 +1,13 @@
+import BeMineJSON from "./pattern-json/be_mine_cardigan.json";
+import CelticThrowJSON from "./pattern-json/celtic_throw.json";
+import DrachenfelsJSON from "./pattern-json/drachenfels.json";
+import GeometricScarfJSON from "./pattern-json/geometric_scarf.json";
+import HelgolandJSON from "./pattern-json/helgoland.json";
+
 export interface ProjectDetails {
   storageKey: string;
   name: string;
-  patternUrl?: string;
+  patternJson?: any;
   pdfUrl: string;
   pdfStartPage: number;
   pdfRotation: number;
@@ -13,7 +19,8 @@ export const PROJECT_VALUES: ProjectDetails[] = [
   {
     storageKey: "ID-3",
     name: "Be Mine Cardigan",
-    patternUrl: "../pattern-json/be_mine_cardigan.json",
+    // patternUrl: "../pattern-json/be_mine_cardigan.json",
+    patternJson: BeMineJSON,
     pdfUrl: "../pattern-pdfs/Be_Mine_Cardigan-medium_highlighted.pdf",
     pdfStartPage: 3,
     pdfRotation: 0,
@@ -21,7 +28,7 @@ export const PROJECT_VALUES: ProjectDetails[] = [
   {
     storageKey: "ID-1",
     name: "Celtic Throw",
-    patternUrl: "../pattern-json/celtic_throw.json",
+    patternJson: CelticThrowJSON,
     pdfUrl: "../pattern-pdfs/AK-Celtic_Traveller_Throw-v052220.pdf",
     pdfStartPage: 5,
     pdfRotation: -90,
@@ -29,7 +36,7 @@ export const PROJECT_VALUES: ProjectDetails[] = [
   {
     storageKey: "ID-2",
     name: "Drachenfels",
-    patternUrl: "../pattern-json/drachenfels.json",
+    patternJson: DrachenfelsJSON,
     pdfUrl: "../pattern-pdfs/Drachenfels.pdf",
     pdfStartPage: 3,
     pdfRotation: 0,
@@ -37,7 +44,7 @@ export const PROJECT_VALUES: ProjectDetails[] = [
   {
     storageKey: "ID-5",
     name: "Geometric Scarf",
-    patternUrl: "../pattern-json/geometric_scarf.json",
+    patternJson: GeometricScarfJSON,
     pdfUrl: "../pattern-pdfs/Geometric-scarf.pdf",
     pdfStartPage: 0,
     pdfRotation: 0,
@@ -45,7 +52,7 @@ export const PROJECT_VALUES: ProjectDetails[] = [
   {
     storageKey: "ID-4",
     name: "Helgoland",
-    patternUrl: "../pattern-json/helgoland.json",
+    patternJson: HelgolandJSON,
     pdfUrl: "../pattern-pdfs/Helgoland-en.pdf",
     pdfStartPage: 3,
     pdfRotation: 0,

@@ -4,8 +4,7 @@ import { ProjectDetails, PROJECT_VALUES } from "./ProjectDetails";
 import { Card, CardBody, CardHeader, Button } from "reactstrap";
 
 function Project(props: { project: ProjectDetails }) {
-  const { storageKey } = props.project;
-  const counters = [];
+  const { storageKey, patternJson } = props.project;
   const [globalIndex, setGlobalIndex] = useState<number>(() => {
     return parseInt(localStorage.getItem(storageKey) || "1");
   });
@@ -23,6 +22,7 @@ function Project(props: { project: ProjectDetails }) {
 
   return (
     <Card className="shadow">
+      // TODO make this the first counter
       <CardHeader>
         <div className="row align-items-center">
           <div className="col">
@@ -40,6 +40,9 @@ function Project(props: { project: ProjectDetails }) {
           </div>
         </div>
       </CardHeader>
+      <CardBody>
+        <ul className="list-group list-group-flush"></ul>
+      </CardBody>
     </Card>
   );
 }
