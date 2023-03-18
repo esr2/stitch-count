@@ -4,16 +4,15 @@ import { ProjectDetails, PROJECT_VALUES } from "./ProjectDetails";
 import { Card, CardBody, CardHeader, Button } from "reactstrap";
 
 function Project(props: { project: ProjectDetails }) {
-  const name: string = props.project.name;
+  const { storageKey } = props.project;
   const counters = [];
   const [globalIndex, setGlobalIndex] = useState<number>(() => {
-    const storageKey = props.project.storageKey;
     return parseInt(localStorage.getItem(storageKey) || "1");
   });
 
   useEffect(() => {
-    localStorage.setItem(props.project.storageKey, globalIndex.toString());
-  });
+    localStorage.setItem(storageKey, globalIndex.toString());
+  }, [storageKey, globalIndex]);
 
   const increase = () => {
     setGlobalIndex(globalIndex + 1);
