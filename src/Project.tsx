@@ -43,9 +43,11 @@ function Project(props: { project: ProjectDetails }) {
           increase={increase}
         />
       </CardHeader>
-      <CardBody>
-        <ul className="list-group list-group-flush">{counters?.slice(1)}</ul>
-      </CardBody>
+      {counters?.length && counters.length > 1 && (
+        <CardBody>
+          <ul className="list-group list-group-flush">{counters?.slice(1)}</ul>
+        </CardBody>
+      )}
     </Card>
   );
 }
