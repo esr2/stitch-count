@@ -4,26 +4,21 @@ import {
   DEFAULT_FREESTYLE_NUM_ROWS,
   ProjectDetails,
 } from "./ProjectDetails";
-import Counter, { CounterDetails } from "./Counter";
-import { Card, CardBody, CardHeader } from "reactstrap";
+import Counter from "./Counter";
+import { Card, CardHeader } from "reactstrap";
 
 function Project(props: { project: ProjectDetails }) {
   const { storageKey } = props.project;
   const [globalIndex, setGlobalIndex] = useState<number>(() => {
     return parseInt(localStorage.getItem(storageKey) || "1");
   });
-  const [numRepeats, setNumRepeats] = useState<number>(() => {
-    return parseInt(
-      localStorage.getItem(`${storageKey}-numRepeats`) ||
-        DEFAULT_FREESTYLE_NUM_REPEATS
-    );
-  });
-  const [numRows, setNumRows] = useState<number>(() => {
-    return parseInt(
-      localStorage.getItem(`${storageKey}-numRows`) ||
-        DEFAULT_FREESTYLE_NUM_ROWS
-    );
-  });
+  const numRepeats = parseInt(
+    localStorage.getItem(`${storageKey}-numRepeats`) ||
+      DEFAULT_FREESTYLE_NUM_REPEATS
+  );
+  const numRows = parseInt(
+    localStorage.getItem(`${storageKey}-numRows`) || DEFAULT_FREESTYLE_NUM_ROWS
+  );
 
   useEffect(() => {
     localStorage.setItem(storageKey, globalIndex.toString());

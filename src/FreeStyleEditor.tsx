@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import {
   DEFAULT_FREESTYLE_NUM_REPEATS,
   DEFAULT_FREESTYLE_NUM_ROWS,
   ProjectDetails,
 } from "./ProjectDetails";
-import Counter, { CounterDetails } from "./Counter";
 import {
   Button,
   Card,

@@ -3,7 +3,7 @@ import "./App.scss";
 import ProjectPicker from "./ProjectPicker";
 import Project from "./Project";
 import FreeStyleProject from "./FreeStyleProject";
-import { NavbarBrand, Navbar, Container, NavItem, Button } from "reactstrap";
+import { NavbarBrand, Navbar, Container, Button } from "reactstrap";
 import { ProjectDetails } from "./ProjectDetails";
 import FreeStyleEditor from "./FreeStyleEditor";
 
