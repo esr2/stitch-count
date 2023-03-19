@@ -3,7 +3,7 @@ import { Button } from "reactstrap";
 function ButtonRow(props: {
   decrease: () => void;
   increase: () => void;
-  index: number;
+  index: string;
 }) {
   const { decrease, increase, index } = props;
   return (
