@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Alert, Progress } from "reactstrap";
 
 export interface CounterDetails {
@@ -72,7 +72,7 @@ function Counter(props: { details: CounterDetails; globalIndex: number }) {
     );
     if (notesAtIndex.length > 1) {
       return <Alert color="error">"Multiple notes specified"</Alert>;
-    } else if (notesAtIndex.length == 1) {
+    } else if (notesAtIndex.length === 1) {
       return <Alert color="info">{notesAtIndex[0].value}</Alert>;
     }
     return null;

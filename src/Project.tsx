@@ -1,6 +1,5 @@
-import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import { ProjectDetails, PROJECT_VALUES } from "./ProjectDetails";
+import { ProjectDetails } from "./ProjectDetails";
 import Counter, { CounterDetails } from "./Counter";
 import { Card, CardBody, CardHeader, Button } from "reactstrap";
 
