@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ProjectDetails } from "./ProjectDetails";
 import Counter, { CounterDetails } from "./Counter";
-import { Card, CardBody, CardHeader, Button } from "reactstrap";
+import { Card, CardBody, CardHeader } from "reactstrap";
 
 function Project(props: { project: ProjectDetails }) {
   const { storageKey, patternJson } = props.project;
@@ -21,31 +21,30 @@ function Project(props: { project: ProjectDetails }) {
   };
 
   const counters = patternJson?.counters.map((counterJson: CounterDetails) => {
-    return <Counter details={counterJson} globalIndex={globalIndex} />;
+    return (
+      <Counter
+        details={counterJson}
+        globalIndex={globalIndex}
+        includeButtons={false}
+        decrease={decrease}
+        increase={increase}
+      />
+    );
   });
 
   return (
     <Card className="shadow">
-      {/* TODO make this the first counter */}
       <CardHeader>
-        <div className="row align-items-center">
-          <div className="col">
-            <Button block color="primary" size="lg" onClick={() => decrease()}>
-              <i className="fa fa-minus"></i>
-            </Button>
-          </div>{" "}
-          <div className="col">
-            <h1 className="display-1 text-center">{globalIndex}</h1>
-          </div>
-          <div className="col">
-            <Button block color="primary" size="lg" onClick={() => increase()}>
-              <i className="fa fa-plus"></i>
-            </Button>
-          </div>
-        </div>
+        <Counter
+          details={patternJson?.counters[0]}
+          globalIndex={globalIndex}
+          includeButtons={true}
+          decrease={decrease}
+          increase={increase}
+        />
       </CardHeader>
       <CardBody>
-        <ul className="list-group list-group-flush">{counters}</ul>
+        <ul className="list-group list-group-flush">{counters?.slice(1)}</ul>
       </CardBody>
     </Card>
   );

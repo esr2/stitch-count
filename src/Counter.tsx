@@ -1,5 +1,6 @@
 import React from "react";
 import { Alert, Progress } from "reactstrap";
+import ButtonRow from "./ButtonRow";
 
 export interface CounterDetails {
   name: string;
@@ -10,7 +11,13 @@ export interface CounterDetails {
   repeats: { startIndex: number; maxRepeats: number }[];
 }
 
-function Counter(props: { details: CounterDetails; globalIndex: number }) {
+function Counter(props: {
+  details: CounterDetails;
+  globalIndex: number;
+  includeButtons: boolean;
+  decrease: () => void;
+  increase: () => void;
+}) {
   const { name, showRelativeIndex, numRows, repeats, notes } = props.details;
   const globalIndex = props.globalIndex;
 
@@ -79,16 +86,24 @@ function Counter(props: { details: CounterDetails; globalIndex: number }) {
   };
 
   return (
-    <li className="list-group-item">
+    <li key={name} className="list-group-item">
       <>
-        <div className="row align-items-center">
-          {name && <div className="col">{name}</div>}
-          <div className={`col ${name ? "col-4" : ""}`}>
-            <h3 className={`${name ? "text-right" : "text-center"}`}>
-              {index}
-            </h3>
+        {props.includeButtons ? (
+          <ButtonRow
+            decrease={props.decrease}
+            increase={props.increase}
+            index={index}
+          />
+        ) : (
+          <div className="row align-items-center">
+            {name && <div className="col">{name}</div>}
+            <div className={`col ${name ? "col-4" : ""}`}>
+              <h3 className={`${name ? "text-right" : "text-center"}`}>
+                {index}
+              </h3>
+            </div>
           </div>
-        </div>
+        )}
         {maxRepeats > 1 && (
           <Progress max="100" value={perecent}>
             {numRepeats} / {maxRepeats}
