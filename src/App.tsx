@@ -3,23 +3,34 @@ import "./App.scss";
 import ProjectPicker from "./ProjectPicker";
 import Project from "./Project";
 import FreeStyleProject from "./FreeStyleProject";
-import { NavbarBrand, Navbar, Container } from "reactstrap";
+import { NavbarBrand, Navbar, Container, NavItem, Button } from "reactstrap";
 import { ProjectDetails } from "./ProjectDetails";
+import FreeStyleEditor from "./FreeStyleEditor";
 
 function App() {
   const [selectedDetails, setSelectedDetails] = useState<ProjectDetails>();
+  const [inFreeStyleEditMode, setInFreeStyleEditMode] = useState(false);
 
   function onProjectPick(project: ProjectDetails) {
     setSelectedDetails(project);
   }
 
   let projectComponent;
+  let showEditButton = false;
   if (!selectedDetails) {
     projectComponent = <ProjectPicker onProjectPick={onProjectPick} />;
   } else if (!!selectedDetails.patternJson) {
     projectComponent = <Project project={selectedDetails} />;
+  } else if (inFreeStyleEditMode) {
+    projectComponent = (
+      <FreeStyleEditor
+        project={selectedDetails}
+        exitFn={() => setInFreeStyleEditMode(false)}
+      />
+    );
   } else {
     projectComponent = <FreeStyleProject project={selectedDetails} />;
+    showEditButton = true;
   }
 
   return (
@@ -32,6 +43,13 @@ function App() {
           <NavbarBrand href="#" onClick={(e) => e.preventDefault()}>
             {!selectedDetails ? "Stitch Count" : selectedDetails.name}
           </NavbarBrand>
+          {showEditButton && (
+            <Button onClick={() => setInFreeStyleEditMode(true)}>
+              <span className="btn-inner--icon">
+                <i className="fa fa-pencil" aria-hidden="true"></i>
+              </span>
+            </Button>
+          )}
         </Container>
       </Navbar>
       <main>

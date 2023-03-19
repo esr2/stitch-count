@@ -15,6 +15,9 @@ export interface ProjectDetails {
   isDefault?: boolean;
 }
 
+export const DEFAULT_FREESTYLE_NUM_REPEATS = "1";
+export const DEFAULT_FREESTYLE_NUM_ROWS = "500";
+
 // Next ID: 7
 export const PROJECT_VALUES: ProjectDetails[] = [
   {

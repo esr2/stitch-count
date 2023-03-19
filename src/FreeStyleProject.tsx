@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { ProjectDetails } from "./ProjectDetails";
+import {
+  DEFAULT_FREESTYLE_NUM_REPEATS,
+  DEFAULT_FREESTYLE_NUM_ROWS,
+  ProjectDetails,
+} from "./ProjectDetails";
 import Counter, { CounterDetails } from "./Counter";
 import { Card, CardBody, CardHeader } from "reactstrap";
 
@@ -9,10 +13,16 @@ function Project(props: { project: ProjectDetails }) {
     return parseInt(localStorage.getItem(storageKey) || "1");
   });
   const [numRepeats, setNumRepeats] = useState<number>(() => {
-    return parseInt(localStorage.getItem(`${storageKey}-numRepeats`) || "1");
+    return parseInt(
+      localStorage.getItem(`${storageKey}-numRepeats`) ||
+        DEFAULT_FREESTYLE_NUM_REPEATS
+    );
   });
   const [numRows, setNumRows] = useState<number>(() => {
-    return parseInt(localStorage.getItem(`${storageKey}-numRows`) || "500");
+    return parseInt(
+      localStorage.getItem(`${storageKey}-numRows`) ||
+        DEFAULT_FREESTYLE_NUM_ROWS
+    );
   });
 
   useEffect(() => {
