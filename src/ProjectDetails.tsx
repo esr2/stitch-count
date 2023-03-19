@@ -23,7 +23,6 @@ export const PROJECT_VALUES: ProjectDetails[] = [
   {
     storageKey: "ID-3",
     name: "Be Mine Cardigan",
-    // patternUrl: "../pattern-json/be_mine_cardigan.json",
     patternJson: BeMineJSON,
     pdfUrl: "../pattern-pdfs/Be_Mine_Cardigan-medium_highlighted.pdf",
     pdfStartPage: 3,
