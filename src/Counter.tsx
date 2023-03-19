@@ -56,7 +56,13 @@ function Counter(props: {
   // Calculate state to render
   const repeat = getRepeat(globalIndex);
   if (!repeat) {
-    return null;
+    return props.includeButtons ? (
+      <ButtonRow
+        decrease={props.decrease}
+        increase={props.increase}
+        index={globalIndex.toString()}
+      />
+    ) : null;
   }
 
   let index: number, numRepeats: number;
@@ -85,32 +91,38 @@ function Counter(props: {
     return null;
   };
 
+  const progressAndNotes = (
+    <>
+      {maxRepeats > 1 && (
+        <Progress max="100" value={perecent}>
+          {numRepeats} / {maxRepeats}
+        </Progress>
+      )}
+      {getNoteAtIndex()}
+    </>
+  );
+
+  if (props.includeButtons) {
+    return (
+      <>
+        <ButtonRow
+          decrease={props.decrease}
+          increase={props.increase}
+          index={index.toString()}
+        />
+        {progressAndNotes}
+      </>
+    );
+  }
   return (
     <li key={name} className="list-group-item">
-      <>
-        {props.includeButtons ? (
-          <ButtonRow
-            decrease={props.decrease}
-            increase={props.increase}
-            index={index}
-          />
-        ) : (
-          <div className="row align-items-center">
-            {name && <div className="col">{name}</div>}
-            <div className={`col ${name ? "col-4" : ""}`}>
-              <h3 className={`${name ? "text-right" : "text-center"}`}>
-                {index}
-              </h3>
-            </div>
-          </div>
-        )}
-        {maxRepeats > 1 && (
-          <Progress max="100" value={perecent}>
-            {numRepeats} / {maxRepeats}
-          </Progress>
-        )}
-        {getNoteAtIndex()}
-      </>
+      <div className="row align-items-center">
+        {name && <div className="col">{name}</div>}
+        <div className={`col ${name ? "col-4" : ""}`}>
+          <h3 className={`${name ? "text-right" : "text-center"}`}>{index}</h3>
+        </div>
+      </div>
+      {progressAndNotes}
     </li>
   );
 }
