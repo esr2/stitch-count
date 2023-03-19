@@ -57,11 +57,14 @@ function Counter(props: {
   const repeat = getRepeat(globalIndex);
   if (!repeat) {
     return props.includeButtons ? (
-      <ButtonRow
-        decrease={props.decrease}
-        increase={props.increase}
-        index={globalIndex.toString()}
-      />
+      <>
+        <ButtonRow
+          decrease={props.decrease}
+          increase={props.increase}
+          index={globalIndex.toString()}
+        />
+        <Alert color="danger">Counter Overflow</Alert>
+      </>
     ) : null;
   }
 
@@ -84,7 +87,7 @@ function Counter(props: {
       }
     );
     if (notesAtIndex.length > 1) {
-      return <Alert color="error">"Multiple notes specified"</Alert>;
+      return <Alert color="danger">"Multiple notes specified"</Alert>;
     } else if (notesAtIndex.length === 1) {
       return <Alert color="info">{notesAtIndex[0].value}</Alert>;
     }

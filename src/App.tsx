@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.scss";
 import ProjectPicker from "./ProjectPicker";
 import Project from "./Project";
+import FreeStyleProject from "./FreeStyleProject";
 import { NavbarBrand, Navbar, Container } from "reactstrap";
 import { ProjectDetails } from "./ProjectDetails";
 
@@ -10,6 +11,15 @@ function App() {
 
   function onProjectPick(project: ProjectDetails) {
     setSelectedDetails(project);
+  }
+
+  let projectComponent;
+  if (!selectedDetails) {
+    projectComponent = <ProjectPicker onProjectPick={onProjectPick} />;
+  } else if (!!selectedDetails.patternJson) {
+    projectComponent = <Project project={selectedDetails} />;
+  } else {
+    projectComponent = <FreeStyleProject project={selectedDetails} />;
   }
 
   return (
@@ -39,13 +49,7 @@ function App() {
               <span />
               <span />
             </div>
-            <Container>
-              {!selectedDetails ? (
-                <ProjectPicker onProjectPick={onProjectPick} />
-              ) : (
-                <Project project={selectedDetails} />
-              )}
-            </Container>
+            <Container>{projectComponent}</Container>
           </section>
           <section className="section section-lg bg-gradient-blue">
             <Container className="pt-lg pb-300"></Container>
