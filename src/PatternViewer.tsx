@@ -12,7 +12,13 @@ export function PatternViewer(props: { details: ProjectDetails }) {
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.worker.min.js";
 
   const [pdfRef, setPdfRef] = useState<any>();
-  const [currentPage, setCurrentPage] = useState<any>(1);
+  const [currentPage, setCurrentPage] = useState<number>(() => {
+    const storedPageNum = localStorage.getItem(
+      `${details.storageKey}-currentPage`
+    );
+
+    return storedPageNum ? parseInt(storedPageNum) : details.pdfStartPage;
+  });
 
   const renderPage = useCallback(
     (pageNum: number, pdf = pdfRef) => {
@@ -39,6 +45,10 @@ export function PatternViewer(props: { details: ProjectDetails }) {
 
   useEffect(() => {
     renderPage(currentPage, pdfRef);
+    localStorage.setItem(
+      `${details.storageKey}-currentPage`,
+      currentPage.toString()
+    );
   }, [pdfRef, currentPage, renderPage]);
 
   useEffect(() => {
