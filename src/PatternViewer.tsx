@@ -10,7 +10,6 @@ export function PatternViewer(props: { details: ProjectDetails }) {
   // The workerSrc property shall be specified.
   pdfjsLib.GlobalWorkerOptions.workerSrc =
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.worker.min.js";
-  var pdfjsViewer = window["pdfjs-dist/web/pdf_viewer"];
 
   const [pdfRef, setPdfRef] = useState<any>();
   const [currentPage, setCurrentPage] = useState<any>(1);
