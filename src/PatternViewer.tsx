@@ -85,13 +85,13 @@ export function PatternViewer(props: { details: ProjectDetails }) {
 
   const zoomIn = () => {
     if (pageScale < 5) {
-      setPageScale(pageScale + 0.2);
+      setPageScale(pageScale + 0.5);
     }
   };
 
   const zoomOut = () => {
     if (pageScale > 0.3) {
-      setPageScale(pageScale - 0.2);
+      setPageScale(pageScale - 0.5);
     }
   };
 
@@ -133,16 +133,27 @@ export function PatternViewer(props: { details: ProjectDetails }) {
         <div className="col-6"></div>
         <div className="col-3 ">
           <div className="justify-content-center">
-            <Button onClick={() => zoomOut()}>
-              <span className="btn-inner--icon">
-                <i className="fa fa-minus" aria-hidden="true"></i>
-              </span>
-            </Button>
-            <Button onClick={() => zoomIn()}>
-              <span className="btn-inner--icon">
-                <i className="fa fa-plus" aria-hidden="true"></i>
-              </span>
-            </Button>
+            <Pagination
+              className="pagination pagination-lg justify-content-center"
+              listClassName="justify-content-center  pagination-lg"
+            >
+              <PaginationItem>
+                <PaginationLink
+                  href="#pablo"
+                  onClick={() => zoomOut()}
+                  tabIndex={-1}
+                >
+                  <i className="fa fa-minus" />
+                  <span className="sr-only">Zoom OUt</span>
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#pablo" onClick={() => zoomIn()}>
+                  <i className="fa fa-plus" />
+                  <span className="sr-only">Zoom In</span>
+                </PaginationLink>
+              </PaginationItem>
+            </Pagination>
           </div>
         </div>
       </div>
