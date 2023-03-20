@@ -11,7 +11,6 @@ export interface ProjectDetails {
   patternJson?: { name: string; counters: CounterDetails[] };
   pdfUrl: string;
   pdfStartPage: number;
-  pdfRotation: number;
   isDefault?: boolean;
 }
 
@@ -26,7 +25,6 @@ export const PROJECT_VALUES: ProjectDetails[] = [
     patternJson: BeMineJSON,
     pdfUrl: "./pattern-pdfs/Be_Mine_Cardigan-medium_highlighted.pdf",
     pdfStartPage: 3,
-    pdfRotation: 0,
   },
   {
     storageKey: "ID-1",
@@ -34,7 +32,6 @@ export const PROJECT_VALUES: ProjectDetails[] = [
     patternJson: CelticThrowJSON,
     pdfUrl: "./pattern-pdfs/AK-Celtic_Traveller_Throw-v052220.pdf",
     pdfStartPage: 5,
-    pdfRotation: -90,
   },
   {
     storageKey: "ID-2",
@@ -42,7 +39,6 @@ export const PROJECT_VALUES: ProjectDetails[] = [
     patternJson: DrachenfelsJSON,
     pdfUrl: "./pattern-pdfs/Drachenfels.pdf",
     pdfStartPage: 3,
-    pdfRotation: 0,
   },
   {
     storageKey: "ID-5",
@@ -50,7 +46,6 @@ export const PROJECT_VALUES: ProjectDetails[] = [
     patternJson: GeometricScarfJSON,
     pdfUrl: "./pattern-pdfs/Geometric-scarf.pdf",
     pdfStartPage: 0,
-    pdfRotation: 0,
   },
   {
     storageKey: "ID-4",
@@ -58,14 +53,12 @@ export const PROJECT_VALUES: ProjectDetails[] = [
     patternJson: HelgolandJSON,
     pdfUrl: "./pattern-pdfs/Helgoland-en.pdf",
     pdfStartPage: 3,
-    pdfRotation: 0,
   },
   {
     storageKey: "ID-6",
     name: "Ingrid Sweater",
     pdfUrl: "./pattern-pdfs/Ingrid_Sweater-small_highlighted.pdf",
     pdfStartPage: 3,
-    pdfRotation: 0,
     isDefault: true,
   },
 ];
