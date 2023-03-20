@@ -98,7 +98,7 @@ export function PatternViewer(props: { details: ProjectDetails }) {
   return (
     <Card>
       <div className="row align-items-center ">
-        <div className="col col-3">
+        <div className="col">
           <Pagination
             className="pagination pagination-lg justify-content-center"
             listClassName="justify-content-center  pagination-lg"
@@ -130,8 +130,7 @@ export function PatternViewer(props: { details: ProjectDetails }) {
             </PaginationItem>
           </Pagination>
         </div>
-        <div className="col-6"></div>
-        <div className="col-3 ">
+        <div className="col">
           <div className="justify-content-center">
             <Pagination
               className="pagination pagination-lg justify-content-center"
