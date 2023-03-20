@@ -1,11 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import {
-  Button,
-  Card,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-} from "reactstrap";
+import { Card, Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import { ProjectDetails } from "./ProjectDetails";
 import "./PatternViewer.scss";
 
@@ -19,6 +13,7 @@ export function PatternViewer(props: { details: ProjectDetails }) {
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.worker.min.js";
 
   const [pdfRef, setPdfRef] = useState<any>();
+  const [pageRendering, setPageRendering] = useState(false);
   const [pageScale, setPageScale] = useState(1.5);
   const [currentPage, setCurrentPage] = useState<number>(() => {
     const storedPageNum = localStorage.getItem(
@@ -45,18 +40,27 @@ export function PatternViewer(props: { details: ProjectDetails }) {
             canvasContext: canvas.getContext("2d"),
             viewport: viewport,
           };
-          page.render(renderContext);
+          const pageRenderTask = page.render(renderContext);
+          pageRenderTask.promise.then(
+            () => {
+              setPageRendering(false);
+              localStorage.setItem(
+                `${details.storageKey}-currentPage`,
+                pageNum.toString()
+              );
+            },
+            () => {
+              setPageRendering(false);
+            }
+          );
         });
     },
-    [pdfRef, pageScale]
+    [pdfRef, pageScale, details.storageKey]
   );
 
   useEffect(() => {
+    setPageRendering(true);
     renderPage(currentPage, pdfRef);
-    localStorage.setItem(
-      `${details.storageKey}-currentPage`,
-      currentPage.toString()
-    );
   }, [pdfRef, currentPage, renderPage]);
 
   useEffect(() => {
@@ -69,15 +73,21 @@ export function PatternViewer(props: { details: ProjectDetails }) {
         window.console.error(reason);
       }
     );
-  }, [props.details.pdfUrl]);
+  }, [details.pdfUrl, pdfjsLib]);
 
   const nextPage = () => {
+    if (pageRendering) {
+      return;
+    }
     if (pdfRef && currentPage < pdfRef.numPages) {
       setCurrentPage(currentPage + 1);
     }
   };
 
   const prevPage = () => {
+    if (pageRendering) {
+      return;
+    }
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
