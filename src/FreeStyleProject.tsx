@@ -6,6 +6,7 @@ import {
 } from "./ProjectDetails";
 import Counter from "./Counter";
 import { Card, CardHeader } from "reactstrap";
+import PatternViewer from "./PatternViewer";
 
 function Project(props: { project: ProjectDetails }) {
   const { storageKey } = props.project;
@@ -46,17 +47,20 @@ function Project(props: { project: ProjectDetails }) {
   };
 
   return (
-    <Card className="shadow">
-      <CardHeader>
-        <Counter
-          details={details}
-          globalIndex={globalIndex}
-          includeButtons={true}
-          decrease={decrease}
-          increase={increase}
-        />
-      </CardHeader>
-    </Card>
+    <>
+      <Card className="shadow">
+        <CardHeader>
+          <Counter
+            details={details}
+            globalIndex={globalIndex}
+            includeButtons={true}
+            decrease={decrease}
+            increase={increase}
+          />
+        </CardHeader>
+      </Card>
+      <PatternViewer details={props.project} />
+    </>
   );
 }
 
