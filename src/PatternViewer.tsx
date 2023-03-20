@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Card, Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import { ProjectDetails } from "./ProjectDetails";
+import "./PatternViewer.scss";
 
 export function PatternViewer(props: { details: ProjectDetails }) {
   const details = props.details;
@@ -108,6 +109,7 @@ export function PatternViewer(props: { details: ProjectDetails }) {
         </PaginationItem>
       </Pagination>
       <canvas ref={canvasRef}></canvas>
+      <div id="highlight" />
     </Card>
   );
 }
