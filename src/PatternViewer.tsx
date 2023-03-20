@@ -1,5 +1,11 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import { Card, Pagination, PaginationItem, PaginationLink } from "reactstrap";
+import {
+  Button,
+  Card,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+} from "reactstrap";
 import { ProjectDetails } from "./ProjectDetails";
 import "./PatternViewer.scss";
 
@@ -13,6 +19,7 @@ export function PatternViewer(props: { details: ProjectDetails }) {
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.worker.min.js";
 
   const [pdfRef, setPdfRef] = useState<any>();
+  const [pageScale, setPageScale] = useState(1.5);
   const [currentPage, setCurrentPage] = useState<number>(() => {
     const storedPageNum = localStorage.getItem(
       `${details.storageKey}-currentPage`
@@ -25,7 +32,7 @@ export function PatternViewer(props: { details: ProjectDetails }) {
     (pageNum: number, pdf = pdfRef) => {
       pdf &&
         pdf.getPage(pageNum).then(function (page: any) {
-          const viewport = page.getViewport({ scale: 1.5 });
+          const viewport = page.getViewport({ scale: pageScale });
           const canvas = canvasRef.current;
           if (!canvas) {
             window.console.log("No Canvas");
@@ -41,7 +48,7 @@ export function PatternViewer(props: { details: ProjectDetails }) {
           page.render(renderContext);
         });
     },
-    [pdfRef]
+    [pdfRef, pageScale]
   );
 
   useEffect(() => {
@@ -76,38 +83,69 @@ export function PatternViewer(props: { details: ProjectDetails }) {
     }
   };
 
+  const zoomIn = () => {
+    if (pageScale < 5) {
+      setPageScale(pageScale + 0.2);
+    }
+  };
+
+  const zoomOut = () => {
+    if (pageScale > 0.3) {
+      setPageScale(pageScale - 0.2);
+    }
+  };
+
   return (
     <Card>
-      <Pagination
-        className="pagination pagination-lg justify-content-center"
-        listClassName="justify-content-center  pagination-lg"
-      >
-        <PaginationItem>
-          <PaginationLink
-            href="#pablo"
-            onClick={(e) => {
-              e.preventDefault();
-              prevPage();
-            }}
-            tabIndex={-1}
+      <div className="row align-items-center ">
+        <div className="col col-3">
+          <Pagination
+            className="pagination pagination-lg justify-content-center"
+            listClassName="justify-content-center  pagination-lg"
           >
-            <i className="fa fa-angle-left" />
-            <span className="sr-only">Previous</span>
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            href="#pablo"
-            onClick={(e) => {
-              e.preventDefault();
-              nextPage();
-            }}
-          >
-            <i className="fa fa-angle-right" />
-            <span className="sr-only">Next</span>
-          </PaginationLink>
-        </PaginationItem>
-      </Pagination>
+            <PaginationItem>
+              <PaginationLink
+                href="#pablo"
+                onClick={(e) => {
+                  e.preventDefault();
+                  prevPage();
+                }}
+                tabIndex={-1}
+              >
+                <i className="fa fa-angle-left" />
+                <span className="sr-only">Previous</span>
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink
+                href="#pablo"
+                onClick={(e) => {
+                  e.preventDefault();
+                  nextPage();
+                }}
+              >
+                <i className="fa fa-angle-right" />
+                <span className="sr-only">Next</span>
+              </PaginationLink>
+            </PaginationItem>
+          </Pagination>
+        </div>
+        <div className="col-6"></div>
+        <div className="col-3 ">
+          <div className="justify-content-center">
+            <Button onClick={() => zoomOut()}>
+              <span className="btn-inner--icon">
+                <i className="fa fa-minus" aria-hidden="true"></i>
+              </span>
+            </Button>
+            <Button onClick={() => zoomIn()}>
+              <span className="btn-inner--icon">
+                <i className="fa fa-plus" aria-hidden="true"></i>
+              </span>
+            </Button>
+          </div>
+        </div>
+      </div>
       <canvas ref={canvasRef}></canvas>
       <div id="highlight" />
     </Card>
