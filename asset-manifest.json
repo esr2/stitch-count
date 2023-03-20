@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/stitch-count/static/css/main.189f890c.css",
+    "main.js": "/stitch-count/static/js/main.31d65754.js",
+    "static/js/787.97ee014b.chunk.js": "/stitch-count/static/js/787.97ee014b.chunk.js",
+    "static/media/fontawesome-webfont.svg?v=4.7.0": "/stitch-count/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/fontawesome-webfont.eot": "/stitch-count/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
+    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/stitch-count/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+    "static/media/nucleo-icons.svg": "/stitch-count/static/media/nucleo-icons.01ebecaf50461162d4bc.svg",
+    "static/media/fontawesome-webfont.woff?v=4.7.0": "/stitch-count/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
+    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/stitch-count/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+    "static/media/nucleo-icons.eot": "/stitch-count/static/media/nucleo-icons.19abb5402a664606b14c.eot",
+    "static/media/nucleo-icons.ttf": "/stitch-count/static/media/nucleo-icons.d6a66724e7a7bf1bba65.ttf",
+    "static/media/nucleo-icons.woff": "/stitch-count/static/media/nucleo-icons.c82c9b7c40130b7116d3.woff",
+    "static/media/nucleo-icons.woff2": "/stitch-count/static/media/nucleo-icons.cba267483aa6a7cb6e33.woff2",
+    "index.html": "/stitch-count/index.html",
+    "main.189f890c.css.map": "/stitch-count/static/css/main.189f890c.css.map",
+    "main.31d65754.js.map": "/stitch-count/static/js/main.31d65754.js.map",
+    "787.97ee014b.chunk.js.map": "/stitch-count/static/js/787.97ee014b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.189f890c.css",
+    "static/js/main.31d65754.js"
+  ]
+}
