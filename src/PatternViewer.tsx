@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
+import { Card, Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import { ProjectDetails } from "./ProjectDetails";
 
 export function PatternViewer(props: { details: ProjectDetails }) {
@@ -53,12 +54,53 @@ export function PatternViewer(props: { details: ProjectDetails }) {
     );
   }, [props.details.pdfUrl]);
 
-  const nextPage = () =>
-    pdfRef && currentPage < pdfRef.numPages && setCurrentPage(currentPage + 1);
+  const nextPage = () => {
+    if (pdfRef && currentPage < pdfRef.numPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
-  const prevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
-  return <canvas ref={canvasRef}></canvas>;
+  return (
+    <Card>
+      <Pagination
+        className="pagination pagination-lg justify-content-center"
+        listClassName="justify-content-center  pagination-lg"
+      >
+        <PaginationItem>
+          <PaginationLink
+            href="#pablo"
+            onClick={(e) => {
+              e.preventDefault();
+              prevPage();
+            }}
+            tabIndex={-1}
+          >
+            <i className="fa fa-angle-left" />
+            <span className="sr-only">Previous</span>
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink
+            href="#pablo"
+            onClick={(e) => {
+              e.preventDefault();
+              nextPage();
+            }}
+          >
+            <i className="fa fa-angle-right" />
+            <span className="sr-only">Next</span>
+          </PaginationLink>
+        </PaginationItem>
+      </Pagination>
+      <canvas ref={canvasRef}></canvas>
+    </Card>
+  );
 }
 
 export default PatternViewer;
