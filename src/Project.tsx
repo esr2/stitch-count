@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ProjectDetails } from "./ProjectDetails";
 import Counter, { CounterDetails } from "./Counter";
 import { Card, CardBody, CardHeader } from "reactstrap";
+import PatternViewer from "./PatternViewer";
 
 function Project(props: { project: ProjectDetails }) {
   const { storageKey, patternJson } = props.project;
@@ -33,22 +34,27 @@ function Project(props: { project: ProjectDetails }) {
   });
 
   return (
-    <Card className="shadow">
-      <CardHeader>
-        <Counter
-          details={patternJson?.counters[0]}
-          globalIndex={globalIndex}
-          includeButtons={true}
-          decrease={decrease}
-          increase={increase}
-        />
-      </CardHeader>
-      {counters?.length && counters.length > 1 && (
-        <CardBody>
-          <ul className="list-group list-group-flush">{counters?.slice(1)}</ul>
-        </CardBody>
-      )}
-    </Card>
+    <>
+      <Card className="shadow">
+        <CardHeader>
+          <Counter
+            details={patternJson?.counters[0]}
+            globalIndex={globalIndex}
+            includeButtons={true}
+            decrease={decrease}
+            increase={increase}
+          />
+        </CardHeader>
+        {counters?.length && counters.length > 1 && (
+          <CardBody>
+            <ul className="list-group list-group-flush">
+              {counters?.slice(1)}
+            </ul>
+          </CardBody>
+        )}
+      </Card>
+      <PatternViewer details={props.project} />
+    </>
   );
 }
 
