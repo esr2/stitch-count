@@ -94,7 +94,7 @@ export function PatternViewer(props: { details: ProjectDetails }) {
   };
 
   const zoomIn = () => {
-    if (pageScale < 5) {
+    if (pageScale < 10) {
       setPageScale(pageScale + 0.5);
     }
   };
