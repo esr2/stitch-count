@@ -1,19 +1,18 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import { ProjectDetails } from "./ProjectDetails";
 import "./PatternViewer.scss";
+import { Document, Page, pdfjs } from "react-pdf";
+import "react-pdf/dist/esm/Page/TextLayer.css";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
 export function PatternViewer(props: { details: ProjectDetails }) {
   const details = props.details;
 
-  const canvasRef = useRef<any>();
-  var pdfjsLib = window["pdfjs-dist/build/pdf"];
-  // The workerSrc property shall be specified.
-  pdfjsLib.GlobalWorkerOptions.workerSrc =
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.worker.min.js";
+  pdfjs.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
 
-  const [pdfRef, setPdfRef] = useState<any>();
-  const [pageRendering, setPageRendering] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
   const [pageScale, setPageScale] = useState(1.5);
   const [currentPage, setCurrentPage] = useState<number>(() => {
     const storedPageNum = localStorage.getItem(
@@ -23,71 +22,29 @@ export function PatternViewer(props: { details: ProjectDetails }) {
     return storedPageNum ? parseInt(storedPageNum) : details.pdfStartPage;
   });
 
-  const renderPage = useCallback(
-    (pageNum: number, pdf = pdfRef) => {
-      pdf &&
-        pdf.getPage(pageNum).then(function (page: any) {
-          const viewport = page.getViewport({ scale: pageScale });
-          const canvas = canvasRef.current;
-          if (!canvas) {
-            window.console.log("No Canvas");
-            return;
-          }
-          canvas.height = viewport.height;
-          canvas.width = viewport.width;
-
-          const renderContext = {
-            canvasContext: canvas.getContext("2d"),
-            viewport: viewport,
-          };
-          const pageRenderTask = page.render(renderContext);
-          pageRenderTask.promise.then(
-            () => {
-              setPageRendering(false);
-              localStorage.setItem(
-                `${details.storageKey}-currentPage`,
-                pageNum.toString()
-              );
-            },
-            () => {
-              setPageRendering(false);
-            }
-          );
-        });
-    },
-    [pdfRef, pageScale, details.storageKey]
-  );
-
   useEffect(() => {
-    setPageRendering(true);
-    renderPage(currentPage, pdfRef);
-  }, [pdfRef, currentPage, renderPage]);
-
-  useEffect(() => {
-    const loadingTask = pdfjsLib.getDocument(details.pdfUrl);
-    loadingTask.promise.then(
-      (loadedPdf: any) => {
-        setPdfRef(loadedPdf);
-      },
-      (reason: any) => {
-        window.console.error(reason);
-      }
+    localStorage.setItem(
+      `${details.storageKey}-currentPage`,
+      currentPage.toString()
     );
-  }, [details.pdfUrl, pdfjsLib]);
+  }, [currentPage]);
+
+  const onDocumentLoadSuccess = (props: { numPages: number }) => {
+    setTotalPages(props.numPages);
+  };
+
+  const onDocumentLoadFailure = (error: any) => {
+    window.console.log("failed document load");
+    window.console.log(error);
+  };
 
   const nextPage = () => {
-    if (pageRendering) {
-      return;
-    }
-    if (pdfRef && currentPage < pdfRef.numPages) {
+    if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
   };
 
   const prevPage = () => {
-    if (pageRendering) {
-      return;
-    }
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
@@ -166,7 +123,14 @@ export function PatternViewer(props: { details: ProjectDetails }) {
           </div>
         </div>
       </div>
-      <canvas ref={canvasRef}></canvas>
+      {/* <canvas ref={canvasRef}></canvas> */}
+      <Document
+        file={details.pdfUrl}
+        onLoadSuccess={onDocumentLoadSuccess}
+        onLoadError={onDocumentLoadFailure}
+      >
+        <Page pageNumber={currentPage} scale={pageScale} />
+      </Document>
       <div id="highlight" />
     </Card>
   );
