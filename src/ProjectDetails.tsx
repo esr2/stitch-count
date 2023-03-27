@@ -17,7 +17,7 @@ export interface ProjectDetails {
 export const DEFAULT_FREESTYLE_NUM_REPEATS = "1";
 export const DEFAULT_FREESTYLE_NUM_ROWS = "500";
 
-// Next ID: 7
+// Next ID: 8
 export const PROJECT_VALUES: ProjectDetails[] = [
   {
     storageKey: "ID-3",
@@ -60,5 +60,12 @@ export const PROJECT_VALUES: ProjectDetails[] = [
     pdfUrl: "./pattern-pdfs/Ingrid_Sweater-small_highlighted.pdf",
     pdfStartPage: 3,
     isDefault: true,
+  },
+  {
+    storageKey: "ID-7",
+    name: "Three Pines Mitts",
+    pdfUrl: "./pattern-pdfs/Three_Pines_v5.pdf",
+    pdfStartPage: 2,
+    isDefault: false,
   },
 ];
