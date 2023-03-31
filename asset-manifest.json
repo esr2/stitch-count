@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/stitch-count/static/css/main.72830159.css",
+    "main.css": "/stitch-count/static/css/main.e260dcde.css",
     "main.js": "/stitch-count/static/js/main.9b526c54.js",
     "static/js/787.97ee014b.chunk.js": "/stitch-count/static/js/787.97ee014b.chunk.js",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/stitch-count/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
@@ -14,12 +14,12 @@
     "static/media/nucleo-icons.woff": "/stitch-count/static/media/nucleo-icons.c82c9b7c40130b7116d3.woff",
     "static/media/nucleo-icons.woff2": "/stitch-count/static/media/nucleo-icons.cba267483aa6a7cb6e33.woff2",
     "index.html": "/stitch-count/index.html",
-    "main.72830159.css.map": "/stitch-count/static/css/main.72830159.css.map",
+    "main.e260dcde.css.map": "/stitch-count/static/css/main.e260dcde.css.map",
     "main.9b526c54.js.map": "/stitch-count/static/js/main.9b526c54.js.map",
     "787.97ee014b.chunk.js.map": "/stitch-count/static/js/787.97ee014b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.72830159.css",
+    "static/css/main.e260dcde.css",
     "static/js/main.9b526c54.js"
   ]
 }
