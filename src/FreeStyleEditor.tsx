@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import {
   DEFAULT_FREESTYLE_NUM_REPEATS,
   DEFAULT_FREESTYLE_NUM_ROWS,
+  DEFAULT_FREESTYLE_OFFSET,
   ProjectDetails,
 } from "./ProjectDetails";
 import {
@@ -31,21 +32,28 @@ function FreeStyleEditor(props: {
         DEFAULT_FREESTYLE_NUM_ROWS
     )
   );
+  const offsetRef = useRef<number>(
+    parseInt(
+      localStorage.getItem(`${storageKey}-offset`) || DEFAULT_FREESTYLE_OFFSET
+    )
+  );
 
   function reset(): void {
     writeAndExit(
       parseInt(DEFAULT_FREESTYLE_NUM_REPEATS),
-      parseInt(DEFAULT_FREESTYLE_NUM_ROWS)
+      parseInt(DEFAULT_FREESTYLE_NUM_ROWS),
+      parseInt(DEFAULT_FREESTYLE_OFFSET)
     );
   }
 
   function select(): void {
-    writeAndExit(numRepeatsRef.current, numRowsRef.current);
+    writeAndExit(numRepeatsRef.current, numRowsRef.current, offsetRef.current);
   }
 
-  function writeAndExit(repeats: number, rows: number): void {
+  function writeAndExit(repeats: number, rows: number, offset: number): void {
     localStorage.setItem(`${storageKey}-numRepeats`, repeats.toString());
     localStorage.setItem(`${storageKey}-numRows`, rows.toString());
+    localStorage.setItem(`${storageKey}-offset`, offset.toString());
     props.exitFn();
   }
 
@@ -72,6 +80,17 @@ function FreeStyleEditor(props: {
               defaultValue={numRepeatsRef.current}
               onChange={(e) => {
                 numRepeatsRef.current = parseInt(e.target.value);
+              }}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="offset">Repeat starts on Row</Label>
+            <Input
+              id="offset"
+              type="number"
+              defaultValue={offsetRef.current}
+              onChange={(e) => {
+                offsetRef.current = parseInt(e.target.value);
               }}
             />
           </FormGroup>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   DEFAULT_FREESTYLE_NUM_REPEATS,
   DEFAULT_FREESTYLE_NUM_ROWS,
+  DEFAULT_FREESTYLE_OFFSET,
   ProjectDetails,
 } from "./ProjectDetails";
 import Counter from "./Counter";
@@ -20,6 +21,9 @@ function Project(props: { project: ProjectDetails }) {
   const numRows = parseInt(
     localStorage.getItem(`${storageKey}-numRows`) || DEFAULT_FREESTYLE_NUM_ROWS
   );
+  const offset = parseInt(
+    localStorage.getItem(`${storageKey}-offset`) || DEFAULT_FREESTYLE_OFFSET
+  );
 
   useEffect(() => {
     localStorage.setItem(storageKey, globalIndex.toString());
@@ -36,11 +40,11 @@ function Project(props: { project: ProjectDetails }) {
     name: "",
     notes: [],
     numRows,
-    showRelativeIndex: true,
+    showRelativeIndex: offset === 1,
     showRepeats: numRepeats !== 1,
     repeats: [
       {
-        startIndex: 1,
+        startIndex: offset,
         maxRepeats: numRepeats,
       },
     ],
