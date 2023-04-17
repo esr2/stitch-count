@@ -64,9 +64,9 @@ export const PROJECT_VALUES: ProjectDetails[] = [
   },
   {
     storageKey: "ID-7",
-    name: "Three Pines Mitts",
-    pdfUrl: "./pattern-pdfs/Three_Pines_v5.pdf",
-    pdfStartPage: 2,
+    name: "Ginevra Mitts",
+    pdfUrl: "./pattern-pdfs/Ginevra_Mitts_worsted.pdf",
+    pdfStartPage: 4,
     isDefault: false,
   },
 ];
