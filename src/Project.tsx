@@ -25,12 +25,20 @@ function Project(props: { project: ProjectDetails }) {
   const counterDetails = !!patternJson
     ? patternJson.counters
     : getRepeatInfo(storageKey).map(
-        (info: { numRows: number; numRepeats: number; offset: number }) => {
+        (
+          info: { numRows: number; numRepeats: number; offset: number },
+          index: number
+        ) => {
+          const notes =
+            index === 0
+              ? []
+              : [{ index: info.numRows, value: "Decrease at end of round" }];
+
           return {
             name: "",
-            notes: [],
+            notes,
             numRows: info.numRows,
-            showRelativeIndex: info.offset === 1,
+            showRelativeIndex: info.offset !== 1,
             showRepeats: info.numRepeats !== 1,
             repeats: [
               {
