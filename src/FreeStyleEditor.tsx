@@ -97,17 +97,13 @@ function FreeStyleEditor(props: {
 
   return (
     <>
-      <div className="row justify-content-end">
-        <div className="col-1">
-          <Button color="info" onClick={() => removeRepeat()}>
-            <i className="fa fa-minus"></i>
-          </Button>
-        </div>
-        <div className="col-1">
-          <Button color="info" onClick={() => addRepeat()}>
-            <i className="fa fa-plus"></i>
-          </Button>
-        </div>
+      <div className="d-flex justify-content-end">
+        <Button color="info" onClick={() => removeRepeat()}>
+          <i className="fa fa-minus"></i>
+        </Button>
+        <Button color="info" onClick={() => addRepeat()}>
+          <i className="fa fa-plus"></i>
+        </Button>
       </div>
 
       {formDetails}
