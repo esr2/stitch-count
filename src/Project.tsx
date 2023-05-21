@@ -3,6 +3,7 @@ import { ProjectDetails } from "./ProjectDetails";
 import Counter, { CounterDetails } from "./Counter";
 import { Card, CardBody, CardHeader } from "reactstrap";
 import PatternViewer from "./PatternViewer";
+import { getRepeatInfo } from "./storage";
 
 function Project(props: { project: ProjectDetails }) {
   const { storageKey, patternJson } = props.project;
@@ -21,10 +22,30 @@ function Project(props: { project: ProjectDetails }) {
     setGlobalIndex(globalIndex - 1);
   };
 
-  const counters = patternJson?.counters.map((counterJson: CounterDetails) => {
+  const counterDetails = !!patternJson
+    ? patternJson.counters
+    : getRepeatInfo(storageKey).map(
+        (info: { numRows: number; numRepeats: number; offset: number }) => {
+          return {
+            name: "",
+            notes: [],
+            numRows: info.numRows,
+            showRelativeIndex: info.offset === 1,
+            showRepeats: info.numRepeats !== 1,
+            repeats: [
+              {
+                startIndex: info.offset,
+                maxRepeats: info.numRepeats,
+              },
+            ],
+          };
+        }
+      );
+
+  const counters = counterDetails.map((details: CounterDetails) => {
     return (
       <Counter
-        details={counterJson}
+        details={details}
         globalIndex={globalIndex}
         includeButtons={false}
         decrease={decrease}
@@ -38,7 +59,7 @@ function Project(props: { project: ProjectDetails }) {
       <Card className="shadow">
         <CardHeader>
           <Counter
-            details={patternJson?.counters[0]}
+            details={counterDetails[0]}
             globalIndex={globalIndex}
             includeButtons={true}
             decrease={decrease}

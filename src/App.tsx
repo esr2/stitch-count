@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./App.scss";
 import ProjectPicker from "./ProjectPicker";
 import Project from "./Project";
-import FreeStyleProject from "./FreeStyleProject";
 import { NavbarBrand, Navbar, Container, Button } from "reactstrap";
 import { ProjectDetails } from "./ProjectDetails";
 import FreeStyleEditor from "./FreeStyleEditor";
@@ -19,8 +18,6 @@ function App() {
   let showEditButton = false;
   if (!selectedDetails) {
     projectComponent = <ProjectPicker onProjectPick={onProjectPick} />;
-  } else if (!!selectedDetails.patternJson) {
-    projectComponent = <Project project={selectedDetails} />;
   } else if (inFreeStyleEditMode) {
     projectComponent = (
       <FreeStyleEditor
@@ -29,8 +26,8 @@ function App() {
       />
     );
   } else {
-    projectComponent = <FreeStyleProject project={selectedDetails} />;
-    showEditButton = true;
+    projectComponent = <Project project={selectedDetails} />;
+    showEditButton = !selectedDetails.patternJson;
   }
 
   return (
