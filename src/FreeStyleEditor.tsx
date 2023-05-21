@@ -1,10 +1,5 @@
 import React, { useRef } from "react";
-import {
-  DEFAULT_FREESTYLE_NUM_REPEATS,
-  DEFAULT_FREESTYLE_NUM_ROWS,
-  DEFAULT_FREESTYLE_OFFSET,
-  ProjectDetails,
-} from "./ProjectDetails";
+import { ProjectDetails } from "./ProjectDetails";
 import {
   Button,
   Card,
@@ -14,46 +9,36 @@ import {
   Input,
   Label,
 } from "reactstrap";
+import { getRepeatInfo, DEFAULT_REPEAT_INFO } from "./storage";
 
 function FreeStyleEditor(props: {
   project: ProjectDetails;
   exitFn: () => void;
 }) {
   const { storageKey } = props.project;
-  const numRepeatsRef = useRef<number>(
-    parseInt(
-      localStorage.getItem(`${storageKey}-numRepeats`) ||
-        DEFAULT_FREESTYLE_NUM_REPEATS
-    )
-  );
-  const numRowsRef = useRef<number>(
-    parseInt(
-      localStorage.getItem(`${storageKey}-numRows`) ||
-        DEFAULT_FREESTYLE_NUM_ROWS
-    )
-  );
-  const offsetRef = useRef<number>(
-    parseInt(
-      localStorage.getItem(`${storageKey}-offset`) || DEFAULT_FREESTYLE_OFFSET
-    )
-  );
+  const repeatInfoRef = useRef<
+    { numRows: number; numRepeats: number; offset: number }[]
+  >(getRepeatInfo(storageKey));
 
   function reset(): void {
-    writeAndExit(
-      parseInt(DEFAULT_FREESTYLE_NUM_REPEATS),
-      parseInt(DEFAULT_FREESTYLE_NUM_ROWS),
-      parseInt(DEFAULT_FREESTYLE_OFFSET)
-    );
+    writeAndExit(DEFAULT_REPEAT_INFO);
   }
 
   function select(): void {
-    writeAndExit(numRepeatsRef.current, numRowsRef.current, offsetRef.current);
+    writeAndExit(repeatInfoRef.current);
   }
 
-  function writeAndExit(repeats: number, rows: number, offset: number): void {
-    localStorage.setItem(`${storageKey}-numRepeats`, repeats.toString());
-    localStorage.setItem(`${storageKey}-numRows`, rows.toString());
-    localStorage.setItem(`${storageKey}-offset`, offset.toString());
+  function writeAndExit(
+    info: {
+      numRows: number;
+      numRepeats: number;
+      offset: number;
+    }[]
+  ): void {
+    localStorage.setItem(
+      `${storageKey}-repeatInfo`,
+      JSON.stringify(info || [])
+    );
     props.exitFn();
   }
 
@@ -66,9 +51,9 @@ function FreeStyleEditor(props: {
             <Input
               id="rows"
               type="number"
-              defaultValue={numRowsRef.current}
+              defaultValue={repeatInfoRef.current[0].numRows}
               onChange={(e) => {
-                numRowsRef.current = parseInt(e.target.value);
+                repeatInfoRef.current[0].numRows = parseInt(e.target.value);
               }}
             />
           </FormGroup>
@@ -77,9 +62,9 @@ function FreeStyleEditor(props: {
             <Input
               id="repeats"
               type="number"
-              defaultValue={numRepeatsRef.current}
+              defaultValue={repeatInfoRef.current[0].numRepeats}
               onChange={(e) => {
-                numRepeatsRef.current = parseInt(e.target.value);
+                repeatInfoRef.current[0].numRepeats = parseInt(e.target.value);
               }}
             />
           </FormGroup>
@@ -88,9 +73,9 @@ function FreeStyleEditor(props: {
             <Input
               id="offset"
               type="number"
-              defaultValue={offsetRef.current}
+              defaultValue={repeatInfoRef.current[0].offset}
               onChange={(e) => {
-                offsetRef.current = parseInt(e.target.value);
+                repeatInfoRef.current[0].offset = parseInt(e.target.value);
               }}
             />
           </FormGroup>
