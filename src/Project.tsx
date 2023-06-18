@@ -32,7 +32,12 @@ function Project(props: { project: ProjectDetails }) {
           const notes =
             index === 0
               ? []
-              : [{ index: info.numRows, value: "Decrease at end of round" }];
+              : [
+                  {
+                    index: info.numRows,
+                    value: "Decrease at start/end of round",
+                  },
+                ];
 
           return {
             name: "",
