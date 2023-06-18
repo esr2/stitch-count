@@ -4,11 +4,17 @@ import {
   DEFAULT_FREESTYLE_OFFSET,
 } from "./ProjectDetails";
 
-export function getRepeatInfo(storageKey: string): {
+export type RepeatInfo = {
   numRows: number;
   numRepeats: number;
+  // The row the repeat starts on relative to the Global Index.
   offset: number;
-}[] {
+  // The equivalent chart index of the start index. Useful only for charts that
+  // have repeat sections and continue their numbering as if they didn't.
+  chartOffset?: number;
+};
+
+export function getRepeatInfo(storageKey: string): RepeatInfo[] {
   let repeatInfo = JSON.parse(
     localStorage.getItem(`${storageKey}-repeatInfo`) || "[]"
   );

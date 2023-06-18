@@ -8,17 +8,19 @@ import {
   FormGroup,
   Input,
   Label,
+  Row,
+  Col,
 } from "reactstrap";
-import { getRepeatInfo, DEFAULT_REPEAT_INFO } from "./storage";
+import { RepeatInfo, getRepeatInfo, DEFAULT_REPEAT_INFO } from "./storage";
 
 function FreeStyleEditor(props: {
   project: ProjectDetails;
   exitFn: () => void;
 }) {
   const { storageKey } = props.project;
-  const [repeatInfo, setRepeatInfo] = useState<
-    { numRows: number; numRepeats: number; offset: number }[]
-  >(getRepeatInfo(storageKey));
+  const [repeatInfo, setRepeatInfo] = useState<RepeatInfo[]>(
+    getRepeatInfo(storageKey)
+  );
 
   function reset(): void {
     writeAndExit(DEFAULT_REPEAT_INFO);
@@ -35,13 +37,7 @@ function FreeStyleEditor(props: {
     setRepeatInfo([...repeatInfo].splice(-1, 1));
   }
 
-  function writeAndExit(
-    info: {
-      numRows: number;
-      numRepeats: number;
-      offset: number;
-    }[]
-  ): void {
+  function writeAndExit(info: RepeatInfo[]): void {
     localStorage.setItem(
       `${storageKey}-repeatInfo`,
       JSON.stringify(info || [])
@@ -49,55 +45,76 @@ function FreeStyleEditor(props: {
     props.exitFn();
   }
 
-  const formDetails = repeatInfo.map(
-    (info: { numRows: number; numRepeats: number; offset: number }) => {
-      return (
-        <Card className="shadow">
-          <CardBody>
-            <Form>
-              <FormGroup>
-                <Label htmlFor="rows">Rows</Label>
-                <Input
-                  id="rows"
-                  type="number"
-                  defaultValue={info.numRows}
-                  onChange={(e) => {
-                    info.numRows = parseInt(e.target.value);
-                  }}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="repeats">Repeats</Label>
-                <Input
-                  id="repeats"
-                  type="number"
-                  defaultValue={info.numRepeats}
-                  onChange={(e) => {
-                    info.numRepeats = parseInt(e.target.value);
-                  }}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="offset">Repeat starts on Row</Label>
-                <Input
-                  id="offset"
-                  type="number"
-                  defaultValue={info.offset}
-                  onChange={(e) => {
-                    info.offset = parseInt(e.target.value);
-                  }}
-                />
-              </FormGroup>
-            </Form>
-          </CardBody>
-        </Card>
-      );
-    }
-  );
+  const formDetails = repeatInfo.map((info: RepeatInfo) => {
+    return (
+      <Card className="shadow mb-1">
+        <CardBody>
+          <Form>
+            <Row>
+              <Col>
+                <FormGroup>
+                  <Label htmlFor="rows">Rows</Label>
+                  <Input
+                    id="rows"
+                    type="number"
+                    defaultValue={info.numRows}
+                    onChange={(e) => {
+                      info.numRows = parseInt(e.target.value);
+                    }}
+                  />
+                </FormGroup>
+              </Col>
+              <Col>
+                <FormGroup>
+                  <Label htmlFor="repeats">Repeats</Label>
+                  <Input
+                    id="repeats"
+                    type="number"
+                    defaultValue={info.numRepeats}
+                    onChange={(e) => {
+                      info.numRepeats = parseInt(e.target.value);
+                    }}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <FormGroup>
+                  <Label htmlFor="offset">Repeat starts on Row</Label>
+                  <Input
+                    id="offset"
+                    type="number"
+                    defaultValue={info.offset}
+                    onChange={(e) => {
+                      info.offset = parseInt(e.target.value);
+                    }}
+                  />
+                </FormGroup>
+              </Col>
+              <Col>
+                <FormGroup>
+                  <Label htmlFor="chartOffset">Chart Row Equivalent</Label>
+                  <Input
+                    id="chartOffset"
+                    type="number"
+                    defaultValue={info.chartOffset || info.offset}
+                    onChange={(e) => {
+                      info.chartOffset = parseInt(e.target.value);
+                    }}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+      </Card>
+    );
+  });
 
   return (
     <>
-      <div className="d-flex justify-content-end">
+      <div className="d-flex justify-content-end mb-1">
         <Button color="info" onClick={() => removeRepeat()}>
           <i className="fa fa-minus"></i>
         </Button>
