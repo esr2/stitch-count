@@ -3,7 +3,7 @@ import { ProjectDetails } from "./ProjectDetails";
 import Counter, { CounterDetails } from "./Counter";
 import { Card, CardBody, CardHeader } from "reactstrap";
 import PatternViewer from "./PatternViewer";
-import { getRepeatInfo } from "./storage";
+import { RepeatInfo, getRepeatInfo } from "./storage";
 
 function Project(props: { project: ProjectDetails }) {
   const { storageKey, patternJson } = props.project;
@@ -24,38 +24,34 @@ function Project(props: { project: ProjectDetails }) {
 
   const counterDetails = !!patternJson
     ? patternJson.counters
-    : getRepeatInfo(storageKey).map(
-        (
-          info: { numRows: number; numRepeats: number; offset: number },
-          index: number
-        ) => {
-          const notes =
-            index === 0
-              ? []
-              : [
-                  {
-                    index: info.numRows,
-                    // TODO: Eventually have none hardcoded notes and title
-                    value: "Decrease at start/end of round",
-                  },
-                ];
+    : getRepeatInfo(storageKey).map((info: RepeatInfo, index: number) => {
+        const notes =
+          index === 0
+            ? []
+            : [
+                {
+                  index: info.numRows,
+                  // TODO: Eventually have none hardcoded notes and title
+                  value: "Decrease at start/end of round",
+                },
+              ];
 
-          return {
-            // TODO: Eventually have none hardcoded notes and title
-            name: index === 0 ? "" : "Decreases",
-            notes,
-            numRows: info.numRows,
-            showRelativeIndex: info.offset !== 1,
-            showRepeats: info.numRepeats !== 1,
-            repeats: [
-              {
-                startIndex: info.offset,
-                maxRepeats: info.numRepeats,
-              },
-            ],
-          };
-        }
-      );
+        return {
+          // TODO: Eventually have none hardcoded notes and title
+          name: index === 0 ? "" : "Decreases",
+          notes,
+          numRows: info.numRows,
+          showRelativeIndex: info.offset === 1,
+          showRepeats: info.numRepeats !== 1,
+          repeats: [
+            {
+              startIndex: info.offset,
+              maxRepeats: info.numRepeats,
+              alias: info.chartOffset,
+            },
+          ],
+        };
+      });
 
   const counters = counterDetails.map((details: CounterDetails) => {
     return (
