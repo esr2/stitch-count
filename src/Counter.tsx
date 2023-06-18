@@ -2,19 +2,21 @@ import React from "react";
 import { Alert, Progress } from "reactstrap";
 import ButtonRow from "./ButtonRow";
 
+export type CounterRepeat = {
+  startIndex: number;
+  maxRepeats: number;
+  // The equivalent chart index of the start index. Useful only for charts that
+  // have repeat sections and continue their numbering as if they didn't.
+  alias?: number;
+};
+
 export interface CounterDetails {
   name: string;
   notes: { index: number; value: string }[];
   numRows: number;
   showRelativeIndex?: boolean;
   showRepeats?: boolean;
-  repeats: {
-    startIndex: number;
-    maxRepeats: number;
-    // The equivalent chart index of the start index. Useful only for charts that
-    // have repeat sections and continue their numbering as if they didn't.
-    alias?: number;
-  }[];
+  repeats: CounterRepeat[];
 }
 
 function Counter(props: {
@@ -40,19 +42,9 @@ function Counter(props: {
   }
 
   function getRepeat(globalIndex: number) {
-    return repeats.find(
-      (repeat: {
-        startIndex: number;
-        maxRepeats: number;
-        alias?: number;
-      }): boolean => {
-        return isWithinRepeat(
-          globalIndex,
-          repeat.startIndex,
-          repeat.maxRepeats
-        );
-      }
-    );
+    return repeats.find((repeat: CounterRepeat): boolean => {
+      return isWithinRepeat(globalIndex, repeat.startIndex, repeat.maxRepeats);
+    });
   }
 
   // Adjust previously calculated index value to account for whether the index

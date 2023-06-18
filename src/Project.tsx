@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ProjectDetails } from "./ProjectDetails";
-import Counter, { CounterDetails } from "./Counter";
+import Counter, { CounterDetails, CounterRepeat } from "./Counter";
 import { Card, CardBody, CardHeader } from "reactstrap";
 import PatternViewer from "./PatternViewer";
 import { RepeatInfo, getRepeatInfo } from "./storage";
@@ -24,7 +24,8 @@ function Project(props: { project: ProjectDetails }) {
 
   const counterDetails = !!patternJson
     ? patternJson.counters
-    : getRepeatInfo(storageKey).map((info: RepeatInfo, index: number) => {
+    : // Map each repeat into its own counter
+      getRepeatInfo(storageKey).map((info: RepeatInfo, index: number) => {
         const notes =
           index === 0
             ? []
@@ -36,6 +37,14 @@ function Project(props: { project: ProjectDetails }) {
                 },
               ];
 
+        const counterRepeatInfo: CounterRepeat = {
+          startIndex: info.offset,
+          maxRepeats: info.numRepeats,
+        };
+        if (info.chartOffset) {
+          counterRepeatInfo.alias = info.chartOffset;
+        }
+
         return {
           // TODO: Eventually have none hardcoded notes and title
           name: index === 0 ? "" : "Decreases",
@@ -43,13 +52,7 @@ function Project(props: { project: ProjectDetails }) {
           numRows: info.numRows,
           showRelativeIndex: info.offset === 1,
           showRepeats: info.numRepeats !== 1,
-          repeats: [
-            {
-              startIndex: info.offset,
-              maxRepeats: info.numRepeats,
-              alias: info.chartOffset,
-            },
-          ],
+          repeats: [counterRepeatInfo],
         };
       });
 
