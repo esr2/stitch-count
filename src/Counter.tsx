@@ -8,7 +8,13 @@ export interface CounterDetails {
   numRows: number;
   showRelativeIndex?: boolean;
   showRepeats?: boolean;
-  repeats: { startIndex: number; maxRepeats: number }[];
+  repeats: {
+    startIndex: number;
+    maxRepeats: number;
+    // The equivalent chart index of the start index. Useful only for charts that
+    // have repeat sections and continue their numbering as if they didn't.
+    alias?: number;
+  }[];
 }
 
 function Counter(props: {
@@ -35,7 +41,11 @@ function Counter(props: {
 
   function getRepeat(globalIndex: number) {
     return repeats.find(
-      (repeat: { startIndex: number; maxRepeats: number }): boolean => {
+      (repeat: {
+        startIndex: number;
+        maxRepeats: number;
+        alias?: number;
+      }): boolean => {
         return isWithinRepeat(
           globalIndex,
           repeat.startIndex,
@@ -47,10 +57,17 @@ function Counter(props: {
 
   // Adjust previously calculated index value to account for whether the index
   // should be shown relative to the repeat block or to the global index.
-  function calculateIndex(calculatedValue: number, startIndex: number): number {
-    return showRelativeIndex
-      ? calculatedValue - startIndex + 1
-      : calculatedValue;
+  function adjustIndex(
+    calculatedValue: number,
+    startIndex: number,
+    alias: number | undefined
+  ): { index: number; chartAlias: number | null } {
+    return {
+      index: showRelativeIndex
+        ? calculatedValue - startIndex + 1
+        : calculatedValue,
+      chartAlias: alias ? calculatedValue - startIndex + alias : null,
+    };
   }
 
   // Calculate state to render
@@ -68,16 +85,20 @@ function Counter(props: {
     ) : null;
   }
 
-  let index: number, numRepeats: number;
-  const { startIndex, maxRepeats } = repeat;
-  if (globalIndex < startIndex + numRows) {
-    index = calculateIndex(globalIndex, startIndex);
-    numRepeats = 0;
-  } else {
-    let remainder = globalIndex - startIndex;
-    index = calculateIndex(startIndex + (remainder % numRows), startIndex);
-    numRepeats = Math.floor(remainder / numRows);
-  }
+  const { startIndex, maxRepeats, alias } = repeat;
+  const isWithinFirstRepeat = globalIndex < startIndex + numRows;
+
+  const numRowsIntoRepeat = globalIndex - startIndex;
+  const numRepeats = isWithinFirstRepeat
+    ? 0
+    : Math.floor(numRowsIntoRepeat / numRows);
+  let indexWithinRepeat = startIndex + (numRowsIntoRepeat % numRows);
+  const { index, chartAlias } = adjustIndex(
+    isWithinFirstRepeat ? globalIndex : indexWithinRepeat,
+    startIndex,
+    alias
+  );
+
   const perecent = Math.floor((numRepeats / maxRepeats) * 100);
 
   const getNoteAtIndex = () => {
@@ -111,7 +132,7 @@ function Counter(props: {
         <ButtonRow
           decrease={props.decrease}
           increase={props.increase}
-          index={index.toString()}
+          index={!!chartAlias ? chartAlias.toString() : index.toString()}
         />
         {progressAndNotes}
       </>
