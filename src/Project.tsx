@@ -35,12 +35,14 @@ function Project(props: { project: ProjectDetails }) {
               : [
                   {
                     index: info.numRows,
+                    // TODO: Eventually have none hardcoded notes and title
                     value: "Decrease at start/end of round",
                   },
                 ];
 
           return {
-            name: "",
+            // TODO: Eventually have none hardcoded notes and title
+            name: index === 0 ? "" : "Decreases",
             notes,
             numRows: info.numRows,
             showRelativeIndex: info.offset !== 1,
@@ -69,7 +71,7 @@ function Project(props: { project: ProjectDetails }) {
 
   return (
     <>
-      <Card className="shadow">
+      <Card className="shadow mb-1">
         <CardHeader>
           <Counter
             details={counterDetails[0]}
