@@ -18,7 +18,7 @@ export const DEFAULT_FREESTYLE_NUM_REPEATS = "1";
 export const DEFAULT_FREESTYLE_NUM_ROWS = "500";
 export const DEFAULT_FREESTYLE_OFFSET = "1";
 
-// Next ID: 8
+// Next ID: 9
 export const PROJECT_VALUES: ProjectDetails[] = [
   {
     storageKey: "ID-3",
@@ -67,6 +67,13 @@ export const PROJECT_VALUES: ProjectDetails[] = [
     name: "Ginevra Mitts",
     pdfUrl: "./pattern-pdfs/Ginevra_Mitts_worsted.pdf",
     pdfStartPage: 4,
+    isDefault: false,
+  },
+  {
+    storageKey: "ID-8",
+    name: "Daisy Chain Top",
+    pdfUrl: "./pattern-pdfs/Daisy_Chain_Cardigan.pdf",
+    pdfStartPage: 1,
     isDefault: false,
   },
 ];
