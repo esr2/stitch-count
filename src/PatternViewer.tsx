@@ -27,7 +27,7 @@ export function PatternViewer(props: { details: ProjectDetails }) {
       `${details.storageKey}-currentPage`,
       currentPage.toString()
     );
-  }, [currentPage]);
+  }, [currentPage, details.storageKey]);
 
   const onDocumentLoadSuccess = (props: { numPages: number }) => {
     setTotalPages(props.numPages);
