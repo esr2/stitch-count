@@ -10,6 +10,7 @@ export interface ProjectDetails {
   name: string;
   patternJson?: { name: string; counters: CounterDetails[] };
   pdfUrl: string;
+  // Zero index
   pdfStartPage: number;
   isDefault?: boolean;
 }
@@ -18,7 +19,7 @@ export const DEFAULT_FREESTYLE_NUM_REPEATS = "1";
 export const DEFAULT_FREESTYLE_NUM_ROWS = "500";
 export const DEFAULT_FREESTYLE_OFFSET = "1";
 
-// Next ID: 9
+// Next ID: 10
 export const PROJECT_VALUES: ProjectDetails[] = [
   {
     storageKey: "ID-3",
@@ -60,7 +61,7 @@ export const PROJECT_VALUES: ProjectDetails[] = [
     name: "Ingrid Sweater",
     pdfUrl: "./pattern-pdfs/Ingrid_Sweater-small_highlighted.pdf",
     pdfStartPage: 3,
-    isDefault: true,
+    isDefault: false,
   },
   {
     storageKey: "ID-7",
@@ -75,5 +76,12 @@ export const PROJECT_VALUES: ProjectDetails[] = [
     pdfUrl: "./pattern-pdfs/Daisy_Chain_Cardigan.pdf",
     pdfStartPage: 1,
     isDefault: false,
+  },
+  {
+    storageKey: "ID-9",
+    name: "Border for Cable Blanket",
+    pdfUrl: "./pattern-pdfs/Daisy_Chain_Cardigan.pdf",
+    pdfStartPage: 1,
+    isDefault: true,
   },
 ];
