@@ -80,7 +80,7 @@ export const PROJECT_VALUES: ProjectDetails[] = [
   {
     storageKey: "ID-9",
     name: "Border for Cable Blanket",
-    pdfUrl: "./pattern-pdfs/Daisy_Chain_Cardigan.pdf",
+    pdfUrl: "./pattern-pdfs/Border_cable_blanket.pdf",
     pdfStartPage: 1,
     isDefault: true,
   },
