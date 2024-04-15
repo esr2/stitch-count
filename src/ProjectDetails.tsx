@@ -19,7 +19,7 @@ export const DEFAULT_FREESTYLE_NUM_REPEATS = "1";
 export const DEFAULT_FREESTYLE_NUM_ROWS = "500";
 export const DEFAULT_FREESTYLE_OFFSET = "1";
 
-// Next ID: 11
+// Next ID: 12
 export const PROJECT_VALUES: ProjectDetails[] = [
   {
     storageKey: "ID-3",
@@ -82,7 +82,7 @@ export const PROJECT_VALUES: ProjectDetails[] = [
     name: "Border for Cable Blanket",
     pdfUrl: "./pattern-pdfs/Border_cable_blanket.pdf",
     pdfStartPage: 1,
-    isDefault: true,
+    isDefault: false,
   },
   {
     storageKey: "ID-10",
@@ -90,5 +90,12 @@ export const PROJECT_VALUES: ProjectDetails[] = [
     pdfUrl: "./pattern-pdfs/Minarets_At_Midnight.pdf",
     pdfStartPage: 2,
     isDefault: false,
+  },
+  {
+    storageKey: "ID-11",
+    name: "Unicorn Sweater",
+    pdfUrl: "./pattern-pdfs/Unicorn_Chart_4y.pdf",
+    pdfStartPage: 1,
+    isDefault: true,
   },
 ];
