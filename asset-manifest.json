@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/stitch-count/static/css/main.3494e665.css",
-    "main.js": "/stitch-count/static/js/main.d4e1b4e2.js",
+    "main.js": "/stitch-count/static/js/main.cd65570b.js",
     "static/js/787.97710ed4.chunk.js": "/stitch-count/static/js/787.97710ed4.chunk.js",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/stitch-count/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/fontawesome-webfont.eot": "/stitch-count/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
@@ -15,11 +15,11 @@
     "static/media/nucleo-icons.woff2": "/stitch-count/static/media/nucleo-icons.cba267483aa6a7cb6e33.woff2",
     "index.html": "/stitch-count/index.html",
     "main.3494e665.css.map": "/stitch-count/static/css/main.3494e665.css.map",
-    "main.d4e1b4e2.js.map": "/stitch-count/static/js/main.d4e1b4e2.js.map",
+    "main.cd65570b.js.map": "/stitch-count/static/js/main.cd65570b.js.map",
     "787.97710ed4.chunk.js.map": "/stitch-count/static/js/787.97710ed4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3494e665.css",
-    "static/js/main.d4e1b4e2.js"
+    "static/js/main.cd65570b.js"
   ]
 }
