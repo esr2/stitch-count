@@ -19,7 +19,7 @@ export const DEFAULT_FREESTYLE_NUM_REPEATS = "1";
 export const DEFAULT_FREESTYLE_NUM_ROWS = "500";
 export const DEFAULT_FREESTYLE_OFFSET = "1";
 
-// Next ID: 12
+// Next ID: 13
 export const PROJECT_VALUES: ProjectDetails[] = [
   {
     storageKey: "ID-3",
@@ -96,6 +96,13 @@ export const PROJECT_VALUES: ProjectDetails[] = [
     name: "Unicorn Sweater",
     pdfUrl: "./pattern-pdfs/Unicorn_Chart_4y.pdf",
     pdfStartPage: 1,
+    isDefault: false,
+  },
+  {
+    storageKey: "ID-12",
+    name: "Aviara Pullover",
+    pdfUrl: "./pattern-pdfs/Aviara_pullover.pdf",
+    pdfStartPage: 6,
     isDefault: true,
   },
 ];
