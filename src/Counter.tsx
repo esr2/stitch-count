@@ -26,7 +26,8 @@ function Counter(props: {
   decrease: () => void;
   increase: () => void;
 }) {
-  const { name, showRelativeIndex, numRows, repeats, notes } = props.details;
+  const { name, showRepeats, showRelativeIndex, numRows, repeats, notes } =
+    props.details;
   const globalIndex = props.globalIndex;
 
   function isWithinRepeat(
@@ -109,7 +110,7 @@ function Counter(props: {
 
   const progressAndNotes = (
     <>
-      {maxRepeats > 1 && (
+      {showRepeats && maxRepeats > 1 && (
         <Progress max="100" value={perecent}>
           {numRepeats} / {maxRepeats}
         </Progress>
@@ -117,6 +118,9 @@ function Counter(props: {
       {getNoteAtIndex()}
     </>
   );
+  const displayableIndex = !!chartAlias
+    ? chartAlias.toString()
+    : index.toString();
 
   if (props.includeButtons) {
     return (
@@ -124,7 +128,7 @@ function Counter(props: {
         <ButtonRow
           decrease={props.decrease}
           increase={props.increase}
-          index={!!chartAlias ? chartAlias.toString() : index.toString()}
+          index={displayableIndex}
         />
         {progressAndNotes}
       </>
@@ -135,7 +139,9 @@ function Counter(props: {
       <div className="row align-items-center">
         {name && <div className="col">{name}</div>}
         <div className={`col ${name ? "col-4" : ""}`}>
-          <h3 className={`${name ? "text-right" : "text-center"}`}>{index}</h3>
+          <h3 className={`${name ? "text-right" : "text-center"}`}>
+            {displayableIndex}
+          </h3>
         </div>
       </div>
       {progressAndNotes}
