@@ -1,0 +1,56 @@
+{
+  "name": "Aviara",
+  "counters": [
+    {
+      "name": "Global",
+      "notes": [],
+      "numRows": 300,
+      "showRepeats": false,
+      "repeats": [
+        {
+          "startIndex": 1,
+          "maxRepeats": 1
+        }
+      ]
+    },
+    {
+      "name": "Hem: Chart 1",
+      "notes": [],
+      "numRows": 2,
+      "showRepeats": true,
+      "repeats": [
+        {
+          "startIndex": 1,
+          "maxRepeats": 6
+        }
+      ]
+    },
+    {
+      "name": "Hem: Chart 1",
+      "notes": [],
+      "numRows": 5,
+      "showRepeats": false,
+      "showRelativeIndex": true,
+      "repeats": [
+        {
+          "startIndex": 13,
+          "maxRepeats": 1,
+          "alias": 3
+        }
+      ]
+    },
+    {
+      "name": "Pattern",
+      "notes": [],
+      "numRows": 32,
+      "showRepeats": false,
+      "showRelativeIndex": true,
+      "repeats": [
+        {
+          "startIndex": 18,
+          "maxRepeats": 200
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import { CounterDetails } from "./Counter";
+import AviaraJSON from "./pattern-json/aviara.json";
 import BeMineJSON from "./pattern-json/be_mine_cardigan.json";
 import CelticThrowJSON from "./pattern-json/celtic_throw.json";
 import DrachenfelsJSON from "./pattern-json/drachenfels.json";
@@ -102,6 +103,7 @@ export const PROJECT_VALUES: ProjectDetails[] = [
     storageKey: "ID-12",
     name: "Aviara Pullover",
     pdfUrl: "./pattern-pdfs/Aviara_pullover.pdf",
+    patternJson: AviaraJSON,
     pdfStartPage: 6,
     isDefault: true,
   },
