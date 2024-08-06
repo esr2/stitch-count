@@ -18,11 +18,11 @@
       "notes": [
         {
           "index": 1,
-          "value": "[ P1, K1tbl] 6 times (12 stitches), p2, pm, repeat row 1 of 28-st repetition of Chart 1 4 times, pm, k2tbl, p2, k1tbl, [p1, k1tbl] 4 times p1"
+          "value": "K1, [P1tbl, K1] 4 times, p1tbl, k2, p2tbl, slip marker, repeat Row 1 of 28-st repetition of Chart 1 4 times, slip marker, k2, [p1tbl, k1] 6 times"
         },
         {
           "index": 2,
-          "value": "K1, [P1tbl, K1] 4 times, p1tbl, k2, p2tbl, slip marker, repeat row 2 of 28-st repetition of Chart 1 4 times, slip marker, k2, [p1tbl, k1] 6 times"
+          "value": "[ P1, K1tbl] 6 times (12 stitches), p2, pm, repeat Row 2 of 28-st repetition of Chart 1 4 times, pm, k2tbl, p2, k1tbl, [p1, k1tbl] 4 times p1"
         }
       ],
       "numRows": 2,
